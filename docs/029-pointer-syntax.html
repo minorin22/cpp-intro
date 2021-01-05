@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>文法上のポインター | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/34.63b70d43.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="active sidebar-link">文法上のポインター</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="029-pointer-syntax.html#文法上のポインター" class="sidebar-link">文法上のポインター</a></li></ul></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="文法上のポインター"><a href="029-pointer-syntax.html#文法上のポインター" class="header-anchor">#</a> 文法上のポインター</h2> <p>ポインターが難しいと言われる理由の1つに、ポインターの文法が難しい問題がある。</p> <h3 id="ポインターとconstの関係"><a href="029-pointer-syntax.html#ポインターとconstの関係" class="header-anchor">#</a> ポインターとconstの関係</h3> <p>型としてのポインターは、ある型<code>T</code>があるときに、<code>T</code>へのポインター型となる。</p> <p><code>T</code>へのポインター型は<code>T *</code>と書く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// intへのポインター型</span>
+<span class="token keyword">using</span> t1 <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token comment">// doubleへのポインター型</span>
+<span class="token keyword">using</span> t2 <span class="token operator">=</span> <span class="token keyword">double</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token comment">// std::stringへのポインター型</span>
+<span class="token keyword">using</span> t3 <span class="token operator">=</span> std<span class="token operator">::</span>string <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token comment">// std::array&lt;int,5&gt;へのポインター型</span>
+<span class="token keyword">using</span> t4 <span class="token operator">=</span> std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token operator">&gt;</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token comment">// std::array&lt;double,10&gt;へのポインター型</span>
+<span class="token keyword">using</span> t5 <span class="token operator">=</span> std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token operator">&gt;</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>リファレンスや<code>const</code>も同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int型へのポインター型</span>
+<span class="token keyword">using</span> t1 <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token comment">// int型へのリファレンス型</span>
+<span class="token keyword">using</span> t2 <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span> <span class="token punctuation">;</span>
+<span class="token comment">// どちらも同じconstなint型</span>
+<span class="token keyword">using</span> t3 <span class="token operator">=</span> <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> t4 <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token keyword">const</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>const int</code>と<code>int const</code>は同じ型だ。この場合、<code>const</code>は<code>int</code>型のあとに付いても前に付いても同じ意味になる。</p> <p>すると当然の疑問が生じる。組み合わせるとどうなるのかということだ。</p> <p>ポインター型へのリファレンス型はできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int *型へのリファレンス</span>
+<span class="token keyword">using</span> type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token operator">*</span> <span class="token operator">&amp;</span> <span class="token punctuation">;</span>
+</code></pre></div><p>リファレンス型へのポインター型はできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// エラー、できない</span>
+<span class="token keyword">using</span> error <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>理由は、リファレンスへのポインターというのは意味がないからだ。ポインターへのリファレンスは意味がある。</p> <p>リファレンスからポインターの値を得るには、参照先のオブジェクトと同じく<code>&amp;</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span> ref <span class="token operator">=</span> data <span class="token punctuation">;</span>
+<span class="token comment">// &amp;dataと同じ</span>
+<span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>ref <span class="token punctuation">;</span>
+</code></pre></div><p>リファレンスは参照先のオブジェクトとまったく同じように振る舞うのでリファレンス自体のポインターの値を得ることはできない。</p> <p>ポインターのリファレンスを得るのは、ポインター以外の値とまったく同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token comment">// ptrを参照する</span>
+<span class="token keyword">int</span> <span class="token operator">*</span> <span class="token operator">&amp;</span> ref <span class="token operator">=</span> ptr <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token comment">// ptrの値が&amp;dataになる。</span>
+ref <span class="token operator">=</span> <span class="token operator">&amp;</span>data <span class="token punctuation">;</span>
+</code></pre></div><p><code>const</code>とポインターの組み合わせは難しい。</p> <p>まず型<code>T</code>とその<code>const</code>版がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> T <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> const_T <span class="token operator">=</span> <span class="token keyword">const</span> T <span class="token punctuation">;</span>
+</code></pre></div><p>そして型<code>T</code>とそのポインター版がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> T <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> T_pointer <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>これを組み合わせると、以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 型T</span>
+<span class="token keyword">using</span> T <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">;</span>
+<span class="token comment">// どちらもconstなT</span>
+<span class="token keyword">using</span> const_T_1 <span class="token operator">=</span> <span class="token keyword">const</span> T <span class="token punctuation">;</span>
+<span class="token keyword">using</span> const_T_2 <span class="token operator">=</span> T <span class="token keyword">const</span> <span class="token punctuation">;</span>
+<span class="token comment">// Tへのポインター</span>
+<span class="token keyword">using</span> T_pointer <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// どちらもconstなTへのポインター</span>
+<span class="token keyword">using</span> const_T_pointer_1 <span class="token operator">=</span> <span class="token keyword">const</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> const_T_pointer_2 <span class="token operator">=</span> T <span class="token keyword">const</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// Tへのconstなポインター</span>
+<span class="token keyword">using</span> T_const_pointer <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// どちらもconstなTへのconstなポインター</span>
+<span class="token keyword">using</span> const_T_const_pointer_1 <span class="token operator">=</span> <span class="token keyword">const</span> T <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> const_T_const_pointer_2 <span class="token operator">=</span> T <span class="token keyword">const</span> <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token punctuation">;</span>
+</code></pre></div><p>順番に見ていこう。まずは組み合わせない型から。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> T <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">;</span>
+<span class="token comment">// どちらもconstなT</span>
+<span class="token keyword">using</span> const_T_1 <span class="token operator">=</span> <span class="token keyword">const</span> T <span class="token punctuation">;</span>
+<span class="token keyword">using</span> const_T_2 <span class="token operator">=</span> T <span class="token keyword">const</span> <span class="token punctuation">;</span>
+<span class="token comment">// Tへのポインター</span>
+<span class="token keyword">using</span> T_pointer <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>T</code>はここでは<code>int</code>型だ。<code>T</code>型はどんな型でもよい。</p> <p><code>const T</code>と<code>T const</code>が同じ型であることを思い出せば、<code>const_T_1</code>と<code>const_T_2</code>は同じ型であることがわかるだろう。</p> <p><code>T_pointer</code>は<code>T</code>へのポインターだ。</p> <p>次を見ていこう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// どちらもconstなTへのポインター</span>
+<span class="token keyword">using</span> const_T_pointer_1 <span class="token operator">=</span> <span class="token keyword">const</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> const_T_pointer_2 <span class="token operator">=</span> T <span class="token keyword">const</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>これはどちらも同じ型だ。<code>const</code>な<code>T</code>へのポインターとなる。わかりにくければ以下のように書いてもよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// constなT</span>
+<span class="token keyword">using</span> const_T <span class="token operator">=</span> <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token punctuation">;</span>
+<span class="token comment">// constなTへのポインター</span>
+<span class="token keyword">using</span> const_T_pointer <span class="token operator">=</span> const_T <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>実際に使ってみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> data <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token comment">// int const *でもよい</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>data <span class="token punctuation">;</span>
+
+    <span class="token comment">// 読み込み</span>
+    <span class="token keyword">int</span> read <span class="token operator">=</span> <span class="token operator">*</span>ptr <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>const</code>な<code>int</code>へのポインターなので、このポインターの参照先を変更することはできない。ポインターは変更できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>x <span class="token punctuation">;</span>
+
+    <span class="token comment">// エラー</span>
+    <span class="token comment">// constな参照先を変更できない</span>
+    <span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token comment">// OK</span>
+    <span class="token comment">// ポインターはconstではないので値が変更できる</span>
+    ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>y <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>const</code>なのは<code>int</code>であってポインターではない。<code>const int *</code>、もしくは<code>int const *</code>は参照先の<code>int</code>が<code>const</code>なので、参照先を変更することができない。ポインターは<code>const</code>ではないので、ポインターの値は変更できる。</p> <p><code>const</code>な<code>T</code>型へのリファレンスで<code>const</code>ではない<code>T</code>型のオブジェクトを参照できるように、<code>const</code>な<code>T</code>型へのポインターから<code>const</code>ではない<code>T</code>型のオブジェクトを参照できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// constではない</span>
+    <span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// OK</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span> ref <span class="token operator">=</span> data <span class="token punctuation">;</span>
+    <span class="token comment">// OK</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>data <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この場合、リファレンスやポインターは<code>const int</code>扱いなので、リファレンスやポインターを経由して読むことはできるが変更はできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>data <span class="token punctuation">;</span>
+    <span class="token comment">// エラー</span>
+    <span class="token comment">// 変更できない</span>
+    <span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 変更できる</span>
+    data <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>その次は<code>const</code>なポインターだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// Tへのconstなポインター</span>
+<span class="token keyword">using</span> T_const_pointer <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token punctuation">;</span>
+</code></pre></div><p>これはポインターが<code>const</code>なのであって、<code>T</code>は<code>const</code>ではない。したがってポインターを経由して参照先を変更することはできるが、ポインターの値自体は変更できない型だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// constなポインター</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> <span class="token keyword">const</span> ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>data <span class="token punctuation">;</span>
+
+    <span class="token comment">// OK、参照先は変更できる</span>
+    <span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// エラー、値は変更できない</span>
+    ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>最後は<code>const</code>な<code>T</code>への<code>const</code>なポインターだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// どちらもconstなTへのconstなポインター</span>
+<span class="token keyword">using</span> const_T_const_pointer_1 <span class="token operator">=</span> <span class="token keyword">const</span> T <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> const_T_const_pointer_2 <span class="token operator">=</span> T <span class="token keyword">const</span> <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token punctuation">;</span>
+</code></pre></div><p>これは<code>const</code>な<code>T</code>なので、ポインターを経由して参照先を変更できないし、<code>const</code>なポインターなのでポインターの値も変更できない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token keyword">const</span> <span class="token operator">*</span> <span class="token keyword">const</span> ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>data <span class="token punctuation">;</span>
+
+    <span class="token comment">// OK、参照先は読める</span>
+    <span class="token keyword">int</span> read <span class="token operator">=</span> <span class="token operator">*</span>ptr <span class="token punctuation">;</span>
+    <span class="token comment">// エラー、参照先は変更できない</span>
+    <span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token comment">// エラー、ポインターは変更できない</span>
+    ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="ポインターのポインター"><a href="029-pointer-syntax.html#ポインターのポインター" class="header-anchor">#</a> ポインターのポインター</h3> <p>ポインター型というのは、「ある型<code>T</code>へのポインター」という形で表現できる。この型<code>T</code>にはどんな型でも使うことができる。ところで、ポインターというのは型だ。もし<code>T</code>がポインター型の場合はどうなるのだろう。</p> <p>例えば、「<code>T</code>型へのポインター型」で、型<code>T</code>が「<code>U</code>型へのポインター型」の場合、全体としては「<code>U</code>型へのポインター型へのポインター型」になる。これはC++の文法では<code>U **</code>となる。</p> <p>C++のコードで確認しよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 適当なU型</span>
+<span class="token keyword">using</span> U <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">;</span>
+<span class="token comment">// ポインターとしてのT型</span>
+<span class="token keyword">using</span> T <span class="token operator">=</span> U <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token comment">// T型へのポインター型</span>
+<span class="token comment">// つまりU型へのポインター型へのポインター型</span>
+<span class="token comment">// つまりU **</span>
+<span class="token keyword">using</span> type <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>具体的に書いてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// int</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token comment">// intへのポインター</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> p <span class="token operator">=</span> <span class="token operator">&amp;</span>x <span class="token punctuation">;</span>
+    <span class="token comment">// intへのポインターのポインター</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">*</span> pp <span class="token operator">=</span> <span class="token operator">&amp;</span>p <span class="token punctuation">;</span>
+
+
+    <span class="token comment">// 123</span>
+    <span class="token comment">// ポインターを経由したポインターを経由したxの読み込み</span>
+    <span class="token keyword">int</span> value1 <span class="token operator">=</span> <span class="token operator">*</span><span class="token operator">*</span>pp <span class="token punctuation">;</span> 
+
+    <span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">456</span> <span class="token punctuation">;</span>
+    <span class="token comment">// ポインターを経由した変数pの変更</span>
+    <span class="token operator">*</span>pp <span class="token operator">=</span> <span class="token operator">&amp;</span>y <span class="token punctuation">;</span>
+
+    <span class="token comment">// 456</span>
+    <span class="token comment">// ポインターを経由したポインターを経由したyの読み込み</span>
+    <span class="token keyword">int</span> value2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token operator">*</span>pp <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>x</code>は<code>int</code>だ。<code>p</code>は<code>int</code>へのポインターだ。ここまではいままでどおりだ。</p> <p><code>pp</code>は<code>int **</code>という型で、「<code>int</code>へのポインターへのポインター」型だ。このポインターの値のためには「<code>int</code>へのポインターのポインター」が必要だ。変数<code>p</code>のポインターは<code>&amp;p</code>で得られる。この場合、変数<code>p</code>は「<code>int</code>へのポインター」でなければならない。そうした場合、変数<code>p</code>のポインターは「<code>int</code>へのポインターのポインター」型の値になる。</p> <p>変数<code>pp</code>は「<code>int</code>へのポインターのポインター」だ。変数<code>pp</code>の参照先の変数<code>p</code>を読み書きするには、<code>*pp</code>と書く。これはまだ「<code>int</code>へのポインター」だ。ここからさらに参照先の<code>int</code>型のオブジェクトにアクセスするには、その結果にさらに<code>*</code>を書く。結果として<code>**pp</code>となる。</p> <p>わかりにくければ変数に代入するとよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> object <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token operator">*</span>   a <span class="token operator">=</span> <span class="token operator">&amp;</span>object <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">*</span>  b <span class="token operator">=</span> <span class="token operator">&amp;</span>a <span class="token punctuation">;</span>
+
+    <span class="token comment">// cとaは同じ値</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> c <span class="token operator">=</span> <span class="token operator">*</span>pointer_to_pointer_to_object <span class="token punctuation">;</span>
+
+    <span class="token comment">// objectに1が代入される</span>
+    <span class="token operator">*</span>c <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token comment">// objectに2が代入される</span>
+    <span class="token operator">*</span><span class="token operator">*</span>b <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>リファレンスを使うという手もある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> object <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token operator">*</span>   a <span class="token operator">=</span> <span class="token operator">&amp;</span>object <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">*</span>  b <span class="token operator">=</span> <span class="token operator">&amp;</span>a <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span> r1 <span class="token operator">=</span> <span class="token operator">*</span>a <span class="token punctuation">;</span>
+
+    <span class="token comment">// objectに1が代入される</span>
+    r1 <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span>r2 <span class="token operator">=</span> <span class="token operator">*</span><span class="token operator">*</span>b <span class="token punctuation">;</span>
+
+    <span class="token comment">// objectに2が代入される</span>
+    r2 <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>「ポインターへのポインター」があるということは、「ポインターへのポインターへのポインター」もあるということだろうか。もちろんある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// intへのポインターへのポインターへのポインター型</span>
+<span class="token keyword">using</span> type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// intへのポインターへのポインターへのポインターへのポインター型</span>
+<span class="token comment">// int ****</span>
+<span class="token keyword">using</span> pointer_to_type <span class="token operator">=</span> type <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>もちろん<code>const</code>も付けられる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token keyword">const</span> <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token operator">*</span> <span class="token keyword">const</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="関数へのポインター"><a href="029-pointer-syntax.html#関数へのポインター" class="header-anchor">#</a> 関数へのポインター</h3> <p>関数へのポインターを説明する前に、まず型としての関数を説明しなければならない。</p> <p>関数にも型がある。例えば以下のような関数、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token keyword">double</span> <span class="token function">g</span><span class="token punctuation">(</span> <span class="token keyword">double</span><span class="token punctuation">,</span> <span class="token keyword">double</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>の型は、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> f_type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> g_type <span class="token operator">=</span> <span class="token keyword">double</span> <span class="token punctuation">(</span> <span class="token keyword">double</span><span class="token punctuation">,</span> <span class="token keyword">double</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>となる。関数から関数名を取り除いたものが関数の型だ。すると関数へのポインター型は以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> f_pointer <span class="token operator">=</span> f_type <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> g_pointer <span class="token operator">=</span> g_type <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>さっそく試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 実引数を出力して返す関数</span>
+<span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">using</span> f_type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> f_pointer <span class="token operator">=</span> f_type <span class="token operator">*</span> <span class="token punctuation">;</span>
+
+    f_pointer ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>f <span class="token punctuation">;</span>
+
+    <span class="token comment">// 関数へのポインターを経由した関数呼び出し</span>
+    <span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>動くようだ。最後の関数呼び出しはまず参照先を得て<code>(*ptr)</code>、その後に関数呼び出し<code>(123)</code>をしている。これは面倒なので、C++では特別に関数へのポインターはそのまま関数呼び出しすることができるようになっている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 関数へのポインターを経由した関数呼び出し</span>
+<span class="token function">ptr</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>ところで、変数<code>ptr</code>の宣言を、<code>f_pointer</code>というエイリアス宣言を使わずに書くと、以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 適当な関数</span>
+<span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// 変数ptrの宣言</span>
+<span class="token comment">// int (int)へのポインター</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>f <span class="token punctuation">;</span>
+</code></pre></div><p>なぜこうなるのか。これを完全に理解するためにはC++の宣言子(declarator)という文法の詳細な理解が必要だ。</p> <p>ここでは詳細を飛ばして重要な部分だけ伝えるが、型名のうちポインターであることを指定する<code>*</code>は、名前にかかる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// この *はnameにかかる</span>
+<span class="token keyword">int</span> <span class="token operator">*</span> name <span class="token punctuation">;</span>
+</code></pre></div><p>つまり以下のような意味だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>name<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>型名だけを指定する場合、名前が省略される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 名前が省略されている</span>
+<span class="token keyword">using</span> type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>つまり以下のような意味だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>そのため、<code>int * name( int )</code>と書いた場合、これは「<code>int</code>型の引数を取り、<code>int</code>型へのポインターを戻り値として返す関数」となる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token operator">*</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>そうではなく、「<code>int</code>型の引数を取り<code>int</code>型の戻り値を返す関数へのポインター」を書きたい場合は、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>としなければならない。</p> <p>変数の名前を入れる場所は以下のとおり。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> type <span class="token operator">=</span>
+<span class="token keyword">int</span>
+<span class="token punctuation">(</span> <span class="token operator">*</span> <span class="token comment">// ポインター</span>
+<span class="token comment">// ここに変数が省略されている</span>
+<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>なので、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+</code></pre></div><p>となる。あるいは以下のように書いてもいい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> function_type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> function_pointer_type <span class="token operator">=</span> function_type <span class="token operator">*</span> <span class="token punctuation">;</span>
+
+function_pointer_type ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+</code></pre></div><p>関数へのポインターは型であり、値でもある。値であるということは、関数は引数として関数へのポインターを受け取ったり、関数へのポインターを返したりできるということだ。</p> <p>さっそく書いてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> x <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">using</span> f_ptr <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token comment">// 関数へのポインターを引数に取り</span>
+<span class="token comment">// 関数へのポインターを戻り値として返す</span>
+<span class="token comment">// 関数g</span>
+f_ptr <span class="token function">g</span><span class="token punctuation">(</span> f_ptr p <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">p</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> p <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">g</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>f<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これは動く。ところでこの関数<code>g</code>へのポインターはどう書けばいいのだろうか。つまり、</p> <div class="language- extra-class"><pre class="language-text"><code>auto ptr = &amp;g ;
+</code></pre></div><p>を<code>auto</code>を使わずに書くとどうなるのだろうか。</p> <p>以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>g <span class="token punctuation">;</span>
+</code></pre></div><p>なぜこうなるのか。分解すると以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span> <span class="token comment">// 戻り値型前半</span>
+    <span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span> <span class="token comment">// 変数名</span>
+    <span class="token punctuation">(</span><span class="token comment">// 関数の引数</span>
+        <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token comment">// 引数としての関数へのポインター</span>
+    <span class="token punctuation">)</span><span class="token comment">// 関数の引数</span>
+
+<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token comment">// 戻り値の型後半</span>
+
+ <span class="token operator">=</span> <span class="token operator">&amp;</span>g <span class="token punctuation">;</span> <span class="token comment">// 初期化子</span>
+</code></pre></div><p>これはわかりにくい。戻り値の型を後ろに書く文法を使うと少し読みやすくなる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">auto</span> <span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>g <span class="token punctuation">;</span>
+</code></pre></div><p>これを分解すると以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">auto</span> <span class="token comment">// プレイスホルダー</span>
+<span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span> <span class="token comment">// 変数名</span>
+<span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token comment">// 引数</span>
+<span class="token operator">-&gt;</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token comment">// 戻り値の型</span>
+<span class="token operator">=</span> <span class="token operator">&amp;</span>g <span class="token punctuation">;</span> <span class="token comment">// 初期化子</span>
+</code></pre></div><p>もちろん、これでもまだわかりにくいので、エイリアス宣言を使った方がよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> func_ptr <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">auto</span> <span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span>func_ptr<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> func_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>g <span class="token punctuation">;</span>
+</code></pre></div><h3 id="配列へのポインター"><a href="029-pointer-syntax.html#配列へのポインター" class="header-anchor">#</a> 配列へのポインター</h3> <p>配列へのポインターについて学ぶ前に、配列の型について学ぶ必要がある。</p> <p>配列の型は、要素の型を<code>T</code>、要素数を<code>N</code>とすると、<code>T [N]</code>となる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 要素型int、要素数5の配列型</span>
+<span class="token keyword">using</span> int5 <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token punctuation">;</span>
+<span class="token comment">// 要素型double、要素数10の配列型</span>
+<span class="token keyword">using</span> double10 <span class="token operator">=</span> <span class="token keyword">double</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token punctuation">;</span>
+</code></pre></div><p>関数型と同じく、ポインター宣言子である<code>*</code>は名前に付く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 要素型int、要素数5の配列へのポインター型</span>
+<span class="token keyword">using</span> pointer_to_array_type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token punctuation">;</span>
+    pointer_to_array_type ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>a <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>エイリアス宣言を使わない変数の宣言は以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>a <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>配列とポインターは密接に関係している。そのため、配列名は配列の先頭要素へのポインターに暗黙に変換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// &amp;a[0]と同じ</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token operator">=</span> a <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>配列とポインターの関係については、ポインターの詳細で詳しく説明する。</p> <h3 id="ポインター型の作り方"><a href="029-pointer-syntax.html#ポインター型の作り方" class="header-anchor">#</a> ポインター型の作り方</h3> <p><code>T</code>型へのポインター型は<code>T *</code>で作ることができる。</p> <p>ただし、<code>T</code>が<code>int (int)</code>のような関数型である場合は、<code>int (*)(int)</code>になる。配列型の場合は要素数<code>N</code>まで必要で<code>T (*)[N]</code>になる。</p> <p>エイリアス宣言で型に別名を付けると<code>T *</code>でよくなる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> function_type <span class="token operator">=</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> pointer_to_function_type <span class="token operator">=</span> function_type <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>ポインターの型を書く際に、このようなことをいちいち考えるのは面倒だ。ここで必要のなのは、ある型<code>T</code>を受け取ったときに型<code>T *</code>を得るような方法だ。ところで、物覚えのいい読者は前にも似たような文章を読んだことに気が付くだろう。そう、テンプレートだ。</p> <p>テンプレートは型を引数化できる機能だ。いままではクラスや関数にしか使っていなかったが、実はエイリアス宣言にも使えるのだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">using</span> type <span class="token operator">=</span> T <span class="token punctuation">;</span>
+</code></pre></div><p>これは引数と同じ型になるエイリアステンプレートだ。使ってみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span> <span class="token keyword">using</span> type <span class="token operator">=</span> T <span class="token punctuation">;</span>
+
+<span class="token comment">// aはint</span>
+type<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> a <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token comment">// bはdouble</span>
+type<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span> b <span class="token operator">=</span> <span class="token number">1.23</span> <span class="token punctuation">;</span>
+<span class="token comment">// cはstd::vector&lt;int&gt;</span>
+type<span class="token operator">&lt;</span>std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;&gt;</span> c <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>using type = int ;</code>というエイリアス宣言があるとき<code>type</code>の型は<code>int</code>だ。エイリアス宣言は新しい<code>type</code>という型を作るわけではない。</p> <p>同様に、上のエイリアステンプレート<code>type</code>による<code>type&lt;int&gt;</code>の型は<code>int</code>だ。新しい<code>type&lt;int&gt;</code>という型ができるわけではない。</p> <p>もう少し複雑な使い方もしてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int</span>
+type<span class="token operator">&lt;</span>type<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;&gt;</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token comment">// int</span>
+type<span class="token operator">&lt;</span>type<span class="token operator">&lt;</span>type<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> b <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>type&lt;int&gt;</code>の型は<code>int</code>なので、それを引数に渡した<code>type&lt; type&lt;int&gt; &gt;</code>も<code>int</code>だ。<code>type&lt;T&gt;</code>をいくつネストしようとも<code>int</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// std::vector&lt;int&gt;</span>
+std<span class="token operator">::</span>vector<span class="token operator">&lt;</span> type<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">&gt;</span> a <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token comment">// std::vector&lt;int&gt;</span>
+type<span class="token operator">&lt;</span>std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>type<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> b <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>type&lt;int&gt;</code>は<code>int</code>なので、<code>std::vector&lt;type&lt;int&gt;&gt;</code>は<code>std::vector&lt;int&gt;</code>になる。それをさらに<code>type&lt;T&gt;</code>で囲んでも同じ型だ。</p> <p><code>type&lt;T&gt;</code>は面白いが何の役に立つのだろうか。<code>type&lt;T&gt;</code>は型として使える。つまり<code>type&lt;T&gt; *</code>はポインターとして機能するのだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span> <span class="token keyword">using</span> type <span class="token operator">=</span> T <span class="token punctuation">;</span>
+
+<span class="token comment">// int *</span>
+type<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">*</span> a <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token comment">// int (*)(int)</span>
+type<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token operator">&gt;</span> <span class="token operator">*</span> b <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token comment">// int (*) [5]</span>
+type<span class="token operator">&lt;</span><span class="token keyword">int</span> <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">*</span> c <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>type&lt;int&gt; *</code>は<code>int *</code>型だ。<code>type&lt;int(int)&gt; *</code>は<code>int(*)(int)</code>型だ。<code>type&lt;int [5]&gt; *</code>は<code>int (*) [5]</code>型だ。これでもう<code>*</code>をどこに書くかという問題に悩まされることはなくなった。</p> <p>しかしわざわざ<code>type&lt;T&gt; *</code>と書くのは依然として面倒だ。<code>T</code>型は引数で受け取っているのだから、最初からポインターを返してどうだろうか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">using</span> add_pointer_t <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+</code></pre></div><p>さっそく試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int *</span>
+add_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> a <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token comment">// int **</span>
+add_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">&gt;</span> b <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token comment">// int(*)(int)</span>
+add_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token operator">&gt;</span> c <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token comment">// int(*)[5]</span>
+add_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span> <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> d <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+</code></pre></div><p>どうやら動くようだ。もっと複雑な例も試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int **</span>
+add_pointer_t<span class="token operator">&lt;</span>add_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;&gt;</span> a <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>add_pointer_t&lt;int&gt;</code>は<code>int *</code>なので、その型を<code>add_pointer_t&lt;T&gt;</code>で囲むとその型へのポインターになる。結果として<code>int **</code>になる。</p> <p>ここで実装した<code>add_pointer_t&lt;T&gt;</code>は<code>T</code>がリファレンスのときにエラーになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span> <span class="token keyword">using</span> add_pointer_t <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token comment">// エラー</span>
+add_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span> <span class="token operator">&amp;</span><span class="token operator">&gt;</span> ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+</code></pre></div><p>実は標準ライブラリにも<code>std::add_pointer_t&lt;T&gt;</code>があり、こちらはリファレンス<code>U &amp;</code>を渡しても、<code>U *</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// OK</span>
+<span class="token comment">// int *</span>
+std<span class="token operator">::</span>add_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span> <span class="token operator">&amp;</span><span class="token operator">&gt;</span> ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+</code></pre></div><p>標準ライブラリ<code>std::add_pointer_t&lt;T&gt;</code>は、<code>T</code>がリファレンス型の場合、リファレンスは剝がしてポインターを付与するという実装になっている。これをどうやって実装するかについてだが、まだ読者の知識では実装できない。テンプレートについて深く学ぶ必要がある。いまは標準ライブラリに頼っておこう。</p> <p>標準ライブラリにはほかにも、ポインターを取り除く<code>std::remove_pointer_t&lt;T&gt;</code>もある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int</span>
+std<span class="token operator">::</span>remove_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span> <span class="token operator">*</span> <span class="token operator">&gt;</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token comment">// int</span>
+std<span class="token operator">::</span>remove_pointer_t<span class="token operator">&lt;</span>
+    std<span class="token operator">::</span>add_pointer_t<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span>
+    <span class="token operator">&gt;</span> b <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="クラスへのポインター"><a href="029-pointer-syntax.html#クラスへのポインター" class="header-anchor">#</a> クラスへのポインター</h3> <p>クラスへのポインターはいままでに学んだものと同じ文法だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    C object <span class="token punctuation">;</span>
+    C <span class="token operator">*</span> pointer <span class="token operator">=</span> <span class="token operator">&amp;</span>object <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> 
+</code></pre></div><p>ただし、ポインターを経由してメンバーにアクセスするのが曲者だ。</p> <p>以下のようなメンバーにアクセスするコードがある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data_member <span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    C object <span class="token punctuation">;</span>
+
+    object<span class="token punctuation">.</span>data_member <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    object<span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これをポインターを経由して書いてみよう。</p> <p>以下のように書くとエラーだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    C object <span class="token punctuation">;</span>
+    C <span class="token operator">*</span> pointer <span class="token operator">=</span> <span class="token operator">&amp;</span>object <span class="token punctuation">;</span>
+
+    <span class="token comment">// エラー</span>
+    <span class="token operator">*</span>pointer<span class="token punctuation">.</span>data_member <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token comment">// エラー</span>
+    <span class="token operator">*</span>pointer<span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この理由は演算子の優先順位の問題だ。上の式は以下のように解釈される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token operator">*</span><span class="token punctuation">(</span>pointer<span class="token punctuation">.</span>data_member<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token operator">*</span><span class="token punctuation">(</span>pointer<span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>ポインターを参照する演算子<code>*</code>よりも、演算子ドット(<code>'.'</code>)の方が演算子の優先順位が高い。</p> <p>このような式を可能にする変数<code>pointer</code>とは以下のようなものだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Pointer</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data  <span class="token operator">=</span> <span class="token number">42</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> data_member <span class="token operator">=</span> <span class="token operator">&amp;</span>data <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> <span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token operator">&amp;</span>data <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Pointer pointer <span class="token punctuation">;</span>
+
+    <span class="token operator">*</span>pointer<span class="token punctuation">.</span>data_member <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token operator">*</span>pointer<span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>pointer.data_member</code>はポインターなのでそれに演算子<code>*</code>を適用して参照した上で<code>0</code>を代入している。</p> <p><code>pointer.member_function()</code>は関数呼び出しで戻り値としてポインターを返すのでそれに演算子<code>*</code>を適用している。</p> <p>演算子<code>*</code>を先にポインターの値である<code>pointer</code>に適用するには、括弧を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token punctuation">(</span><span class="token operator">*</span>pointer<span class="token punctuation">)</span><span class="token punctuation">.</span>data_member <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token operator">*</span>pointer<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>リファレンスを使ってポインターを参照した結果をリファレンスに束縛して使うこともできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>C <span class="token operator">&amp;</span> ref <span class="token operator">=</span> <span class="token operator">*</span>pointer <span class="token punctuation">;</span>
+ref<span class="token punctuation">.</span>data_member <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+ref<span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>ただし、ポインターを介してクラスを扱う際に、毎回括弧を使ったりリファレンスを使ったりするのは面倒なので、簡単なシンタックスシュガーとして演算子<code>-&gt;</code>が用意されている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>pointer<span class="token operator">-&gt;</span>data_member <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+pointer<span class="token operator">-&gt;</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>a-&gt;b</code>は、<code>(*(a))-&gt;b</code>と同じ意味になる。そのため、上は以下のコードと同じ意味になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>
+<span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>pointer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>data_member <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>pointer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="thisポインター"><a href="029-pointer-syntax.html#thisポインター" class="header-anchor">#</a> thisポインター</h3> <p>メンバー関数はクラスのデータメンバーにアクセスできる。このときのデータメンバーはメンバー関数が呼ばれたクラスのオブジェクトのサブオブジェクトになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span> <span class="token keyword">int</span> n <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        data <span class="token operator">=</span> n <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    C a <span class="token punctuation">;</span>
+    C b <span class="token punctuation">;</span>
+
+    <span class="token comment">// a.dataを変更</span>
+    a<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// b.dataを変更</span>
+    b<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>すでに説明したように、メンバー関数が自分を呼び出したクラスのオブジェクトのサブオブジェクトを参照できるのは、クラスのオブジェクトへの参照を知っているからだ。内部的には以下のような隠し引数を持つコードが生成されたかのような挙動になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// コンパイラーが生成するコードのたとえ</span>
+<span class="token keyword">struct</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 隠し引数</span>
+<span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span> C <span class="token operator">&amp;</span> obj<span class="token punctuation">,</span> <span class="token keyword">int</span> n <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    obj<span class="token punctuation">.</span>data <span class="token operator">=</span> n <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>つまり、メンバー関数は自分を呼び出したクラスのオブジェクトへの参照を知っている。その参照にアクセスする方法が<code>this</code>キーワードだ。</p> <p><code>this</code>キーワードはクラスのメンバー関数の中で使うと、メンバー関数を呼び出したクラスのオブジェクトへのポインターとして扱われる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span> <span class="token keyword">int</span> n <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// このメンバー関数を呼び出したクラスのオブジェクトへのポインター</span>
+        C <span class="token operator">*</span> pointer <span class="token operator">=</span> <span class="token keyword">this</span> <span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token operator">-&gt;</span>data <span class="token operator">=</span> n <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>先ほど、関数<code>C::set</code>の中で<code>data = n ;</code>と書いたのは、<code>this-&gt;data = n ;</code>と書いたのと同じ意味になる。</p> <p><code>this</code>はリファレンスではなくてポインターだ。この理由は歴史的なものだ。本来ならばリファレンスの方がよいのだが、いまさら変更できないのでポインターになっている。わかりにくければリファレンスに束縛してもよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> <span class="token operator">&amp;</span> this_ref <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>const</code>なメンバー関数の中では、<code>this</code>の型も<code>const</code>なクラス型へのポインターになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// thisの型はS *</span>
+        S <span class="token operator">*</span> pointer <span class="token operator">=</span> <span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// thisの型はS const *</span>
+        S <span class="token keyword">const</span> <span class="token operator">*</span> pointer <span class="token operator">=</span> <span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>この理由は、<code>const</code>なメンバー関数はクラスのオブジェクトへの参照として<code>const</code>なリファレンスを隠し引数として持つからだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// コンパイラーが生成するコードのたとえ</span>
+<span class="token keyword">struct</span> <span class="token class-name">S</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 非constなメンバー関数</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> S <span class="token operator">&amp;</span> obj <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// constなメンバー関数</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> S <span class="token keyword">const</span> <span class="token operator">&amp;</span> obj <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="メンバーへのポインター"><a href="029-pointer-syntax.html#メンバーへのポインター" class="header-anchor">#</a> メンバーへのポインター</h3> <p>メンバーへのポインターはかなり文法的にややこしい。そもそも、通常のポインターとは概念でも実装でも異なる。</p> <p>ここで取り扱うのはメンバーへのポインターという概念で、クラスのオブジェクトのサブオブジェクトへのポインターではない。サブオブジェクトへのポインターは通常のポインターと同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Object</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// サブオブジェクト</span>
+    <span class="token keyword">int</span> subobject <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// クラスのオブジェクト</span>
+    Object object <span class="token punctuation">;</span>
+
+    <span class="token comment">// サブオブジェクトへのポインター</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> pointer <span class="token operator">=</span> <span class="token operator">&amp;</span>object<span class="token punctuation">.</span>subobject <span class="token punctuation">;</span>
+
+    <span class="token operator">*</span>pointer <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> read <span class="token operator">=</span> object<span class="token punctuation">.</span>subobject <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>メンバーへのポインターとは、クラスのデータメンバーやメンバー関数を参照するもので、クラスのオブジェクトとともに使うことでそのデータメンバーやメンバー関数を参照できるものだ。</p> <p>細かい文法の解説はあとにして例を見せよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Object</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data_member <span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> data_member <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// Object::data_memberメンバーへのポインター</span>
+    <span class="token keyword">int</span> Object<span class="token operator">::</span><span class="token operator">*</span> int_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>Object<span class="token operator">::</span>data_member <span class="token punctuation">;</span>
+    <span class="token comment">// Object::member_functionメンバーへのポインター</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span>Object<span class="token operator">::</span><span class="token operator">*</span> func_ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>Object<span class="token operator">::</span>member_function <span class="token punctuation">;</span>
+
+    <span class="token comment">// クラスのオブジェクト</span>
+    Object object <span class="token punctuation">;</span>
+
+    <span class="token comment">// objectに対するメンバーポインターを介した参照</span>
+    object<span class="token punctuation">.</span><span class="token operator">*</span>int_ptr <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token comment">// objectに対するメンバーポインターを介した参照</span>
+    <span class="token comment">// 123</span>
+    <span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token operator">*</span>func_ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 別のオブジェクト</span>
+    Object another_object <span class="token punctuation">;</span>
+    another_object<span class="token punctuation">.</span>data_member <span class="token operator">=</span> <span class="token number">456</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 456</span>
+    <span class="token punctuation">(</span>another_object<span class="token punctuation">.</span><span class="token operator">*</span>func_ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>細かい文法はあとで学ぶとして、肝心の機能としてはこうだ。クラスのオブジェクトからは独立したデータメンバーやメンバー関数自体へのポインターを取得する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Object</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data_member <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// メンバーへのポインター</span>
+<span class="token keyword">int</span> Object<span class="token operator">::</span><span class="token operator">*</span>int_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>Object<span class="token operator">::</span>data_member <span class="token punctuation">;</span> 
+</code></pre></div><p>このポインターをクラスのオブジェクトと組み合わせることで、ポインターが参照するクラスのメンバーで、かつオブジェクトのサブオブジェクトの部分を参照できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>Object object <span class="token punctuation">;</span>
+
+<span class="token comment">// メンバーへのポインターをオブジェクトに適用してサブオブジェクトを参照する</span>
+object<span class="token punctuation">.</span><span class="token operator">*</span>int_ptr <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p>では文法の説明に入ろう。</p> <p>メンバーへのポインターは文法がややこしい。</p> <p>あるクラス名<code>C</code>の型名<code>T</code>のメンバーへのポインター型は以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>型名 クラス名<span class="token operator">::</span><span class="token operator">*</span>
+T C<span class="token operator">::</span><span class="token operator">*</span>
+</code></pre></div><p>以下のクラスの各データメンバーへの型はそれぞれコメントのとおりになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">ABC</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// int ABC::*</span>
+    <span class="token keyword">int</span> x <span class="token punctuation">;</span>
+    <span class="token comment">// int ABC::*</span>
+    <span class="token keyword">int</span> y <span class="token punctuation">;</span>
+    <span class="token comment">// double ABC::*</span>
+    <span class="token keyword">double</span> d <span class="token punctuation">;</span>
+    <span class="token comment">// int * ABC::*</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">DEF</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ABC * DEF::*</span>
+    ABC <span class="token operator">*</span> abc <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>順を追って説明していこう。まずクラス<code>ABC</code>のメンバー、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int ABC::*</span>
+<span class="token keyword">int</span> x <span class="token punctuation">;</span>
+<span class="token comment">// int ABC::*</span>
+<span class="token keyword">int</span> y <span class="token punctuation">;</span>
+</code></pre></div><p>このメンバーへのポインターの型はどちらも<code>int ABC::*</code>になる。データメンバーの型は<code>int</code>で、クラス名が<code>ABC</code>なので、<code>型名 クラス名::*</code>に当てはめると<code>int ABC::*</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// double ABC::*</span>
+<span class="token keyword">double</span> d <span class="token punctuation">;</span>
+</code></pre></div><p>このメンバーへのポインターの型は<code>double ABC::*</code>になる。</p> <p>最後のクラス<code>ABC</code>のメンバー、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int * ABC::*</span>
+<span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token punctuation">;</span>
+</code></pre></div><p>これが<code>int * ABC::*</code>になる理由も、最初に説明した<code>型名 クラス名::*</code>のルールに従っている。型名が<code>int *</code>、クラス名が<code>ABC</code>なので、<code>int * ABC::*</code>だ。</p> <p>最後の例はクラス<code>DEF</code>のメンバーとしてクラス<code>ABC</code>のポインター型のメンバーだ。<code>ABC DEF::*</code>になる。</p> <p>クラス名<code>C</code>のメンバー名<code>M</code>のメンバーへのポインターを得るには以下の文法を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token operator">&amp;</span>クラス名<span class="token operator">::</span>メンバー名
+<span class="token operator">&amp;</span>C<span class="token operator">::</span>M
+</code></pre></div><p>具体的な例を見てみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> C<span class="token operator">::</span><span class="token operator">*</span> x_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>x <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> C<span class="token operator">::</span><span class="token operator">*</span> y_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>y <span class="token punctuation">;</span>
+
+    C object <span class="token punctuation">;</span>
+
+    <span class="token comment">// 1</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> object<span class="token punctuation">.</span><span class="token operator">*</span>x_ptr <span class="token punctuation">;</span>
+    <span class="token comment">// 2 </span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> object<span class="token punctuation">.</span><span class="token operator">*</span>y_ptr <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>わかりづらければエイリアス宣言を使うとよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> type <span class="token operator">=</span> <span class="token keyword">int</span> C<span class="token operator">::</span><span class="token operator">*</span> <span class="token punctuation">;</span>
+type x_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>x <span class="token punctuation">;</span>
+</code></pre></div><p>あるいは<code>auto</code>を使うという手もある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int C::*</span>
+<span class="token keyword">auto</span> x_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>x <span class="token punctuation">;</span>
+</code></pre></div><p>メンバー関数へのポインターは、メンバーへのポインターと関数へのポインターを組み合わせた複雑な文法となるので、とてもわかりづらい。</p> <p>復習すると、<code>int</code>型の引数を1つ受け取り<code>int</code>型の戻り値を返す関数へのポインターの型は<code>int (*)(int)</code>だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>f <span class="token punctuation">;</span>
+</code></pre></div><p>この関数がクラス<code>C</code>のメンバー関数の場合、以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>ところで、メンバーへのポインターは<code>型名 クラス名::*</code>だった。この2つを組み合わせると、以下のように書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// メンバー関数へのポインター</span>
+    <span class="token keyword">int</span> <span class="token punctuation">(</span>C<span class="token operator">::</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>f <span class="token punctuation">;</span>
+    <span class="token comment">// クラスのオブジェクト</span>
+    C object <span class="token punctuation">;</span>
+
+    <span class="token comment">// オブジェクトを指定したメンバー関数へのポインターを介した関数呼び出し</span>
+    <span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span> <span class="token number">123</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>メンバー関数へのポインターは難しい。</p> <p>関数<code>f</code>の型は<code>int (int)</code>で、そのポインターの型は<code>int (*)(int)</code>だ。するとクラス名<code>C</code>のメンバー関数<code>f</code>へのポインターの型は、<code>int (C::*)(int)</code>になる。</p> <p>メンバー関数へのポインター型の変数を宣言してその値を<code>C::f</code>へのポインターに初期化しているのが以下の行だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// メンバー関数へのポインター</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span>C<span class="token operator">::</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>f <span class="token punctuation">;</span>
+</code></pre></div><p>この<code>ptr</code>を経由したメンバー関数<code>f</code>の呼び出し方だが、まずクラスのオブジェクトが必要になるので作る。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>C object <span class="token punctuation">;</span>
+</code></pre></div><p>そして演算子の<code>operator .*</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>object.*ptr</code>を括弧で囲んでいるのは、演算子の優先順位のためだ。もしこれを以下のように書くと、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>object<span class="token punctuation">.</span><span class="token operator">*</span><span class="token function">ptr</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+</code></pre></div><p>これは<code>ptr(123)</code>という式を評価した結果をメンバーへのポインターと解釈してクラスのオブジェクトを介して参照していることになる。例えば以下のようなコードだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token punctuation">{</span> <span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">auto</span> <span class="token function">ptr</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token keyword">int</span> C<span class="token operator">::</span><span class="token operator">*</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>data <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    C object <span class="token punctuation">;</span>
+    object<span class="token punctuation">.</span><span class="token operator">*</span><span class="token function">ptr</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>演算子の優先順位の問題のために、<code>(object.*ptr)</code>と括弧で包んで先に評価させ、その後に関数呼び出し式である<code>(123)</code>を評価させる。</p> <p>実は演算子<code>operator .*</code>のほかに、<code>operator -&gt;*</code>という演算子がある。</p> <p><code>.*</code>はクラスのオブジェクトがリファレンスの場合の演算子だが、<code>-&gt;*</code>はクラスのオブジェクトがポインターの場合の演算子だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span><span class="token punctuation">{</span> <span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> data_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>data <span class="token punctuation">;</span>
+
+    C object <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> c_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>object <span class="token punctuation">;</span>
+
+    c_ptr<span class="token operator">-&gt;</span><span class="token operator">*</span>data_ptr <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>演算子<code>a-&gt;b</code>が<code>(*(a)).b</code>となるように、演算子<code>a-&gt;*b</code>も<code>(*(a)).*b</code>と置き換えられるシンタックスシュガーだ。</p> <p>上の例で、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>c_ptr<span class="token operator">-&gt;</span><span class="token operator">*</span>object <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p>は、以下と同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>c_ptr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token operator">*</span>object <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>.*</code>や<code>-&gt;*</code>の文法を覚えるのが面倒な場合、標準ライブラリに<code>std::invoke( f, t1, ... )</code>という便利な関数が用意されている。</p> <p><code>f</code>がデータメンバーへのポインターで、<code>t1</code>がクラスのオブジェクトの場合、<code>std::invoke(f, t1)</code>は以下のような関数になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> F<span class="token punctuation">,</span> <span class="token keyword">typename</span> T1 <span class="token operator">&gt;</span>
+適切な戻り値の型 std<span class="token operator">::</span><span class="token function">invoke</span><span class="token punctuation">(</span> F f<span class="token punctuation">,</span> T1 t1 <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> t1<span class="token punctuation">.</span><span class="token operator">*</span>f <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>なので以下のように書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token punctuation">{</span> <span class="token keyword">int</span> data <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> data_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>data <span class="token punctuation">;</span>
+
+    C object <span class="token punctuation">;</span>
+
+    <span class="token comment">// どちらも同じ意味</span>
+    object<span class="token punctuation">.</span><span class="token operator">*</span>data_ptr <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">invoke</span><span class="token punctuation">(</span> data_ptr<span class="token punctuation">,</span> object <span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>便利なことに<code>t1</code>がポインターの場合は、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> F<span class="token punctuation">,</span> <span class="token keyword">typename</span> T1 <span class="token operator">&gt;</span>
+適切な戻り値の型 std<span class="token operator">::</span><span class="token function">invoke</span><span class="token punctuation">(</span> F f<span class="token punctuation">,</span> T1 t1 <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>t1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token operator">*</span>f <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>という関数として振る舞う。そのため、リファレンスでもポインターでも気にせずに使うことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>C <span class="token operator">*</span> c_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>object <span class="token punctuation">;</span>
+
+<span class="token comment">// どちらも同じ意味</span>
+c_ptr<span class="token operator">-&gt;</span><span class="token operator">*</span>data_ptr <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+std<span class="token operator">::</span><span class="token function">invoke</span><span class="token punctuation">(</span> data_ptr<span class="token punctuation">,</span> c_ptr <span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>std::invoke</code>がさらにすごいことに、メンバー関数へのポインターにも対応している。</p> <p><code>std::invoke( f, t1, ... )</code>で、<code>f</code>がメンバー関数へのポインターで、<code>t1</code>がクラスのオブジェクトへのリファレンスで、<code>...</code>が関数呼び出しの際の引数の場合、以下のような関数として振る舞う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> F<span class="token punctuation">,</span> <span class="token keyword">typename</span> T1<span class="token punctuation">,</span>
+    <span class="token comment">// まだ知らない機能</span>
+    <span class="token keyword">typename</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> Ts <span class="token operator">&gt;</span>
+適切な戻り値の型
+<span class="token function">invoke</span><span class="token punctuation">(</span> F f<span class="token punctuation">,</span> T1 t1<span class="token punctuation">,</span>
+<span class="token comment">// まだ知らない機能</span>
+Ts <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> ts <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>t1<span class="token punctuation">.</span><span class="token operator">*</span>f<span class="token punctuation">)</span><span class="token punctuation">(</span>ts<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>厳密にはこの宣言は間違っているのだが、まだ知らない機能を使っているので気にしなくてもよい。大事なことは、<code>std::invoke</code>の第三引数以降の実引数が、関数呼び出しの実引数として使われるということだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> <span class="token function">f0</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">int</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+    <span class="token keyword">int</span> <span class="token function">f2</span><span class="token punctuation">(</span> <span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">2</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    C object <span class="token punctuation">;</span>
+
+    <span class="token comment">// 同じ</span>
+    <span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token operator">*</span><span class="token operator">&amp;</span>C<span class="token operator">::</span>f0<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">invoke</span><span class="token punctuation">(</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>f0<span class="token punctuation">,</span> object <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 同じ</span>
+    <span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token operator">*</span><span class="token operator">&amp;</span>C<span class="token operator">::</span>f1<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">invoke</span><span class="token punctuation">(</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>f1<span class="token punctuation">,</span> object<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 同じ</span>
+    <span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token operator">*</span><span class="token operator">&amp;</span>C<span class="token operator">::</span>f2<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">invoke</span><span class="token punctuation">(</span> <span class="token operator">&amp;</span>C<span class="token operator">::</span>f2<span class="token punctuation">,</span> object<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この場合も、<code>object</code>が<code>C</code>へのリファレンスではなく、<code>C</code>へのポインターでも自動で認識していいように処理してくれる。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="028-pointer-semantics.html" class="prev">意味上のポインター</a></span> <span class="next"><a href="030-pointer-details.html">ポインターの内部実装</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/34.63b70d43.js" defer></script>
+  </body>
+</html>

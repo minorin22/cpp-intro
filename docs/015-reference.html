@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>lvalueリファレンスとconst | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/20.39088cad.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="active sidebar-link">lvalueリファレンスとconst</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="015-reference.html#lvalueリファレンス" class="sidebar-link">lvalueリファレンス</a></li><li class="sidebar-sub-header"><a href="015-reference.html#const" class="sidebar-link">const</a></li></ul></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="lvalueリファレンスとconst"><a href="015-reference.html#lvalueリファレンスとconst" class="header-anchor">#</a> lvalueリファレンスとconst</h1> <pre><code>ポップカルチャーリファレンスというのは流行の要素をさり気なく作品中に取り入れることで、流行作品を知っている読者の笑いを誘う手法である
+-- キャプテン・オブビウス、ポップカルチャーリファレンスについて
+</code></pre> <h2 id="lvalueリファレンス"><a href="015-reference.html#lvalueリファレンス" class="header-anchor">#</a> lvalueリファレンス</h2> <p>変数に変数を代入すると、代入元の値が代入先にコピーされる。代入先の値を変更しても、コピーされた値が変わるだけで、代入元にはいっさい影響がない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+
+    b <span class="token operator">=</span> a <span class="token punctuation">;</span>
+    <span class="token comment">// b == 1</span>
+
+    b <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">;</span>
+    <span class="token comment">// a == 1</span>
+    <span class="token comment">// b == 3</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これは関数も同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">assign_3</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    x <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token function">assign_3</span><span class="token punctuation">(</span> a <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// a == 1</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>しかし、ときには変数の値を直接書き換えたい場合がある。このとき<code>lvalue</code>リファレンス(reference)が使える。<code>lvalue</code>リファレンスは変数に<code>&amp;</code>を付けて宣言する</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span> ref <span class="token operator">=</span> a <span class="token punctuation">;</span>
+
+    ref <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// a == 3</span>
+    <span class="token comment">// refはaなので同じく3</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この例で、変数<code>ref</code>は変数<code>a</code>への参照(リファレンス)なので、変数<code>a</code>と同じように使える。</p> <p><code>lvalue</code>リファレンスは必ず初期化しなければならない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// エラー</span>
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span> ref <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>lvalue</code>リファレンスは関数でも使える。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    x <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token function">f</span><span class="token punctuation">(</span> a <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// a == 3</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>選択ソートで2つの変数の値を交換する必要があったことを覚えているだろうか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 0番目と2番目の要素を交換したい</span>
+    <span class="token keyword">auto</span> temp <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">=</span> temp <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>いちいち交換のために別の変数<code>temp</code>を作って3回代入を書くのは面倒だ。これを関数にしてしまいたい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 値を交換</span>
+<span class="token function">swap</span><span class="token punctuation">(</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>このような関数<code>swap</code>は普通に書くことはできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// この実装は正しくない</span>
+<span class="token keyword">auto</span> swap <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span> <span class="token keyword">auto</span> a<span class="token punctuation">,</span> <span class="token keyword">auto</span> b <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> temp <span class="token operator">=</span> a <span class="token punctuation">;</span>
+    a <span class="token operator">=</span> b <span class="token punctuation">;</span>
+    b <span class="token operator">=</span> temp <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>この実装では、変数は単にコピーされるだけなので、関数の呼び出し元には何の影響もない。</p> <p>これを<code>lvalue</code>リファレンスに変えると、関数の呼び出し元の変数の値を交換する関数<code>swap</code>が作れる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// lvalueリファレンス</span>
+<span class="token keyword">auto</span> swap <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span> <span class="token keyword">auto</span> <span class="token operator">&amp;</span> a<span class="token punctuation">,</span> <span class="token keyword">auto</span> <span class="token operator">&amp;</span> b <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> temp <span class="token operator">=</span> a <span class="token punctuation">;</span>
+    a <span class="token operator">=</span> b <span class="token punctuation">;</span>
+    b <span class="token operator">=</span> temp <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>C++の標準ライブラリには<code>std::swap</code>があるので、読者はわざわざこのような関数を自作する必要はない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span><span class="token function">swap</span><span class="token punctuation">(</span> a<span class="token punctuation">,</span> b <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// a == 2</span>
+    <span class="token comment">// b == 1</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ところで、この章では一貫して<code>lvalue</code>リファレンスと書いているのに気が付いただろうか。<code>lvalue</code>とは何なのか、<code>lvalue</code>ではないリファレンスはあるのか。その疑問はあとの章で解決する。</p> <h2 id="const"><a href="015-reference.html#const" class="header-anchor">#</a> const</h2> <p>値を変更したくない変数は、<code>const</code>を付けることで変更を禁止できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token comment">// OK、変更できる</span>
+
+    <span class="token keyword">const</span> <span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    y <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token comment">// エラー、変更できない。</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>const</code>はちょっと文法が変わっていて混乱する。例えば、<code>const int</code>でも<code>int const</code>でも意味が同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 意味は同じ</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token keyword">const</span> y <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>const</code>は<code>lvalue</code>リファレンスと組み合わせることができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span> ref <span class="token operator">=</span> x <span class="token punctuation">;</span>
+    <span class="token comment">// OK</span>
+    <span class="token operator">++</span>ref <span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span> const_ref <span class="token operator">=</span> x <span class="token punctuation">;</span>
+
+    <span class="token comment">// エラー</span>
+    <span class="token operator">++</span>const_ref <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>const</code>は本当に文法が変わっていて混乱する。<code>const int &amp;</code>と<code>int const &amp;</code>は同じ意味だが、<code>int &amp; const</code>はエラーになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// OK、意味は同じ</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span> b <span class="token operator">=</span> a <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> c <span class="token operator">=</span> a <span class="token punctuation">;</span>
+
+    <span class="token comment">// エラー</span>
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span> <span class="token keyword">const</span> d <span class="token operator">=</span> a <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これはとても複雑なルールで決まっているので、こういうものだとあきらめて覚えるしかない。</p> <p><code>const</code>が付いていない型のオブジェクトを<code>const</code>な<code>lvalue</code>リファレンスで参照することができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// constの付いていない型のオブジェクト</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// OK</span>
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span> ref <span class="token operator">=</span> x <span class="token punctuation">;</span>
+    <span class="token comment">// OK、constは付けてもよい</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span> cref <span class="token operator">=</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>const</code>の付いている型のオブジェクトを<code>const</code>の付いていない<code>lvalue</code>リファレンスで参照することはできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// constの付いている型のオブジェクト</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// エラー、constがない</span>
+    <span class="token keyword">int</span> <span class="token operator">&amp;</span> ref <span class="token operator">=</span> x <span class="token punctuation">;</span>
+
+    <span class="token comment">// OK、constが付いている</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span> cref <span class="token operator">=</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>const</code>の付いている<code>lvalue</code>リファレンスは何の役に立つのかというと、関数の引数を取るときに役に立つ。</p> <p>例えば以下のコードは非効率的だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">1234</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 10000個の要素を持つvector</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token function">f</span><span class="token punctuation">(</span> v <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>なぜかというと、関数の引数に渡すときに、変数<code>v</code>はコピーされるからだ。</p> <p>リファレンスを使うと不要なコピーをしなくて済む。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> v <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">1234</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>しかし、リファレンスで受け取ると、うっかり変数を変更してしまった場合、その変更が関数の呼び出し元に反映されてしまう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 値を変更するかもしれない</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> v <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 要素数10000のvector</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token function">f</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 値は変更されているかもしれない</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このとき、<code>const</code>な<code>lvalue</code>リファレンスを使うと、引数に取った値を変更しないことを保証できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> v <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="014-iterator.html" class="prev">イテレーターの基礎</a></span> <span class="next"><a href="016-algorithm.html">アルゴリズム</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/20.39088cad.js" defer></script>
+  </body>
+</html>

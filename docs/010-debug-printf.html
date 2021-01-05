@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>デバッグ：printfデバッグ | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/15.ba58285d.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="active sidebar-link">デバッグ：printfデバッグ</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="010-debug-printf.html#実践例" class="sidebar-link">実践例</a></li><li class="sidebar-sub-header"><a href="010-debug-printf.html#std-cerr" class="sidebar-link">std::cerr</a></li><li class="sidebar-sub-header"><a href="010-debug-printf.html#まとめ" class="sidebar-link">まとめ</a></li></ul></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="デバッグ：printfデバッグ"><a href="010-debug-printf.html#デバッグ：printfデバッグ" class="header-anchor">#</a> デバッグ：printfデバッグ</h1> <p>ループと多数の要素の集合を扱えるようになったので、読者はもう相当複雑な処理をするプログラムでも書けるようになった。処理が複雑になってくると増えるのがバグだ。</p> <p>この章では、伝統ある<code>printfデバッグ</code>を紹介する。</p> <p><code>printfデバッグ</code>とは、プログラムの実行中に知りたい情報を出力することだ。<code>printf</code>とはC言語の伝統ある出力用のライブラリに由来する名前だが、本書では<code>iostream</code>を使う。</p> <h2 id="実践例"><a href="010-debug-printf.html#実践例" class="header-anchor">#</a> 実践例</h2> <p>例えば前章で実装したように<code>vector</code>の要素を選択ソートでソートしたいとする。</p> <p>選択ソートとは、要素の集合の中から0番目に来るべき要素の場所を探し、0番目の要素と交換し、1番目に来るべき要素の場所を探し、1番目の要素と交換し・・・を要素の数だけ繰り返すことによって要素全体をソートする方法だ。</p> <p>以下のように書いたとする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">3</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">7</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> size <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t head <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> head <span class="token operator">!=</span> size <span class="token punctuation">;</span> <span class="token operator">++</span>head <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> min <span class="token operator">=</span> head <span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t index <span class="token operator">=</span> head<span class="token operator">+</span><span class="token number">1</span> <span class="token punctuation">;</span> index <span class="token operator">!=</span> size <span class="token punctuation">;</span> <span class="token operator">++</span>index <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+                min <span class="token operator">=</span> index <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token keyword">auto</span> temp <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+        v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+        v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> i <span class="token operator">!=</span> size <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>さっそく実行してみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>$ make run
+1 1 1 1 1 1 1 1 7
+</code></pre></div><p>コンパイルはできるが、なぜかうまく動かない。コードのどこかが間違っているのはわかる。しかしどこが間違っているのかはわからない。さっそく<code>printfデバッグ</code>により問題のある箇所を特定してみよう。</p> <p><code>printfデバッグ</code>を行うには、まずコード中の間違っていそうな箇所にアタリをつける必要がある。</p> <p>問題がどこにあるかわからないが、ループのどこかで間違っていそうだ。一番外側のループにアタリをつけよう。ループが実行されるごとに変数<code>v</code>の中身を表示してみる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t head <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> head <span class="token operator">!=</span> size <span class="token punctuation">;</span> <span class="token operator">++</span>head <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// printfデバッグ</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;debug: head = &quot;</span>s <span class="token operator">&lt;&lt;</span> head <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;, v = { &quot;</span>s<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> i <span class="token operator">!=</span> v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;}\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token comment">// printfデバッグ</span>
+</code></pre></div><p>そして実行した結果が以下だ。</p> <div class="language- extra-class"><pre class="language-text"><code>$ make run
+debug: v = { 3, 8, 2, 5, 6, 9, 4, 1, 7, }
+debug: v = { 1, 8, 2, 5, 6, 9, 4, 1, 7, }
+debug: v = { 1, 1, 2, 5, 6, 9, 4, 1, 7, }
+debug: v = { 1, 1, 1, 5, 6, 9, 4, 1, 7, }
+debug: v = { 1, 1, 1, 1, 6, 9, 4, 1, 7, }
+debug: v = { 1, 1, 1, 1, 1, 9, 4, 1, 7, }
+debug: v = { 1, 1, 1, 1, 1, 1, 4, 1, 7, }
+debug: v = { 1, 1, 1, 1, 1, 1, 1, 1, 7, }
+debug: v = { 1, 1, 1, 1, 1, 1, 1, 1, 7, }
+1 1 1 1 1 1 1 1 7 
+</code></pre></div><p>なぜか<code>1</code>が増えている。明らかにおかしい。しかしまだ問題の特定にまでは至らない。</p> <p>内側のループにも<code>printfデバッグ</code>を追加してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">auto</span> min <span class="token operator">=</span> head <span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t index <span class="token operator">=</span> head<span class="token operator">+</span><span class="token number">1</span> <span class="token punctuation">;</span> index <span class="token operator">!=</span> size <span class="token punctuation">;</span> <span class="token operator">++</span>index <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// printfデバッグ</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;, &quot;</span>s <span class="token punctuation">;</span>
+    <span class="token comment">// printfデバッグ</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        min <span class="token operator">=</span> index <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// printfデバッグ</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token comment">// printfデバッグ</span>
+</code></pre></div><p>そして実行する。</p> <div class="language- extra-class"><pre class="language-text"><code>debug: v = { 3, 8, 2, 5, 6, 9, 4, 1, 7, }
+8, 2, 5, 6, 9, 4, 1, 7, 
+debug: v = { 1, 8, 2, 5, 6, 9, 4, 1, 7, }
+2, 5, 6, 9, 4, 1, 7, 
+debug: v = { 1, 1, 2, 5, 6, 9, 4, 1, 7, }
+5, 6, 9, 4, 1, 7, 
+debug: v = { 1, 1, 1, 5, 6, 9, 4, 1, 7, }
+6, 9, 4, 1, 7, 
+debug: v = { 1, 1, 1, 1, 6, 9, 4, 1, 7, }
+9, 4, 1, 7, 
+debug: v = { 1, 1, 1, 1, 1, 9, 4, 1, 7, }
+4, 1, 7, 
+debug: v = { 1, 1, 1, 1, 1, 1, 4, 1, 7, }
+1, 7, 
+debug: v = { 1, 1, 1, 1, 1, 1, 1, 1, 7, }
+7, 
+debug: v = { 1, 1, 1, 1, 1, 1, 1, 1, 7, }
+
+1 1 1 1 1 1 1 1 7 
+</code></pre></div><p>あまりいい情報は得られないようだ。問題はここではないらしい。</p> <p>ひょっとしたら大小比較が間違っているのかもしれない。確かめてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t index <span class="token operator">=</span> head<span class="token operator">+</span><span class="token number">1</span> <span class="token punctuation">;</span> index <span class="token operator">!=</span> size <span class="token punctuation">;</span> <span class="token operator">++</span>index <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &lt; &quot;</span>s <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+        min <span class="token operator">=</span> index <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &gt;= &quot;</span>s <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>実行結果は長いので一部だけ記載しておく。</p> <div class="language- extra-class"><pre class="language-text"><code>debug: v = { 3, 8, 2, 5, 6, 9, 4, 1, 7, }
+8 &gt;= 3
+2 &lt; 3
+5 &gt;= 2
+6 &gt;= 2
+9 &gt;= 2
+4 &gt;= 2
+1 &lt; 2
+7 &gt;= 1
+
+debug: v = { 1, 8, 2, 5, 6, 9, 4, 1, 7, }
+2 &lt; 8
+5 &gt;= 2
+6 &gt;= 2
+9 &gt;= 2
+4 &gt;= 2
+1 &lt; 2
+7 &gt;= 1
+</code></pre></div><p>大小比較も問題ないようだ。では最終的に見つけた最も小さい値は、本当に最も小さい値だろうか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 最小値を探すループ</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t index <span class="token operator">=</span> head<span class="token operator">+</span><span class="token number">1</span> <span class="token punctuation">;</span> index <span class="token operator">!=</span> size <span class="token punctuation">;</span> <span class="token operator">++</span>index <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// より小さい値があればそれを現在の最小値とする</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        min <span class="token operator">=</span> index <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// printfデバッグ</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token comment">// printfデバッグ </span>
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>debug: v = { 3, 8, 2, 5, 6, 9, 4, 1, 7, }
+1
+debug: v = { 1, 8, 2, 5, 6, 9, 4, 1, 7, }
+1
+debug: v = { 1, 1, 2, 5, 6, 9, 4, 1, 7, }
+1
+debug: v = { 1, 1, 1, 5, 6, 9, 4, 1, 7, }
+1
+debug: v = { 1, 1, 1, 1, 6, 9, 4, 1, 7, }
+1
+debug: v = { 1, 1, 1, 1, 1, 9, 4, 1, 7, }
+1
+debug: v = { 1, 1, 1, 1, 1, 1, 4, 1, 7, }
+1
+debug: v = { 1, 1, 1, 1, 1, 1, 1, 1, 7, }
+1
+debug: v = { 1, 1, 1, 1, 1, 1, 1, 1, 7, }
+7
+1 1 1 1 1 1 1 1 7 
+</code></pre></div><p>見つけた値は最も小さいようだ。しかし毎回<code>1</code>になる。<code>1</code>が残っているのだから当然だが、なぜ残っているのだろう。</p> <p>ひょっとしたら要素の交換が間違っているのかもしれない。<code>printfデバッグ</code>してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// printfデバッグ </span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;debug before: &quot;</span>s <span class="token operator">&lt;&lt;</span>  v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;,  &quot;</span> <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token comment">// printfデバッグ</span>
+
+v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// printfデバッグ</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;debug after : &quot;</span>s <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;, &quot;</span> <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token comment">// printfデバッグ</span>
+</code></pre></div><p><code>&quot;debug before:&quot;</code>は交換前、<code>&quot;debug after:&quot;</code>は交換後の2つの要素の値だ。</p> <p>以下は実行結果の一部だ。</p> <div class="language- extra-class"><pre class="language-text"><code>debug: v = { 3, 8, 2, 5, 6, 9, 4, 1, 7, }
+debug before: 3,  1
+debug after : 1, 1
+debug: v = { 1, 8, 2, 5, 6, 9, 4, 1, 7, }
+debug before: 8,  1
+debug after : 1, 1
+debug: v = { 1, 1, 2, 5, 6, 9, 4, 1, 7, }
+debug before: 2,  1
+debug after : 1, 1
+debug: v = { 1, 1, 1, 5, 6, 9, 4, 1, 7, }
+</code></pre></div><p>これを見ると、要素の値の交換が正しく行われていないことがわかる。</p> <p>問題の場所がわかったので、さっそくコードを見てみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>min<span class="token punctuation">)</span> <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>これは要するに以下のコードと同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+a <span class="token operator">=</span> b <span class="token punctuation">;</span> <span class="token comment">// a = 1</span>
+b <span class="token operator">=</span> a <span class="token punctuation">;</span> <span class="token comment">// b = 1</span>
+</code></pre></div><p>変数<code>a</code>, <code>b</code>の値を交換したい場合、変数<code>a</code>に変数<code>b</code>を代入したあとに、変数<code>b</code>に変数<code>a</code>を代入する処理は誤りだ。なぜならば、変数<code>b</code>の代入のときには、変数<code>a</code>の値は変数<code>b</code>の値になってしまっているからだ。</p> <p>前章で学んだように、こういう場合、別の変数に値を代入して退避させておく。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> temp <span class="token operator">=</span> a <span class="token punctuation">;</span>
+a <span class="token operator">=</span> b <span class="token punctuation">;</span>
+b <span class="token operator">=</span> temp <span class="token punctuation">;</span>
+</code></pre></div><p>こうして<code>printfデバッグ</code>によって問題が解決した。</p> <h2 id="std-cerr"><a href="010-debug-printf.html#std-cerr" class="header-anchor">#</a> <code>std::cerr</code></h2> <p><code>printfデバッグ</code>として標準出力である<code>std::cout</code>に出力すると、プログラムの通常の標準出力と混ざって見づらくなる。例えば以下のプログラムを見てみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 1 * 2 * 3 * ... * nを計算するプログラム</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cin <span class="token operator">&gt;&gt;</span> n <span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> n <span class="token operator">&lt;</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>  
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        sum <span class="token operator">*=</span> i <span class="token punctuation">;</span>
+
+        <span class="token comment">// printfデバッグ</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;debug: &quot;</span>s <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;, &quot;</span> <span class="token operator">&lt;&lt;</span> sum <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+        <span class="token comment">// printfデバッグ</span>
+    <span class="token punctuation">}</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> sum <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この場合、標準エラー出力を使うとプログラムの通常の出力と<code>printfデバッグ</code>用の出力を分けることができる。</p> <p>標準エラー出力を使うには、<code>std::cout</code>の代わりに<code>std::cerr</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 標準出力</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;standard output\n&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token comment">// 標準エラー出力</span>
+    std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;standard error output\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムを実行すると一見すべて同じように出力されているように見える。</p> <div class="language- extra-class"><pre class="language-text"><code>$ make run
+standard output
+standard error output
+</code></pre></div><p>違いはリダイレクトやパイプを使うとわかる。</p> <div class="language- extra-class"><pre class="language-text"><code>$ ./program &gt; /dev/null
+standard error output
+$ ./program | grep error
+standard error output 
+</code></pre></div><p>標準出力には<code>&quot;standard output\n&quot;</code>しか出力されていない。通常のリダイレクトやパイプで扱われるのも標準出力だけだ。そのため、<code>/dev/null</code>にリダイレクトすると標準エラー出力しか見えないし、<code>grep</code>にパイプしても標準出力しか受け取らない。</p> <p>標準出力と標準エラー出力を別々にリダイレクトする方法もある。</p> <div class="language- extra-class"><pre class="language-text"><code>$ ./program &gt; cout.txt 2&gt; cerr.txt
+</code></pre></div><p>これを実行すると、ファイル<code>cout.txt</code>には<code>&quot;standard output\n&quot;</code>が、ファイル<code>cerr.txt</code>には<code>&quot;standard error output\n&quot;</code>が出力されている。</p> <p>これを使って先ほどのプログラムを書き直すと以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 1 * 2 * 3 * ... * nを計算するプログラム</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cin <span class="token operator">&gt;&gt;</span> n <span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> n <span class="token operator">&lt;</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>  
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        sum <span class="token operator">*=</span> i <span class="token punctuation">;</span>
+
+        <span class="token comment">// printfデバッグ</span>
+            <span class="token comment">// 標準エラー出力</span>
+            std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;debug: &quot;</span>s <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;, &quot;</span> <span class="token operator">&lt;&lt;</span> sum <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+        <span class="token comment">// printfデバッグ</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 標準出力</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> sum <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="まとめ"><a href="010-debug-printf.html#まとめ" class="header-anchor">#</a> まとめ</h2> <p><code>printfデバッグ</code>はコード中のどこに問題があるかを絞り込むための方法だ。プログラムに問題が存在し、問題の発生の有無はプログラムの状態を調べることで判断できるが、コード中のどこに問題が存在するかわからないとき、<code>printfデバッグ</code>で問題の箇所を絞り込むことができる。</p> <p><code>printfデバッグ</code>のやり方は以下のとおり。</p> <ol><li>コード中の間違っていそうな箇所にアタリをつける</li> <li>プログラムの状態を出力する</li> <li>出力結果が期待どおりかどうかを調べる</li></ol> <p><code>printfデバッグ</code>は原始的だが効果的なデバッグ方法だ。あとの章ではデバッガーというより高級でプログラマーらしいデバッグ方法も紹介するが、そのような高級なデバッグ方法が使えない環境でも、<code>printfデバッグ</code>ならば使えることは多い。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="009-vector.html" class="prev">メモリーを無限に確保する</a></span> <span class="next"><a href="011-integer.html">整数</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/15.ba58285d.js" defer></script>
+  </body>
+</html>

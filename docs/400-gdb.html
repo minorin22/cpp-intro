@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>デバッガー | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/54.9b6224cf.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="active sidebar-link">デバッガー</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="400-gdb.html#gdbのチュートリアル" class="sidebar-link">GDBのチュートリアル</a></li><li class="sidebar-sub-header"><a href="400-gdb.html#プログラムの実行" class="sidebar-link">プログラムの実行</a></li><li class="sidebar-sub-header"><a href="400-gdb.html#プログラムの停止方法" class="sidebar-link">プログラムの停止方法</a></li><li class="sidebar-sub-header"><a href="400-gdb.html#プログラムの実行再開とステップ実行" class="sidebar-link">プログラムの実行再開とステップ実行</a></li><li class="sidebar-sub-header"><a href="400-gdb.html#バックトレース" class="sidebar-link">バックトレース</a></li><li class="sidebar-sub-header"><a href="400-gdb.html#変数の値を確認" class="sidebar-link">変数の値を確認</a></li><li class="sidebar-sub-header"><a href="400-gdb.html#シグナルによるプログラムの中断" class="sidebar-link">シグナルによるプログラムの中断</a></li><li class="sidebar-sub-header"><a href="400-gdb.html#コアダンプを使ったプログラムの状態の確認" class="sidebar-link">コアダンプを使ったプログラムの状態の確認</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="デバッガー"><a href="400-gdb.html#デバッガー" class="header-anchor">#</a> デバッガー</h1> <p>読者は複雑なコードを書く際に間違ったコードを書くことだろう。間違ったコードは直せばよい。問題はどこが間違っているのかわからない場合だ。</p> <p>例えば以下のコードは<code>1</code>から<code>10</code>までの整数を標準出力するはずのプログラムだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>しかし実際に実行してみると、<code>1</code>から<code>9</code>までの整数しか標準出力しない。なぜだろうか。</p> <p>読者の中にはコード中の問題のある箇所に気が付いた人もいるだろう。これはたったの5行のコードで、問題の箇所も1箇所だ。これが数百行、数千行になり、関数やクラスを複雑に使い、問題の原因は複数の箇所のコードの実行が組み合わさった結果で、しかも自分で書いたコードなので正しく書いたはずだという先入観がある場合、たとえコードとしてはささいな間違いであったとしても、発見は難しい。</p> <p>こういうとき、実際にコードを1行ずつ実行したり、ある時点でプログラムの実行を停止させて変数の値を見たりしたいものだ。</p> <p>そんな夢を実現するのがデバッガーだ。この章ではデバッガーとしてGDB(GNUプロジェクトデバッガー)の使い方を学ぶ。</p> <p>GDBで快適にデバッグするには、プログラムをコンパイルするときにデバッグ情報を出力する必要がある。そのためには、GCCに<code>-g</code>オプションを付けてプログラムをコンパイルする。</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -g -o program program.cpp
+</code></pre></div><p>本書の始めに作った入門用の<code>Makefile</code>を使う場合は、<code>$gcc_options</code>に<code>-g</code>を加えることになる。</p> <div class="language- extra-class"><pre class="language-text"><code>gcc_options = -std=c++17 -Wall --pedantic-error -g
+</code></pre></div><p>コンパイラーのオプションを変更したあとは、<code>make clean</code>を実行してコンパイル済みヘッダーファイルを生成し直す必要がある。</p> <div class="language- extra-class"><pre class="language-text"><code>$ make clean
+</code></pre></div><h2 id="gdbのチュートリアル"><a href="400-gdb.html#gdbのチュートリアル" class="header-anchor">#</a> GDBのチュートリアル</h2> <p>では具体的にデバッガーを使ってみよう。以下のようなソースファイルを用意する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> val <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    val <span class="token operator">=</span> <span class="token number">10</span> <span class="token punctuation">;</span>
+    val <span class="token operator">+=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    val <span class="token operator">*=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+    val <span class="token operator">*=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+    val <span class="token operator">/=</span> <span class="token number">4</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムをコンパイルする。</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -g program.cpp -o program
+</code></pre></div><p>GDBを使ってプログラムのデバッグを始めるには、GDBのオプションとして<code>-g</code>オプション付きでコンパイルしたプログラムのファイル名を指定する。</p> <div class="language- extra-class"><pre class="language-text"><code>$ gdb program
+</code></pre></div><p>すると以下のように出力される。</p> <div class="language- extra-class"><pre class="language-text"><code>GNU gdb (Ubuntu 8.2-0ubuntu1) 8.2
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type &quot;show copying&quot; and &quot;show warranty&quot; for details.
+This GDB was configured as &quot;x86_64-linux-gnu&quot;.
+Type &quot;show configuration&quot; for configuration details.
+For bug reporting instructions, please see:
+&lt;http://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual and other documentation resources online at:
+    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from program...done.
+(gdb) 
+</code></pre></div><p>大量のメッセージに戸惑うかもしれないが、最後の行以外はGDBのライセンス表記やドキュメントだ。細部は環境ごとに異なる。</p> <p>ここで重要なのは最後の行だ。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb)
+</code></pre></div><p>ここにGDBのコマンドを入力する。ヘルプを表示するコマンド<code>help</code>と入力してみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) help
+</code></pre></div><p>ヘルプメッセージが表示される。あるコマンドのヘルプを見たい場合は<code>help コマンド</code>と入力する。いまから使う予定のコマンドである<code>list</code>のヘルプを見てみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) help list
+</code></pre></div><p><code>list</code>コマンドは現在のソースファイルの前後10行を表示する。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) list
+1	int main()
+2	{
+3	    int val = 0 ;
+4	    val = 10 ;
+5	    val += 1 ;
+6	    val *= 2 ;
+7	    val *= 2 ;
+8	    val /= 4 ;
+9	}
+</code></pre></div><p>さっそく実行してみよう。実行するコマンドは<code>run</code>だ。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) run
+Starting program: 実行可能ファイルへのパス
+[Inferior 1 (process PID) exited normally]
+</code></pre></div><p><code>run</code>コマンドを使うとデバッガーはプログラムを実行する。</p> <p>プログラムの実行を特定の場所で止めるには<code>break</code>コマンドを使ってブレイクポイントを設定する。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) help break
+</code></pre></div><p><code>break</code>コマンドには関数や行番号を指定できる。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break main
+(gdb) break 4
+(gdb) break 5
+</code></pre></div><p>これで、<code>main</code>関数、4行目、5行目にブレイクポイントを設定した。さっそくもう一度最初から実行してみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) run
+Starting program: プログラムへのファイルパス
+
+Breakpoint 1, main () at main.cpp:3
+3	    int val = 0 ;
+</code></pre></div><p><code>main</code>関数にブレイクポイントを設定したので、プログラムは<code>main</code>関数が呼ばれたところ、最初のコードである3行目を実行する手前で止まる。</p> <p>プログラムの実行を再開するには<code>continue</code>コマンドを使う。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) continue
+Continuing.
+
+Breakpoint 2, main () at main.cpp:4
+4	    val = 10 ;
+</code></pre></div><p>4行目にブレイクポイントを設定したので、4行目を実行する手前で止まる。</p> <p>この時点で、変数<code>val</code>が初期化され、その値は0になっているはずだ。確かめてみよう。変数の値を調べるには<code>print</code>コマンドを使う。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) print val
+$1 = 0
+</code></pre></div><p>値が<code>0</code>になっていることが確認できた。実行を再開しよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) continue
+Continuing.
+
+Breakpoint 3, main () at main.cpp:5
+5	    val += 1 ;
+</code></pre></div><p>4行目を実行し、5行目のブレイクポイントで止まる。4行目を実行したということは、変数<code>val</code>の値は<code>10</code>になっているはずだ。もう一度<code>print</code>コマンドで調べてみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) print val
+$2 = 10
+</code></pre></div><p>値は<code>10</code>だ。GDBは<code>print</code>の結果の履歴を記録している。<code>$1</code>や<code>$2</code>というのはその記録を参照するための名前だ。その値は<code>print</code>コマンドで確認できる。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) print $1
+$3 = 0
+(gdb) print $2
+$4 = 10
+</code></pre></div><p>現在、プログラムは5行目を実行する手前で止まっている。このまま<code>continue</code>コマンドを使うとプログラムの終了まで実行されてしまう。もう一度1行だけ実行するには<code>break 6</code>で6行目にブレイクポイントを設定すればよいのだが、次の1行だけ実行したいときにいちいちブレイクポイントを設定するのは面倒だ。</p> <p>そこで使うのが<code>step</code>だ。次の5行目を実行すると、変数<code>val</code>の値は<code>11</code>になっているはずだ。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) step
+6	    val *= 2 ;
+(gdb) print val
+$5 = 11
+</code></pre></div><p>さて、残りの行も<code>step</code>して実行を1行ずつ確かめてみよう。</p> <p>GDBの基本的な使い方を覚えたので、これから詳細な使い方を学んでいく。</p> <h2 id="プログラムの実行"><a href="400-gdb.html#プログラムの実行" class="header-anchor">#</a> プログラムの実行</h2> <p>GDBでプログラムをデバッグするには、GDBの起動時にプログラムのオプションとしてプログラムのファイル名を指定する。プログラムのファイル名が<code>program</code>の場合、以下のようにする。</p> <div class="language- extra-class"><pre class="language-text"><code>$ ls
+program
+$ gdb program
+</code></pre></div><p>起動したGDBでプログラムを実行するには、<code>run</code>コマンドを使う。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) run
+</code></pre></div><p>このとき、プログラムにオプションを指定したい場合は<code>run</code>に続けて記述する。例えばプログラムの標準出力を<code>out.txt</code>にリダイレクトしたいときは以下のようにする。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) run &gt; out.txt
+</code></pre></div><h2 id="プログラムの停止方法"><a href="400-gdb.html#プログラムの停止方法" class="header-anchor">#</a> プログラムの停止方法</h2> <p>デバッガーの機能として一番わかりやすいのが、実行中のプログラムを一時停止させる機能だ。</p> <h3 id="ブレイクポイント"><a href="400-gdb.html#ブレイクポイント" class="header-anchor">#</a> ブレイクポイント</h3> <p>コマンド<code>break</code>はブレイクポイントを設定する。プログラムの実行がブレイクポイントに達した場合、GDBはブレイクポイントの直前でプログラムの実行を中断する。</p> <p>ブレイクポイントを設定する場所は<code>break</code>コマンドへの引数で指定する。省略して<code>b</code>だけでもよい。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break 場所
+(gdb) b 場所
+</code></pre></div><p>場所として使えるのは行番号と関数名だ。</p> <h4 id="行番号へのブレイクポイント"><a href="400-gdb.html#行番号へのブレイクポイント" class="header-anchor">#</a> 行番号へのブレイクポイント</h4> <p>現在のソースファイルの123行目にブレイクポイントを設定する場合は以下のように書く。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break 123
+</code></pre></div><p>ソースファイルが複数ある場合は、</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break ファイル名:行番号
+</code></pre></div><p>と書く。例えば<code>foo.cpp</code>の8行目にブレイクポイントを仕掛ける場合は、</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break foo.cpp:8
+</code></pre></div><p>と書く。</p> <h4 id="ブレイクポイントの確認"><a href="400-gdb.html#ブレイクポイントの確認" class="header-anchor">#</a> ブレイクポイントの確認</h4> <p>設定したブレイクポイントの一覧は、<code>info breakpoints</code>コマンドで確認できる。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break 5
+Breakpoint 1 at 0x1150: file main.cpp, line 5.
+(gdb) break 6
+Breakpoint 2 at 0x1157: file main.cpp, line 6.
+(gdb) break 7
+Breakpoint 3 at 0x115b: file main.cpp, line 7.
+(gdb) info breakpoints 
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000001150 in main() at main.cpp:5
+2       breakpoint     keep y   0x0000000000001157 in main() at main.cpp:6
+3       breakpoint     keep y   0x000000000000115b in main() at main.cpp:7
+</code></pre></div><p>これは5,6,7行目にそれぞれブレイクポイントを設定したあとの<code>info breakpoints</code>の結果だ。</p> <p>この表の意味は、左から番号(Num, Number)、種類(Type)、中断後の処理(Disposition), 有効/無効(Enb, Enable/Disable)、アドレス(Address), 内容(What)となっている。</p> <p>ブレイクポイントには作成された順番に番号が振られる。ブレイクポイントの設定を変えるには、この番号でブレイクポイントを参照する。</p> <p>ブレイクポイントには3種類ある。普通のブレイクポイントである<code>breakpoint</code>のほかに、特殊なブレイクポイントであるウォッチポイント(watchpoint)、キャッチポイント(catchpoint)がある。</p> <p>中断後の処理と有効/無効の切り替えはあとで説明する。</p> <p>アドレスというのはブレイクポイントを設定した場所に該当するプログラムのコード部分であり、本書では解説しない。</p> <p>内容はブレイクポイントを設定した場所の情報だ。</p> <h4 id="ブレイクポイントの削除"><a href="400-gdb.html#ブレイクポイントの削除" class="header-anchor">#</a> ブレイクポイントの削除</h4> <p>ブレイクポイントを削除するには<code>delete</code>コマンドを使う。削除するブレイクポイントは番号で指定する。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) delete 1
+</code></pre></div><p>番号を指定しないとすべてのブレイクポイントを削除することができる。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) delete
+Delete all breakpoints? (y or n) y
+(gdb) info breakpoints
+No breakpoints or watchpoints.
+</code></pre></div><h4 id="ブレイクポイントの有効-無効"><a href="400-gdb.html#ブレイクポイントの有効-無効" class="header-anchor">#</a> ブレイクポイントの有効/無効</h4> <p>ブレイクポイントは有効/無効を切り替えることができる。</p> <p>ブレイクポイントを無効化するには<code>disable</code>コマンドを使う。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) disable 1
+</code></pre></div><p>ブレイクポイントを有効化するには<code>enable</code>コマンドを使う。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) enable 1
+</code></pre></div><p>ブレイクポイントは発動したあとに自動で無効化させることができる。</p> <p><code>enable [breakpoints] once</code>コマンドで、ブレイクポイントが一度発動すると自動的に無効化されるブレイクポイントを設定できる。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) enable 1 once
+</code></pre></div><p>このコマンドは、ブレイクポイント番号1が一度発動したら自動的に無効化する設定をする。</p> <p>ブレイクポイントは$n$回発動したあとに自動的に無効化することもできる。そのためのコマンドは<code>enable [breakpoints] count n</code>だ。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) enable 1 count 10
+</code></pre></div><p>上のコマンドは、ブレイクポイント番号1が10回発動したら自動的に無効化されるよう設定している。</p> <h4 id="関数名へのブレイクポイント"><a href="400-gdb.html#関数名へのブレイクポイント" class="header-anchor">#</a> 関数名へのブレイクポイント</h4> <p>ブレイクポイントの場所として関数名を書くと、その関数名が呼び出されたあと、関数の本体の1行目が実行されるところにブレイクポイントが設定される。</p> <p>現在のソースファイルの関数<code>main</code>にブレイクポイントを設定する場合は以下のように書く。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break main
+</code></pre></div><p>ソースファイルが複数ある場合は、</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) ファイル名:関数名
+</code></pre></div><p>と書く。</p> <p>C++では異なる引数で同じ名前の関数が使える。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このようなプログラムで関数<code>f</code>にブレイクポイントを設定すると、<code>f</code>という名前の関数すべてにブレイクポイントが設定される。</p> <p>ブレイクポイントの一覧を表示する<code>info breakpoints</code>コマンドで確かめてみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break f
+Breakpoint 1 at 0x1149: f. (3 locations)
+(gdb) info breakpoints 
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   &lt;MULTIPLE&gt;         
+1.1                         y     0x0000000000001149 in f() at main.cpp:1
+1.2                         y     0x0000000000001153 in f(int) at main.cpp:2
+1.3                         y     0x000000000000115f in f(double) at main.cpp:3
+</code></pre></div><p>関数名<code>f</code>に該当するすべての関数に、ブレイクポイント番号1としてブレイクポイントが設定される。関数にはそれぞれサブの番号が振られる。</p> <p>この状態でブレイクポイント番号1を削除すると、1.1, 1.2, 1.3はすべて削除される。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) delete 1
+(gdb) info breakpoints
+No breakpoints or watchpoints.
+</code></pre></div><p>もし、オーバーロードされた同名の関数のうちの一部だけにブレイクポイントを仕掛けたい場合、曖昧性を解決するメニューを表示する設定にすることで、一部の関数だけを選ぶことができる。メニューを表示する設定にするには、</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) set multiple-symbols ask
+</code></pre></div><p>というコマンドを使う。これ以降の<code>break</code>コマンドが名前が曖昧であることを検出した場合、以下のようなメニューを表示する。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break f
+[0] cancel
+[1] all
+[2] run.cpp:f()
+[3] run.cpp:f(double)
+[4] run.cpp:f(int)
+&gt;
+</code></pre></div><p>ここで<code>0</code>を入力するとキャンセル。<code>1</code>を入力するとすべての関数にブレイクポイントを設定する。</p> <p>特定の関数だけにブレイクポイントを設定したい場合、その関数に対応する番号を入力する。例えば、<code>f()</code>と<code>f(int)</code>だけにブレイクポイントを設定したい場合は、</p> <div class="language- extra-class"><pre class="language-text"><code>&gt; 2 4
+</code></pre></div><p>と入力する。</p> <h3 id="条件付きブレイクポイント"><a href="400-gdb.html#条件付きブレイクポイント" class="header-anchor">#</a> 条件付きブレイクポイント</h3> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break ... if 条件
+</code></pre></div><p>と入力すると、<code>条件</code>が<code>true</code>となるときのみブレイクポイントが発動する。</p> <p>例えば以下のようなコードで、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span> i <span class="token operator">!=</span> <span class="token number">1000</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">++</span>i <span class="token punctuation">;</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>以下のように7行目に変数<code>i</code>が<code>500</code>に等しい条件を設定すると</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break 7 if i == 500
+</code></pre></div><p>変数<code>i</code>が<code>500</code>でありかつ7行目が実行される直前でブレイクポイントが発動する。</p> <h2 id="プログラムの実行再開とステップ実行"><a href="400-gdb.html#プログラムの実行再開とステップ実行" class="header-anchor">#</a> プログラムの実行再開とステップ実行</h2> <p>以下のようなプログラムがあるとする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> x <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムを<code>main</code>関数から1行ずつ実行してその挙動を確かめたい。その場合に、すべての行にブレイクポイントを設定するのは面倒だ。GDBではこのような場合に、現在中断している場所から1行だけ実行する方法がある。</p> <h3 id="実行再開-continue"><a href="400-gdb.html#実行再開-continue" class="header-anchor">#</a> 実行再開(continue)</h3> <p><code>continue</code>コマンドは実行を再開する。省略して<code>c</code>でもよい</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) continue
+(gdb) c
+</code></pre></div><p>実行を再開すると、次のブレイクポイントが発動するか、プログラムが終了するまで実行が続く。</p> <h3 id="ステップ実行-step"><a href="400-gdb.html#ステップ実行-step" class="header-anchor">#</a> ステップ実行(step)</h3> <p><code>step</code>コマンドは現在実行が中断している場所から、ソースファイルで1行分の実行をして中断する。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) step
+(gdb) s
+</code></pre></div><p><code>step</code>コマンドは省略して<code>s</code>でもよい。</p> <p>先ほどのソースファイルで、まず<code>main</code>関数にブレイクポイントを設定して実行すると、</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break main
+(gdb) run
+</code></pre></div><p><code>main</code>関数に入った直後で実行が中断する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token operator">&gt;&gt;</span>  <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre></div><p>この状態で<code>step</code>コマンドを使うと</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) step
+</code></pre></div><p>1行分にあたる実行が行われ、また中断される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token operator">&gt;&gt;</span>  i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre></div><p>もう一度<code>step</code>コマンドを使うと、今度は関数<code>f</code>の中で実行が中断する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token operator">&gt;&gt;</span>  <span class="token keyword">return</span> x <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre></div><p>このまま<code>step</code>コマンドを続けていくと、また<code>main</code>関数に戻り、また次の行が実行され、また関数<code>f</code>が実行される。</p> <p>1行ずつ実行するのではなく$n$行実行したい場合は、<code>step</code>コマンドに$n$を指定する。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) step n
+</code></pre></div><p>するとソースファイルの$n$行分実行される。例えば以下のように書くと、</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) step 3
+</code></pre></div><p>3行分実行される。</p> <h3 id="ネクスト実行-next"><a href="400-gdb.html#ネクスト実行-next" class="header-anchor">#</a> ネクスト実行(next)</h3> <p><code>step</code>コマンドはソースファイルの1行分を実行してくれるが、途中に関数呼び出しが入る場合、その関数のソースファイルがある場合はその関数の中も1行とカウントする。<code>next</code>コマンドは現在実行が中断しているソースファイルの次の行を1行として扱い、次の行まで実行して中断する。</p> <p>例えばプログラムが以下の状態で中断しているとする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token operator">&gt;&gt;</span>  i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre></div><p>このまま<code>step</code>コマンドを実行すると、関数<code>f</code>の中の1行で実行が中断する。一方<code>next</code>コマンドを使うと、</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) next
+</code></pre></div><p>現在止まっているソースファイルの次の1行の手前まで実行して中断する。途中の関数呼び出しはすべて実行される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token operator">&gt;&gt;</span>  i <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre></div><p><code>step</code>コマンドと同じく、<code>next</code>コマンドも$n$行分一度に実行することができる。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) next n
+</code></pre></div><h3 id="関数から抜けるまで実行-finish"><a href="400-gdb.html#関数から抜けるまで実行-finish" class="header-anchor">#</a> 関数から抜けるまで実行(finish)</h3> <p><code>finish</code>コマンドは現在の関数から<code>return</code>するまで実行する。</p> <h2 id="バックトレース"><a href="400-gdb.html#バックトレース" class="header-anchor">#</a> バックトレース</h2> <p>バックトレースは中断しているプログラムの情報を得るとても強力なコマンドだ。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) backtrace
+(gdb) bt
+</code></pre></div><p>バックトレースを表示するには<code>backtrace</code>もしくは<code>bt</code>というコマンドを使う。</p> <p>例えば以下のようなソースファイルがある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+<span class="token keyword">void</span> <span class="token function">banana</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+<span class="token keyword">void</span> <span class="token function">cherry</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">banana</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">cherry</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ここで関数<code>f</code>に注目してみよう。関数<code>f</code>はさまざまな関数から呼ばれる。関数<code>main</code>から呼ばれるし、関数<code>apple</code>や<code>banana</code>からも呼ばれる。特に、関数<code>cherry</code>は関数<code>apple</code>を呼び出すので、間接的に関数<code>f</code>を呼ぶ。</p> <p>関数<code>f</code>にブレイクポイントを仕掛けて実行してみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break f
+(gdb) run
+(gdb) continue
+(gdb) continue
+(gdb) continue
+(gdb) continue
+</code></pre></div><p>関数<code>f</code>が呼ばれるたびに実行が中断するが、関数<code>f</code>がどこから呼ばれたのかがわからない。</p> <p>こういうときにバックトレースが役に立つ。</p> <p>上のコマンドを実行しながら、関数<code>f</code>のブレイクポイントが発動するたびに、<code>backtrace</code>コマンドを入力してみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break f
+(gdb) run
+(gdb) backtrace
+#0  f () at main.cpp:2
+#1  0x0000555555556310 in main () at main.cpp:10
+</code></pre></div><p><code>#0</code>がバックトレースの最も深い現在のスタックフレームだ。これは関数<code>f</code>でソースファイル<code>main.cpp</code>の2行目だ。<code>#1</code>が<code>#0</code>の上のスタックフレームで、これは関数<code>main</code>で10行目にある。</p> <p>実行を再開して、次の関数<code>f</code>のバックトレースを見よう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) continue
+(gdb) backtrace
+#0  f () at main.cpp:2
+#1  0x00005555555562ec in apple () at main.cpp:4
+#2  0x0000555555556315 in main () at main.cpp:11
+</code></pre></div><p>今回はスタックフレームが3つある。最も外側のスタックフレームは関数<code>main</code>で、そこから関数<code>apple</code>が呼び出され、そして関数<code>f</code>が呼び出される。</p> <p>さらに進めよう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) continue
+(gdb) backtrace
+#0  f () at main.cpp:2
+#1  0x00005555555562f8 in banana () at main.cpp:5
+#2  0x000055555555631a in main () at main.cpp:12
+</code></pre></div><p>今度は<code>main</code>→<code>banana</code>→<code>f</code>になった。次はどうだろうか。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) continue
+(gdb) backtrace
+#0  f () at main.cpp:2
+#1  0x00005555555562ec in apple () at main.cpp:4
+#2  0x0000555555556304 in cherry () at main.cpp:6
+#3  0x000055555555631f in main () at main.cpp:13
+</code></pre></div><p>最後は<code>main</code>→<code>cherry</code>→<code>apple</code>→<code>f</code>だ。</p> <p>このようにバックトレースを使うことでプログラムの状態を調べることができる。</p> <h2 id="変数の値を確認"><a href="400-gdb.html#変数の値を確認" class="header-anchor">#</a> 変数の値を確認</h2> <p>変数の値を確認するには<code>print</code>コマンドを使う。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) print 式
+</code></pre></div><p><code>print</code>コマンドは式を評価した結果を出力する。</p> <p>例えば以下のようなソースファイルがある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    x <span class="token operator">+=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    x <span class="token operator">*=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この変数<code>x</code>の値を見ていこう。</p> <p>まず変数<code>x</code>が初期化されるところまで実行する。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break main
+(gdb) run
+(gdb) step
+(gdb) print x
+$1 = 1
+</code></pre></div><p>1行ずつ実行して値を見ていこう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) step
+(gdb) print x
+$2 = 2
+(gdb) step
+(gdb) print x
+$3 = 4
+</code></pre></div><p><code>print 式</code>コマンドで注意すべき点としては、<code>式</code>の副作用もプログラムに反映されるということだ。例えば以下のように変数<code>x</code>を変更する式も使えるし、変数<code>x</code>は実際に変更されてしまう。</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) print ++x
+(gdb) print x = 0
+</code></pre></div><p>式では関数まで呼べてしまう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;hello&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムは関数<code>hello</code>を呼ばないし標準出力には何も出力しない。しかしこのプログラムをGDBでロードし、<code>main</code>関数にブレイクポイントを設定してから実行し、ブレイクポイントが発動したら<code>print hello()</code>コマンドを使ってみると、</p> <div class="language- extra-class"><pre class="language-text"><code>(gdb) break main
+(gdb) run
+(gdb) print hello()
+</code></pre></div><p>なんと関数<code>hello</code>が呼び出され、標準出力に<code>hello</code>と出力されるではないか。</p> <p><code>print</code>コマンドの式のもたらす副作用には注意しよう。</p> <h2 id="シグナルによるプログラムの中断"><a href="400-gdb.html#シグナルによるプログラムの中断" class="header-anchor">#</a> シグナルによるプログラムの中断</h2> <p>プログラムはさまざまな理由によりシグナルを出して実行を強制的に終了する。このシグナルはGDBによってトラップされ、ブレイクポイントと同じくプログラムの中断として扱われる。</p> <p>プログラムが実行を終了するようなシグナルは、プログラムの不具合によって生じる。具体的な不具合は実行環境に依存するが、たいていの環境で動く不具合は、nullポインターを経由した間接アクセスと、ゼロ除算だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// nullポインターを経由した間接アクセス</span>
+<span class="token keyword">int</span> <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+<span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token comment">// ゼロ除算</span>
+<span class="token number">1</span> <span class="token operator">/</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+</code></pre></div><p>実際にそのようなプログラムを作ってGDBで実行し、プログラムが中断されることを確認してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cin <span class="token operator">&gt;&gt;</span> x <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">/</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムはユーザーが標準入力から<code>0</code>を入力するとゼロ除算となり強制的に終了する。GDBで実行してみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>$ gdb program
+(gdb) run
+Starting program:
+0
+
+Program received signal SIGFPE, Arithmetic exception.
+0x0000555555556336 in main () at main.cpp:5
+5	    std::cout &lt;&lt; 1 / x ;
+</code></pre></div><p>ちょうどゼロ除算を起こした箇所でプログラムの実行が中断する。</p> <p>このとき中断した状態でプログラムのさまざまな状態を観測できる。例えばバックトレースを表示したり、変数の値を確認したりできる。</p> <h2 id="コアダンプを使ったプログラムの状態の確認"><a href="400-gdb.html#コアダンプを使ったプログラムの状態の確認" class="header-anchor">#</a> コアダンプを使ったプログラムの状態の確認</h2> <p>プログラムがシグナルによって強制的に終了したときに、たまたまデバッガーで動かしていたならばプログラムの状態を調べられる。しかし都合よくデバッガーで実行していない場合はどうすればいいのか。</p> <p>まずプログラムを普通に実行してみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>$ program
+0
+Floating point exception (core dumped)
+</code></pre></div><p><code>core dumped</code>という文字が気になる。プログラムはシグナルで強制的に実行を終了するときコアファイルをダンプする。このファイル名は通常<code>core</code>だ。通常はカレントディレクトリーに<code>core</code>という名前のファイルが生成されているはずだ。</p> <p>もしカレントディレクトリーに<code>core</code>という名前のファイルがない場合、以下のコマンドを実行する。</p> <div class="language- extra-class"><pre class="language-text"><code>$ ulimit -c unlimited
+</code></pre></div><p>これにより<code>core</code>ファイルが生成されるようになる。</p> <p>すでにコアファイルが存在する場合に上書きされるかどうかは環境により異なる。昔のコアファイルがいらないのであれば消しておこう。</p> <div class="language- extra-class"><pre class="language-text"><code>$ rm ./core
+$ ./program
+0
+Floating point exception (core dumped)
+$ find core
+core
+</code></pre></div><p>このコアファイルはデバッガーに読み込ませることで、プログラムが強制的に終了するに至った瞬間のプログラムの状態を調べるのに使える。</p> <p>使い方はGDBにプログラムファイルと一緒に指定するだけだ。</p> <div class="language- extra-class"><pre class="language-text"><code>$ gdb program core
+...
+Core was generated by `./program'.
+Program terminated with signal SIGFPE, Arithmetic exception.
+#0  0x000055dcbfd3d336 in main () at main.cpp:5
+5	    std::cout &lt;&lt; 1 / x ;
+(gdb) backtrace
+#0  0x000055dcbfd3d336 in main () at main.cpp:5
+(gdb) print x
+$1 = 0
+</code></pre></div><p>デバッガーはとても役に立つ。本書では少しだけしか解説しなかったが、このほかにも強力な機能がたくさんある。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="300-multiple-source-files.html" class="prev">分割コンパイル</a></span> <!----></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/54.9b6224cf.js" defer></script>
+  </body>
+</html>

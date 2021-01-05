@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>整数 | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/16.663fe3ce.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="active sidebar-link">整数</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="011-integer.html#整数リテラル" class="sidebar-link">整数リテラル</a></li><li class="sidebar-sub-header"><a href="011-integer.html#整数の仕組み" class="sidebar-link">整数の仕組み</a></li><li class="sidebar-sub-header"><a href="011-integer.html#整数型" class="sidebar-link">整数型</a></li><li class="sidebar-sub-header"><a href="011-integer.html#整数型のサイズ" class="sidebar-link">整数型のサイズ</a></li><li class="sidebar-sub-header"><a href="011-integer.html#整数型の表現できる値の範囲" class="sidebar-link">整数型の表現できる値の範囲</a></li><li class="sidebar-sub-header"><a href="011-integer.html#整数型の変換" class="sidebar-link">整数型の変換</a></li></ul></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="整数"><a href="011-integer.html#整数" class="header-anchor">#</a> 整数</h1> <p>始めに書いておくがこの章はユーモア欠落症患者によって書かれており極めて退屈だ。しかし、整数の詳細はすべてのプログラマーが理解すべきものだ。心して読むとよい。</p> <h2 id="整数リテラル"><a href="011-integer.html#整数リテラル" class="header-anchor">#</a> 整数リテラル</h2> <p>整数リテラルとは整数の値を直接ソースファイルに記述する機能だ。本書ではここまで何の説明もなくリテラルを使っていた。例えば以下のように。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ここでは、<code>'123'</code>, <code>'0'</code>がリテラルだ。<code>'-123'</code>というのは演算子<code>operator -</code>に整数リテラル<code>123</code>を適用したものだ。リテラルは<code>123</code>だけだ。ただしこれは細かい詳細なのでいまはそれほど気にしなくてもよい。</p> <h3 id="_10進数リテラル"><a href="011-integer.html#_10進数リテラル" class="header-anchor">#</a> 10進数リテラル</h3> <p>10進数リテラルは最も簡単で我々が日常的に使っている数の表記方法と同じものだ。接頭語は何も使わず数字には<code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>が使える。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 10進数で123</span>
+<span class="token keyword">int</span> decimal <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p>ただし、10進数リテラルの先頭を<code>0</code>にしてはならない。これは8進数リテラルになってしまう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 10進数で83</span>
+<span class="token keyword">int</span> octal <span class="token operator">=</span> <span class="token number">0123</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="_2進数リテラル"><a href="011-integer.html#_2進数リテラル" class="header-anchor">#</a> 2進数リテラル</h3> <p>2進数リテラルは接頭語<code>'0b'</code>, <code>'0B'</code>から始まる。数字には<code>0</code>, <code>1</code>を使うことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 10進数で5</span>
+<span class="token keyword">int</span> binary <span class="token operator">=</span> <span class="token number">0b1010</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 0bと0Bは同じ</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0B1010</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="_8進数リテラル"><a href="011-integer.html#_8進数リテラル" class="header-anchor">#</a> 8進数リテラル</h3> <p>8進数リテラルは接頭語<code>'0'</code>から始まる。数字には<code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>を使うことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 10進数で83</span>
+<span class="token keyword">int</span> octal <span class="token operator">=</span> <span class="token number">0123</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 10進数で342391</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">01234567</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="_16進数リテラル"><a href="011-integer.html#_16進数リテラル" class="header-anchor">#</a> 16進数リテラル</h3> <p>16進数リテラルは接頭語<code>'0x'</code>, <code>'0X'</code>から始まる。数字には<code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>, <code>e</code>, <code>f</code>, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, <code>E</code>, <code>F</code>が使える。ローマ字の大文字と小文字は意味が同じだ。<code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>, <code>e</code>, <code>f</code>がそれぞれ<code>10</code>, <code>11</code>, <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>を意味する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 10進数で291</span>
+<span class="token keyword">int</span> hexadecimal <span class="token operator">=</span> <span class="token number">0x123</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 0xと0Xは同じ</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0X123</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 10進数で10</span>
+<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">0xa</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 10進数で15</span>
+<span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token number">0xf</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="数値区切り"><a href="011-integer.html#数値区切り" class="header-anchor">#</a> 数値区切り</h3> <p>長い整数リテラルは読みにくい。例えば<code>10000000</code>と<code>100000000</code>はどちらが大きくて具体的にどのくらいの値なのかがわからない。C++には整数リテラルを読みやすいように区切ることのできる数値区切りという機能がある。整数リテラルはシングルクオート文字(<code>'</code>)で区切ることができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span>   <span class="token number">1000'0000</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">1'0000'0000</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>区切り幅は何文字でもよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1'22'333'4444'55555</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>10進数整数リテラル以外でも使える。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">0b10101010'11110000'00001111</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token number">07'7'5</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> c <span class="token operator">=</span> <span class="token number">0xde'ad'be'ef</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="整数の仕組み"><a href="011-integer.html#整数の仕組み" class="header-anchor">#</a> 整数の仕組み</h2> <h3 id="情報の単位"><a href="011-integer.html#情報の単位" class="header-anchor">#</a> 情報の単位</h3> <p>0から100までの整数を表現するには101種類の状態を表現できる必要がある。コンピューターはどうやって整数を表現しているのかをここで学ぶ。</p> <p>情報の最小単位はビット(bit)だ。ビットは2種類の状態を表現できる。たとえば<code>bool</code>型は<code>true</code>/<code>false</code>という2種類の状態を表現できる。</p> <p>しかし、2種類の状態しか表現できない整数は使いづらい。0もしくは1しか表現できない整数とか、100もしく1000しか表現できない整数は使い物にならない。</p> <p>また、ビットという単位も扱いづらい。コンピューターは膨大な情報を扱うので、ビットをいくつかまとめたバイト(byte)を単位として情報を扱っている。1バイトが何ビットであるかは環境により異なる。本書では最も普及している1バイトは8ビットを前提にする。</p> <p>1ビットは2種類の状態を表現できるので、1バイトの中の8ビットは$2^8 = 256$種類の状態を表現できる。2バイトならば16ビットとなり、$2^{16} = 65536$種類の状態を表現できる。</p> <h3 id="_1バイトで表現された整数"><a href="011-integer.html#_1バイトで表現された整数" class="header-anchor">#</a> 1バイトで表現された整数</h3> <p>整数の表現方法について理解するために、1バイトで表現された整数を考えよう。</p> <p>1バイトは8ビットであり256種類の状態を表現できる。整数を0から正の方向の数だけ表現したいとすると、0から255までの値を表現できることになる。</p> <p>その場合、1バイトの整数の中の8ビットはちょうど2進数8桁で表現できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 0</span>
+<span class="token keyword">auto</span> zero <span class="token operator">=</span> <span class="token number">0b00000000</span> <span class="token punctuation">;</span>
+<span class="token comment">// 255</span>
+<span class="token keyword">auto</span> max  <span class="token operator">=</span> <span class="token number">0b11111111</span> <span class="token punctuation">;</span>
+</code></pre></div><p>一番左側の桁が最上位桁で、一番右側の桁が最下位桁だ。これを最上位ビット、最下位ビットともいう。</p> <p>正数だけを表現するならば話は簡単だ。1バイトの整数は0から255までの値を表現できる。これを符号なし整数(unsigned integer)という。</p> <p>では負数を表現するにはどうしたらいいだろう。正数と負数を両方扱える整数表現のことを、符号付き整数(signed integer)という。1バイトは256種類の状態しか表現できないので、もし$-1$を表現したい場合、$-1$から254までの値を扱えることになる。</p> <p>$-1$しか扱えないのでは実用的ではないので、負数と正数を同じ種類ぐらい表現したい。256の半分は128だが、1バイトで表現された整数は$-128$から128までを表現することはできない。0があるからだ。0を含めると、1バイトの整数は最大で$-128$から127までか、$-127$から128までを表現できる。どちらかに偏ってしまう。</p> <p>では実際に1バイトで負数も表現できる整数表現を考えてみよう。</p> <h4 id="符号ビット"><a href="011-integer.html#符号ビット" class="header-anchor">#</a> 符号ビット</h4> <p>誰でも思いつきそうな表現方法に、符号ビットがある。これは最上位ビットを符号の有無を管理するフラグとして用いることにより、下位7ビットの値の符号を指定する方法だ。</p> <p>符号ビット表現では$-1$と1は以下のように表現できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 1</span>
+<span class="token number">0b0'0000001</span>
+<span class="token comment">// -1</span>
+<span class="token number">0b1'0000001</span>
+</code></pre></div><p>最上位ビットが0であれば正数、1であれば負数だ。</p> <p>この一見わかりやすい表現方法には問題がある。まず表現できる値の範囲は$-127$から$+127$だ。先ほど、1バイトで正負になるべく均等に値を割り振る場合、$-128$から$+127$、もしくは$-127$から$+128$までを扱えると書いた。しかし符号ビット表現では$-127$から$+127$しか扱えない。残りの1はどこにいったのか。</p> <p>答えはゼロにある。符号ビット表現ではゼロに2通りの表現がある。$+0$と$-0$だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// +0</span>
+<span class="token number">0b0'0000000</span>
+<span class="token comment">// -0</span>
+<span class="token number">0b1'0000000</span>
+</code></pre></div><p>$+0$も$-0$もゼロには違いない。しかし符号ビットが独立して存在しているために、ゼロが2種類ある。</p> <p>符号ビットは電子回路で実装するには複雑という問題もある。</p> <h4 id="_1の補数"><a href="011-integer.html#_1の補数" class="header-anchor">#</a> 1の補数</h4> <p>1の補数は負数を絶対値を2進数で表したときの各ビットを反転させた値で表現する。たとえば$-1$は1(<code>0b00000001</code>)の1の補数の<code>0b11111110</code>で表現される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// -1</span>
+<span class="token number">0b11111110</span>
+
+<span class="token comment">// -2</span>
+<span class="token number">0b11111101</span>
+</code></pre></div><p>$-1$と$-2$を足すと結果は$-3$だ。この計算を1の補数で行うとどうなるか。</p> <p>まず1の補数表現による$-1$と$-2$を足す。</p> <div class="language- extra-class"><pre class="language-text"><code>   11111110
++) 11111101
+-----------
+ 1'11111011
+</code></pre></div><p>この結果は9ビットになる。この整数は8ビットなので、9ビット目を表現することはできない。ただし1の補数表現の計算では、もし9ビット目が繰り上がった場合は、演算結果に1を足す取り決めがある。</p> <div class="language- extra-class"><pre class="language-text"><code>   11111011
++)        1
+-----------
+   11111100
+</code></pre></div><p>1の補数による$-3$は3の各ビットを反転したものだ。3は<code>0b00000011</code>で、そのビットを反転させたものは<code>0b11111100</code>だ。上の計算結果は$-3$の1の補数表現になった。</p> <p>もう1つ例を見てみよう。5と$-2$を足すと3になる。</p> <div class="language- extra-class"><pre class="language-text"><code>   00000101
++) 11111101
+-----------
+ 1'00000010
+</code></pre></div><p>繰り上がりが発生したので1を足すと</p> <div class="language- extra-class"><pre class="language-text"><code>   00000010
++)        1
+-----------
+   00000011
+</code></pre></div><p>3になった。</p> <p>1の補数は引き算も足し算で表現できるので電子回路での実装が符号ビットよりもやや簡単になる。</p> <p>ただし、1の補数にも問題がある。0の表現だ。0というのは<code>0b00000000</code>だが1の補数では$-x$は$x$の各ビット反転ということを適用すると、$-0$は<code>0b11111111</code>になる。すると、符号ビット表現と同じく、$+0$と$-0$が存在することになる。したがって、1の補数8ビットで表現できる範囲は$-127$から$+127$になる。</p> <h4 id="_2の補数"><a href="011-integer.html#_2の補数" class="header-anchor">#</a> 2の補数</h4> <p>符号ビットと1の補数による負数表現にある問題は、2の補数表現で解決できる。</p> <p>2の補数表現による負数は1の補数表現の負数に、繰り上がり時に足すべき1を加えた値になる。</p> <p>$-1$は1の補数表現では、1(<code>0b00000001</code>)の各ビットを反転させた値になる(<code>0b11111110</code>)。2の補数表現では、1の補数表現に1を加えた値になるので、<code>0b11111111</code>になる。</p> <p>同様に、$-2$は<code>0b11111110</code>に、$-3$は<code>0b11111101</code>になる。</p> <p>2の補数表現の$-1$と$-2$を足すと以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>   11111111
++) 11111110
+-----------
+ 1'11111101
+</code></pre></div><p>9ビット目の繰り上がりを無視すると、計算結果は<code>0b11111101</code>になる。これは2の補数表現による$-3$と同じだ。</p> <p>5と$-2$の計算も見てみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>   00000101
++) 11111110
+-----------
+ 1'00000011
+</code></pre></div><p>結果は3(<code>0b00000011</code>)だ。</p> <p>2の補数表現は引き算も足し算で実装できる上に、ゼロの表現方法は1つで、$+0$と$-0$が存在しない。8ビットの2の補数表現された整数の範囲は$-128$から$+127$になる。とても便利な負数の表現方法なのでほとんどのコンピューターで採用されている。</p> <h2 id="整数型"><a href="011-integer.html#整数型" class="header-anchor">#</a> 整数型</h2> <p>C++にはさまざまな整数型が存在する。C++はCから引き継いだ歴史的な経緯により、整数型の文法がわかりにくくなっている。</p> <p>基本的には、符号付き整数型と符号なし整数型に分かれている。</p> <p>符号付き整数型としては、<code>signed char</code>, <code>short int</code>, <code>int</code>, <code>long int</code>, <code>long long int</code>が存在する。符号付き整数型は負数を表現できる。</p> <p>符号なし整数型としては、<code>unsigned char</code>, <code>unsigned short int</code>, <code>unsigned int</code>, <code>unsigned long int</code>, <code>unsigned long long int</code>が存在する。符号なし整数型は負数を表現できない。</p> <h3 id="int型"><a href="011-integer.html#int型" class="header-anchor">#</a> int型</h3> <p><code>int型</code>は最も基本となる整数型だ。C++で数値を扱う場合、多くは<code>int</code>型になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p>整数リテラルの型は通常は<code>int</code>型になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int</span>
+<span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>unsigned int型</code>は符号のない<code>int</code>型だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">unsigned</span> <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p>整数リテラルの末尾に<code>u</code>/<code>U</code>と書いた場合、<code>unsigned int</code>型になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int</span>
+<span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token comment">// unsigned int</span>
+<span class="token keyword">auto</span> y <span class="token operator">=</span> <span class="token number">123u</span> <span class="token punctuation">;</span>
+</code></pre></div><p>特殊なルールとして、単に<code>signed</code>と書いた場合、それは<code>int</code>になる。<code>unsigned</code>と書いた場合は、<code>unsigned int</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int</span>
+<span class="token keyword">signed</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+<span class="token comment">// unsigned int</span>
+<span class="token keyword">unsigned</span> b <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>signed int</code>と書いた場合、<code>int型</code>になる。<code>signed int</code>は<code>int</code>の冗長な書き方だ。</p> <h3 id="long-int型"><a href="011-integer.html#long-int型" class="header-anchor">#</a> long int型</h3> <p><code>long int型</code>は<code>int型</code>以上の範囲の整数を扱える型だ。具体的な整数型の値の範囲は実装依存だが、<code>long int型</code>は<code>int型</code>の表現できる整数の範囲はすべて表現でき、かつ<code>int型</code>以上の範囲の整数型を表現できるかもしれない型だ。</p> <p><code>unsigned long int型</code>は符号なしの<code>long int</code>だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">long</span> <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+</code></pre></div><p>特殊なルールとして、単に<code>long</code>と書いた場合、それは<code>long int</code>になる。<code>unsigned long</code>と書いた場合、<code>unsigned long int</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// long int</span>
+<span class="token keyword">long</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+<span class="token comment">// unsigned long int</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">long</span> b <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+</code></pre></div><p>通常、<code>int</code>を省略して単に<code>long</code>と書くことが多い。</p> <p>整数リテラルの値が<code>int型</code>で表現できない場合、<code>long型</code>になる。例えば、<code>int型</code>で100億を表現できないが、<code>long型</code>では表現できる実装の場合、以下の変数<code>a</code>は<code>long型</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 100億</span>
+<span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">100'0000'0000</span> <span class="token punctuation">;</span>
+</code></pre></div><p>整数リテラルの値が<code>long</code>では表現できないが<code>unsigned long</code>では表現できる場合、<code>unsigned long型</code>になる。</p> <p>整数リテラルの末尾に<code>l</code>/<code>L</code>と書いた場合、値にかかわらず<code>long型</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int</span>
+<span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token comment">// long</span>
+<span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token number">123l</span> <span class="token punctuation">;</span>
+<span class="token comment">// long</span>
+<span class="token keyword">auto</span> c <span class="token operator">=</span> <span class="token number">123L</span> <span class="token punctuation">;</span>
+</code></pre></div><p>符号なし整数型を意味する<code>u</code>/<code>U</code>と組み合わせることもできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// unsigned long</span>
+<span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">123ul</span> <span class="token punctuation">;</span>
+<span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token number">123lu</span> <span class="token punctuation">;</span>
+</code></pre></div><p>順番と大文字小文字の組み合わせは自由だ。</p> <h3 id="long-long-int型"><a href="011-integer.html#long-long-int型" class="header-anchor">#</a> long long int型</h3> <p><code>long long int型</code>は<code>long int型</code>以上の範囲の整数を扱える型だ。<code>long</code>と同じく<code>long long</code>は<code>long long int</code>と同じで、<code>unsigned long long int</code>もある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// long long int</span>
+<span class="token keyword">long</span> <span class="token keyword">long</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+<span class="token comment">// unsigned long long int</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">long</span> <span class="token keyword">long</span> b <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+</code></pre></div><p>整数リテラルの値が<code>long型</code>でも表現できないときは、<code>long long</code>が使われる。<code>long long</code>でも表現できない場合は<code>unsigned long long</code>が使われる。</p> <p>整数リテラルの末尾に<code>ll</code>/<code>LL</code>と書くと<code>long long int型</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// long long int</span>
+<span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">123ll</span> <span class="token punctuation">;</span>
+<span class="token comment">// long long int</span>
+<span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token number">123LL</span> <span class="token punctuation">;</span>
+<span class="token comment">// unsigned long long int</span>
+<span class="token keyword">auto</span> c <span class="token operator">=</span> <span class="token number">123ull</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="short-int型"><a href="011-integer.html#short-int型" class="header-anchor">#</a> short int型</h3> <p><code>short int型</code>は<code>int型</code>より小さい範囲の値を扱う整数型だ。<code>long</code>, <code>long long</code>と同様に、<code>unsigned short int</code>型もある。単に<code>short</code>と書くと、<code>short int</code>と同じ意味になる。</p> <p>整数リテラルで<code>short int</code>型を表現する方法はない。</p> <h3 id="char型"><a href="011-integer.html#char型" class="header-anchor">#</a> char型</h3> <p><code>char型</code>はやや特殊で、<code>char</code>, <code>signed char</code>, <code>unsigned char</code>の3種類の型がある。<code>signed char</code>と<code>char</code>は別物だ。<code>char型</code>は整数型であり、あとで説明するように文字型でもある。<code>char型</code>の符号の有無は実装ごとに異なる。</p> <h2 id="整数型のサイズ"><a href="011-integer.html#整数型のサイズ" class="header-anchor">#</a> 整数型のサイズ</h2> <p>整数型を含む変数のサイズは、<code>sizeof演算子</code>で確認することができる。<code>sizeof(T)</code>は<code>T</code>に型名や変数名を入れることで、サイズを取得することができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> x<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>sizeof演算子</code>は<code>std::size_t型</code>を返す。<code>vector</code>の章でも出てきたこの型は実装依存の符号なし型であると定義されている。単位はバイトだ。</p> <p>以下が各種整数型のサイズを出力するプログラムだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> print <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span> std<span class="token operator">::</span>size_t s <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> s <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">short</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムを筆者の環境で実行した結果が以下になる。</p> <div class="language- extra-class"><pre class="language-text"><code>1
+2
+4
+8
+8
+</code></pre></div><p>どうやら筆者の環境では、<code>char</code>が1バイト、<code>short</code>が2バイト、<code>int</code>が4バイト、<code>long</code>と<code>long long</code>が8バイトのようだ。この結果は環境ごとに異なるので読者も自分で<code>sizeof</code>演算子をさまざまな型に適用して試してほしい。</p> <h2 id="整数型の表現できる値の範囲"><a href="011-integer.html#整数型の表現できる値の範囲" class="header-anchor">#</a> 整数型の表現できる値の範囲</h2> <p>整数型の表現できる値の最小値と最大値は<code>std::numeric_limits&lt;T&gt;</code>で取得できる。最小値は<code>::min()</code>を、最大値は<code>::max()</code>で得られる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout
+        <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">min</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>実行結果</p> <div class="language- extra-class"><pre class="language-text"><code>-2147483648
+2147483647
+</code></pre></div><p>どうやら筆者の環境では<code>int</code>型は$−21億4748万3648$から21億4748万3647までの範囲の値を表現できるようだ。</p> <p><code>unsigned int</code>はどうだろうか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout
+        <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">min</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>実行結果</p> <div class="language- extra-class"><pre class="language-text"><code>0
+4294967295
+</code></pre></div><p>どうやら筆者の環境では<code>unsigned int</code>型は0から42億9496万7295までの範囲の値を表現できるようだ。<code>sizeof(int)</code>が4バイトであり、1バイトが8ビットの筆者の環境では自然な値だ。符号なしの4バイト整数型は0から$2^{32}-1$までの範囲の値を表現できる。符号付き4バイト整数型は$-2^{31}$から$2^{31}-1$までの範囲の値を表現できる。</p> <p>整数の最小値を$-1$したり、最大値を$+1$した場合、何が起こるのだろうか。</p> <p>符号なし整数型の場合は簡単だ。最小値$-1$は最大値になる。最大値$+1$は最小値になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> min <span class="token operator">=</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">min</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> max <span class="token operator">=</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> min_minus_one <span class="token operator">=</span> min <span class="token operator">-</span> <span class="token number">1u</span> <span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> max_plus_one <span class="token operator">=</span> max <span class="token operator">+</span> <span class="token number">1u</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> min <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token operator">&lt;&lt;</span> max <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> min_minus_one <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token operator">&lt;&lt;</span> max_plus_one <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>8ビットの符号なし整数型があるとして、最小値は<code>0b00000000</code>(0)になるが、この値を$-1$すると<code>0b11111111</code>(255)となり、これは最大値になる。逆に、最大値である<code>0b11111111</code>(255)に$+1$すると<code>0b00000000</code>(0)となり、これは最小値になる。</p> <p>これを数学的に厳密に書くと、「符号なし整数は算術モジュロ$2^n$の法に従う。ただし$n$は整数を表現する値のビット数である」となる。</p> <p>符号付き整数型の場合、挙動は定められていない。ただし、一般に普及している2の補数表現の場合は、以下のような挙動になることが多い。</p> <p>符号付き整数型の最小値を$-1$すると最大値になり、最大値を$+1$すると最小値になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token keyword">int</span> min <span class="token operator">=</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">min</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+     <span class="token keyword">int</span> max <span class="token operator">=</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+     <span class="token keyword">int</span> min_minus_one <span class="token operator">=</span> min <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+     <span class="token keyword">int</span> max_plus_one <span class="token operator">=</span> max <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> min <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token operator">&lt;&lt;</span> max <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> min_minus_one <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token operator">&lt;&lt;</span> max_plus_one <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これはなぜか。2の補数表現の8ビットの符号付き整数の最小値は<code>0b10000000</code>($-128$)だが、これを$-1$すると<code>0b01111111</code>(127)となり、これは最大値となる。逆に最大値<code>0b01111111</code>(127)を$+1$すると<code>0b10000000</code>($-128$)となり、これは最小値となる。</p> <h2 id="整数型の変換"><a href="011-integer.html#整数型の変換" class="header-anchor">#</a> 整数型の変換</h2> <p>整数型にはここで紹介しただけでも、さまざまな型がある。同じ型同士を使った方がよい。</p> <p>以下は型が一致している例だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token keyword">long</span> b <span class="token operator">=</span> <span class="token number">123l</span> <span class="token punctuation">;</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> c <span class="token operator">=</span> <span class="token number">123ll</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> d <span class="token operator">=</span> <span class="token number">123u</span> <span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre></div><p>以下は型が一致していない例だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// intからshort</span>
+    <span class="token keyword">short</span> a <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token comment">// longからint</span>
+    <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">123l</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// intからunsigned int</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token comment">// unsigned intからint</span>
+    <span class="token keyword">int</span> d <span class="token operator">=</span> <span class="token number">123u</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>代入や演算で整数型が一致しない場合、整数型の変換が行われる。</p> <p>整数型の変換で注意すべきこととしては、変換元の値を変換先の型で表現できない場合の挙動だ。</p> <p>たとえば<code>short</code>型と<code>int</code>型の表現できる最大値を調べるプログラムを書いてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;short: &quot;</span>s <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">short</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;int: &quot;</span>s <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>numeric_limits<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これを実行すると筆者の環境では以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>short: 32767
+int: 2147483647
+</code></pre></div><p>どうやら筆者の環境では<code>short</code>型は約3万、<code>int</code>型は約21億ぐらいの値を表現できるようだ。</p> <p>では約3万までしか表現できない<code>short</code>型に4万を代入しようとするとどうなるのか。これは1つ前の整数型の表現できる値の範囲で説明したものと同じことが起こる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">short</span> x <span class="token operator">=</span> <span class="token number">40000</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムを実行した結果は実装ごとに異なる。例えば筆者の環境では以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>-25536
+</code></pre></div><p>整数型の変換は暗黙的に行われるが、明示的に行うこともできる。明示的な変換には<code>static_cast&lt;T&gt;(e)</code>を使う。<code>static_cast</code>は値<code>e</code>を型<code>T</code>の値に変換する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token keyword">short</span> y <span class="token operator">=</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">short</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="010-debug-printf.html" class="prev">デバッグ：printfデバッグ</a></span> <span class="next"><a href="012-floating-point.html">浮動小数点数</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/16.663fe3ce.js" defer></script>
+  </body>
+</html>

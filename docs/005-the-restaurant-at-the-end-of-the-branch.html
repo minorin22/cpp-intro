@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>条件分岐の果てのレストラン | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/10.0bc4fb9f.js" as="script"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="active sidebar-link">条件分岐の果てのレストラン</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="005-the-restaurant-at-the-end-of-the-branch.html#複合文" class="sidebar-link">複合文</a></li><li class="sidebar-sub-header"><a href="005-the-restaurant-at-the-end-of-the-branch.html#条件分岐" class="sidebar-link">条件分岐</a></li><li class="sidebar-sub-header"><a href="005-the-restaurant-at-the-end-of-the-branch.html#条件式" class="sidebar-link">条件式</a></li><li class="sidebar-sub-header"><a href="005-the-restaurant-at-the-end-of-the-branch.html#bool型" class="sidebar-link">bool型</a></li><li class="sidebar-sub-header"><a href="005-the-restaurant-at-the-end-of-the-branch.html#bool型の演算" class="sidebar-link">bool型の演算</a></li><li class="sidebar-sub-header"><a href="005-the-restaurant-at-the-end-of-the-branch.html#boolの変換" class="sidebar-link">boolの変換</a></li></ul></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="条件分岐の果てのレストラン"><a href="005-the-restaurant-at-the-end-of-the-branch.html#条件分岐の果てのレストラン" class="header-anchor">#</a> 条件分岐の果てのレストラン</h1> <p>さてC++の勉強に戻ろう。この章では条件分岐について学ぶ。</p> <h2 id="複合文"><a href="005-the-restaurant-at-the-end-of-the-branch.html#複合文" class="header-anchor">#</a> 複合文</h2> <p>条件分岐とループについて学ぶ前に、まず<code>複合文</code>(compound statement)や<code>ブロック</code>(block)と呼ばれている、複数の文をひとまとめにする文について学ばなければならない。</p> <p>C++では<code>文</code>(statement)が実行される。<code>文</code>については詳しく説明すると長くなるが、<code>';'</code>で区切られたものが<code>文</code>だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 文</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 文</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+
+    <span class="token comment">// 空文</span>
+    <span class="token comment">// 実は空っぽの文も書ける。</span>
+    <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>複数の<code>文</code>を<code>{}</code>で囲むことで、1つの文として扱うことができる。これを<code>複合文</code>という。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 複合文開始</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;hello\n&quot;</span>s <span class="token punctuation">;</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;hello\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token comment">// 複合文終了</span>
+
+    <span class="token comment">// 別の複合文</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;world\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// 空の複合文</span>
+    <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>複合文</code>には<code>';'</code>はいらない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ;はいらない</span>
+    <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// これは空の複合文に続いて</span>
+    <span class="token comment">// 空文があるだけのコード</span>
+    <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>複合文</code>の中に<code>複合文</code>を書くこともできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>関数の本体</code>としての一番外側<code>'{}'</code>はこの<code>複合文</code>とは別のものだが、読者はまだ気にする必要はない。</p> <p><code>複合文</code>は複数の<code>文</code>をひとまとめにして、1つの<code>文</code>として扱えるようにするぐらいの意味しか持っていない。ただし、変数の見え方に影響する。変数は宣言された最も内側の複合文の中でしか使えない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">auto</span> c <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+            <span class="token comment">// cはここまで使える</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// bはここまで使える</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// aはここまで使える</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これを専門用語では<code>変数</code>の<code>寿命</code>とか<code>ブロックスコープ</code>(block-scope)という。</p> <p>内側のブロックスコープの変数が、外側のブロックスコープの変数と同じ名前を持っていた場合はエラーではない。外側の変数が内側の変数で隠される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+            <span class="token comment">// 2</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 1</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+        x <span class="token operator">=</span> <span class="token number">42</span> <span class="token punctuation">;</span>
+        <span class="token comment">// 42</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 0</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>慣れないうちは驚くかもしれないが、多くのプログラミング言語はこのような挙動になっているものだ。</p> <h2 id="条件分岐"><a href="005-the-restaurant-at-the-end-of-the-branch.html#条件分岐" class="header-anchor">#</a> 条件分岐</h2> <p>すでに読者はさまざまな数値計算を学んだ。読者は<code>12345 + 6789</code>の答えや、<code>8073 * 132 / 5</code>の答えを計算できる上、この2つの答えをさらに掛け合わせた結果だって計算できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">12345</span> <span class="token operator">+</span> <span class="token number">6789</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token number">8073</span> <span class="token operator">*</span> <span class="token number">132</span> <span class="token operator">/</span> <span class="token number">5</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> sum <span class="token operator">=</span> a <span class="token operator">+</span> b <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout
+        <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;a=12345 + 6789=&quot;</span> <span class="token operator">&lt;&lt;</span> a <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;b=8073 * 132 / 5=&quot;</span> <span class="token operator">&lt;&lt;</span> b <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;a+b=&quot;</span> <span class="token operator">&lt;&lt;</span> sum <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>なるほど、答えがわかった。ところで変数<code>a</code>と変数<code>b</code>はどちらが大きいのだろうか。大きい変数だけ出力したい。この場合は条件分岐を使う。</p> <p>C++では条件分岐に<code>if文</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">12345</span> <span class="token operator">+</span> <span class="token number">6789</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token number">8073</span> <span class="token operator">*</span> <span class="token number">132</span> <span class="token operator">/</span> <span class="token number">5</span> <span class="token punctuation">;</span>
+
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> a <span class="token operator">&lt;</span> b <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// bが大きい</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> b <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// aが大きい</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> a <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>if文</code>は以下のように書く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">if</span> <span class="token punctuation">(</span> 条件 <span class="token punctuation">)</span>
+文<span class="token number">1</span>
+<span class="token keyword">else</span>
+文<span class="token number">2</span>
+</code></pre></div><p><code>条件</code>が真(<code>true</code>)のときは<code>文1</code>が実行され、偽(<code>false</code>)のときは<code>文2</code>が実行される。</p> <p><code>else</code>の部分は書かなくてもよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">if</span> <span class="token punctuation">(</span> 条件 <span class="token punctuation">)</span>
+文<span class="token number">1</span>
+文<span class="token number">2</span>
+</code></pre></div><p>その場合、<code>条件</code>が真のときだけ<code>文1</code>が実行される。条件の真偽にかかわらず<code>文2</code>は実行される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token number">2</span> <span class="token operator">&lt;</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;sentence 1.\n&quot;</span> <span class="token punctuation">;</span> <span class="token comment">// 文1</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;sentence 2.\n&quot;</span> <span class="token punctuation">;</span> <span class="token comment">// 文2</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この例では、<code>2</code>が<code>1</code>より小さい場合は<code>文1</code>が実行される。<code>文2</code>は必ず実行される。</p> <p>条件次第で複数の文を実行したい場合、<code>複合文</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token operator">&lt;</span> <span class="token number">2</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;yes!\n&quot;</span> <span class="token punctuation">;</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;yes!\n&quot;</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>条件</code>とか<code>真偽</code>についてはとてもとても深い話があるのだが、その解説はあとの章に回すとして、まずは以下の比較演算子を覚えよう。</p> <p>演算子             意味</p> <hr> <p><code>a == b</code> <code>a</code>は<code>b</code>と等しい
+<code>a != b</code> <code>a</code>は<code>b</code>と等しくない
+<code>a &lt; b</code> <code>a</code>は<code>b</code>より小さい
+<code>a &lt;= b</code> <code>a</code>は<code>b</code>より小さい、もしくは等しい
+<code>a &gt; b</code> <code>a</code>は<code>b</code>より大きい
+<code>a &gt;= b</code> <code>a</code>は<code>b</code>より大きい、もしくは等しい</p> <p>真(<code>true</code>)というのは、意味が真であるときだ。正しい、成り立つ、正解などと言い換えてもよい。それ以外の場合はすべて偽(<code>false</code>)だ。正しくない、成り立たない、不正解などと言い換えてもいい。</p> <p>整数や浮動小数点数の場合、話は簡単だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 1は2より小さいか？</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token operator">&lt;</span> <span class="token number">2</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>   <span class="token comment">// 真、お使いのコンピューターは正常です</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Your computer works just fine.\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 偽、お使いのコンピューターには深刻な問題があります</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Your computer has serious issues.\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>文字列の場合、内容が同じであれば等しい。違うのであれば等しくない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token string">&quot;dog&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token string">&quot;dog&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> c <span class="token operator">=</span> <span class="token string">&quot;cat&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> a <span class="token operator">==</span> b <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;a == b\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;a != b\n&quot;</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> a <span class="token operator">==</span> c <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;a == c\n&quot;</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;a != c\n&quot;</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>では文字列に大小はあるのだろうか。文字列に大小はある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> cat <span class="token operator">=</span> <span class="token string">&quot;cat&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> dog <span class="token operator">=</span> <span class="token string">&quot;dog&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> cat <span class="token operator">&lt;</span> dog <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>   <span class="token comment">// 猫は小さい</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;cat is smaller.\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>   <span class="token comment">// 犬は小さい</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;dog is smaller.\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">auto</span> longcat <span class="token operator">=</span> <span class="token string">&quot;longcat&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> longcat <span class="token operator">&gt;</span> cat <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>   <span class="token comment">// longcatは長い</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Longcat is Looong.\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Longcat isn't that long. Sigh.\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>実行して確かめてみよう。ほとんどの読者の実行環境では以下のようになるはずだ。ほとんどの、というのは、そうではない環境も存在するからだ。読者がそのような稀有な環境を使っている可能性はまずないだろうが。</p> <div class="language- extra-class"><pre class="language-text"><code>cat is smaller.
+Longcat is Looong.
+</code></pre></div><p>なるほど。<code>&quot;cat&quot;s</code>は<code>&quot;dog&quot;s</code>よりも小さく(？)、<code>&quot;longcat&quot;s</code>は<code>&quot;cat&quot;s</code>よりも長い(大きい？)ようだ。なんだかよくわからない結果になった。</p> <p>これはどういうことなのか。もっと簡単な文字列で試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token comment">// aとbはどちらが小さいのだろうか？</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token string">&quot;a&quot;</span>s <span class="token operator">&lt;</span> <span class="token string">&quot;b&quot;</span>s <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>   x <span class="token operator">=</span> <span class="token string">&quot;a&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>   x <span class="token operator">=</span> <span class="token string">&quot;b&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+ 
+    <span class="token comment">// 小さい方の文字が出力される</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これを実行すると<code>a</code>と出力される。すると<code>&quot;a&quot;s</code>は<code>&quot;b&quot;s</code>より小さいようだ。</p> <p>もっと試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token string">&quot;aa&quot;</span>s <span class="token operator">&lt;</span> <span class="token string">&quot;ab&quot;</span>s <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> x <span class="token operator">=</span> <span class="token string">&quot;aa&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span> x <span class="token operator">=</span> <span class="token string">&quot;ab&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// 小さい文字列が出力される</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これを実行すると、<code>aa</code>と出力される。すると<code>&quot;aa&quot;s</code>は<code>&quot;ab&quot;s</code>より小さいことになる。</p> <p>文字列の大小比較は文字単位で行われる。まず最初の文字が大小比較される。もし等しい場合は、次の文字が大小比較される。等しくない最初の文字の結果が、文字列の大小比較の結果となる。</p> <h2 id="条件式"><a href="005-the-restaurant-at-the-end-of-the-branch.html#条件式" class="header-anchor">#</a> 条件式</h2> <h3 id="条件とは何だろう"><a href="005-the-restaurant-at-the-end-of-the-branch.html#条件とは何だろう" class="header-anchor">#</a> 条件とは何だろう</h3> <p><code>if文</code>の中で書く<code>条件</code>(condition)は、<code>条件式</code>(conditional expression)とも呼ばれている<code>式</code>(expression)の一種だ。<code>式</code>というのは例えば<code>&quot;1+1&quot;</code>のようなものだ。<code>式</code>は<code>文</code>の中に書くことができ、これを<code>式文</code>(expression statement)という。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token comment">// 式文</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>&quot;a==b&quot;</code>や<code>&quot;a\&lt;b&quot;</code>のような<code>条件</code>も<code>式</code>なので、<code>文</code>として書くことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token number">1</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token number">1</span> <span class="token operator">&lt;</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>C++では多くの式には型がある。たとえば<code>&quot;123&quot;</code>は<code>int</code>型で、<code>&quot;123+4&quot;</code>も<code>int</code>型だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span> <span class="token comment">// int</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> a <span class="token operator">+</span> <span class="token number">4</span> <span class="token punctuation">;</span> <span class="token comment">// int</span>
+    <span class="token keyword">auto</span> c <span class="token operator">=</span> <span class="token number">1.0</span> <span class="token punctuation">;</span> <span class="token comment">// double</span>
+    <span class="token keyword">auto</span> d <span class="token operator">=</span> <span class="token string">&quot;hello&quot;</span>s <span class="token punctuation">;</span> <span class="token comment">// std::string</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>とすると、<code>&quot;1==2&quot;</code>や<code>&quot;3!=3&quot;</code>のような条件式にも型があるのではないか。型があるのであれば変数に入れられるはずだ。試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>  <span class="token number">1</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1 == 1 is true.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1 == 1 is false.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> x <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1 == 1 is true.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1 == 1 is false.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>&quot;if(x)&quot;</code>は<code>&quot;if(1==1)&quot;</code>と書いた場合と同じように動く。</p> <p>変数に入れられるのであれば出力もできるのではないだろうか。試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token comment">// 正しい</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">!=</span> <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token comment">// 間違い</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> a <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token operator">&lt;&lt;</span> b <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>1
+0
+</code></pre></div><p>なるほど、条件が正しい場合<code>&quot;1&quot;</code>になり、条件が間違っている場合<code>&quot;0&quot;</code>になるようだ。</p> <p>では<code>if文</code>の中に<code>1</code>や<code>0</code>を入れたらどうなるのだろうか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 条件が正しい値だけ出力される。</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;1\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token number">0</span> <span class="token punctuation">)</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;0\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token number">123</span> <span class="token punctuation">)</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;123\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;-1\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>実行結果は以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>1
+123
+-1
+</code></pre></div><p>この結果を見ると、条件として<code>1</code>, <code>123</code>, <code>-1</code>は正しく、<code>0</code>は間違っているということになる。ますます訳がわからなくなってきた。</p> <h2 id="bool型"><a href="005-the-restaurant-at-the-end-of-the-branch.html#bool型" class="header-anchor">#</a> bool型</h2> <p>そろそろ種明かしをしよう。条件式の結果は、<code>bool型</code>という特別な型を持っている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token comment">// bool型</span>
+    <span class="token keyword">bool</span> A <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token comment">// 型を書いてもよい</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>int</code>型の変数には整数の値が入る。<code>double</code>型の変数には浮動小数点数の値が入る。<code>std::string</code>型の変数には文字列の値が入る。</p> <p>すると、<code>bool</code>型の変数には<code>bool</code>型の値が入る。</p> <p><code>bool</code>型には2つの値がある。条件が正しいことを意味する<code>true</code>と、条件が間違っていることを意味する<code>false</code>だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> correct <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> wrong <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>bool</code>型にこれ以外の値は存在しない。</p> <p><code>bool</code>型の値を正しく出力するには、<code>std::boolalpha</code>を出力する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token boolean">true</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>true
+false
+</code></pre></div><p><code>std::boolalpha</code>自体は何も出力をしない。一度<code>std::boolalpha</code>を出力すると、それ以降の<code>bool</code>値が<code>true</code>/<code>false</code>で出力されるようになる。</p> <p>元に戻すには<code>std::noboolalpha</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token boolean">true</span> <span class="token operator">&lt;&lt;</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>noboolalpha <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token boolean">true</span> <span class="token operator">&lt;&lt;</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>以下のように出力される。</p> <div class="language- extra-class"><pre class="language-text"><code>truefalse10
+</code></pre></div><p>すでに学んだ比較演算子は、正しい場合に<code>bool</code>型の値<code>true</code>を、間違っている場合に<code>bool</code>型の値<code>false</code>を返す。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// true</span>
+    <span class="token keyword">bool</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token comment">// false</span>
+    <span class="token keyword">bool</span> b <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">!=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// true</span>
+    <span class="token keyword">bool</span> c <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+    <span class="token comment">// false</span>
+    <span class="token keyword">bool</span> d <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&gt;</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>先に説明した<code>if文</code>の<code>条件</code>が「正しい」というのは<code>true</code>のことで、「間違っている」というのは<code>false</code>のことだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 出力される</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token boolean">true</span> <span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;true\n&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token comment">// 出力されない。</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;false\n&quot;</span>s <span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="bool型の演算"><a href="005-the-restaurant-at-the-end-of-the-branch.html#bool型の演算" class="header-anchor">#</a> bool型の演算</h2> <p><code>bool</code>型にはいくつかの演算が用意されている。</p> <h3 id="論理否定-operator"><a href="005-the-restaurant-at-the-end-of-the-branch.html#論理否定-operator" class="header-anchor">#</a> 論理否定: operator !</h3> <p><code>&quot;!a&quot;</code>は<code>a</code>が<code>true</code>の場合<code>false</code>に、<code>false</code>の場合<code>true</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token punctuation">;</span>
+
+    <span class="token comment">// false</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">!</span><span class="token boolean">true</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token comment">// true</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">!</span><span class="token boolean">false</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>論理否定演算子を使うと、<code>false</code>のときのみ実行されてほしい条件分岐が書きやすくなる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// ロケットが発射可能かどうかを返す関数</span>
+<span class="token keyword">bool</span> <span class="token function">is_rocket_ready_to_launch</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// まだだよ</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+    <span class="token comment">// ロケットが発射可能ではないときに実行される</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span><span class="token function">is_rocket_ready_to_launch</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>   <span class="token comment">// もうしばらくそのままでお待ちください</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Standby...\n&quot;</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この例では、ロケットが発射可能でない場合のみ、待つようにアナウンスする。</p> <p>同じように、<code>true</code>のときに実行されてほしくない条件分岐も書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// ロケットが発射可能かどうかを返す関数</span>
+<span class="token keyword">bool</span> <span class="token function">is_rocket_ready_to_launch</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// もういいよ</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ロケットが発射可能なときに実行される</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span><span class="token function">is_rocket_ready_to_launch</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>   <span class="token comment">// カウントダウン</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;3...2...1...Hallelujah!\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><p>この2つの例では、ロケットの状態が実行すべき条件ではないので、正しく何も出力されない。</p> <h3 id="同値比較-operator"><a href="005-the-restaurant-at-the-end-of-the-branch.html#同値比較-operator" class="header-anchor">#</a> 同値比較: operator ==, !=</h3> <p><code>bool</code>型の値の同値比較はわかりやすい。<code>true</code>は<code>true</code>と等しく、<code>false</code>は<code>false</code>と等しく、<code>true</code>と<code>false</code>は等しくない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> print <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> b<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> b <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">==</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// false</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">==</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// false</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">!=</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// false</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">!=</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">!=</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">!=</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// false</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>比較演算子の結果は<code>bool</code>値になるということを覚えているだろうか。<code>&quot;1 \&lt; 2&quot;</code>は<code>true</code>になり、<code>&quot;1 \&gt; 2&quot;</code>は<code>false</code>になる。</p> <p><code>bool</code>値同士も同値比較ができるということは、<code>&quot;(1 \&lt; 2) == true&quot;</code>のように書くことも可能だということだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>&quot;(1\&lt;2)&quot;</code>は<code>true</code>なので、<code>&quot;(1\&lt;2)==true&quot;</code>は<code>&quot;true==true&quot;</code>と同じ意味になる。この結果はもちろん<code>&quot;true&quot;</code>だ。</p> <h3 id="論理積-operator"><a href="005-the-restaurant-at-the-end-of-the-branch.html#論理積-operator" class="header-anchor">#</a> 論理積: operator &amp;&amp;</h3> <p><code>&quot;a &amp;&amp; b&quot;</code>は<code>a</code>と<code>b</code>がともに<code>true</code>のときに<code>true</code>となる。それ以外の場合は<code>false</code>となる。これを論理積という。</p> <p>表にまとめると以下のようになる。</p> <p>式                    結果</p> <hr> <p><code>false &amp;&amp; false</code> <code>false</code> <code>false &amp;&amp; true</code> <code>false</code> <code>true &amp;&amp; false</code> <code>false</code> <code>true &amp;&amp; true</code> <code>true</code></p> <p>さっそく確かめてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> print <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span> <span class="token keyword">auto</span> b <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> b <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">&amp;&amp;</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// false</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">&amp;&amp;</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// false</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">&amp;&amp;</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// false</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">&amp;&amp;</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>論理積は、「AかつB」を表現するのに使える。</p> <p>例えば、人間の体温が平熱かどうかを判断するプログラムを書くとする。36.1℃以上、37.2℃以下を平熱とすると、<code>if</code>文を使って以下のように書くことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 体温</span>
+    <span class="token keyword">double</span> temperature <span class="token operator">=</span> <span class="token number">36.6</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 36.1度以上</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> temperature <span class="token operator">&gt;=</span> <span class="token number">36.1</span> <span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span> temperature <span class="token operator">&lt;=</span> <span class="token number">37.2</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Good.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Bad.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Bad.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードは、<code>operator &amp;&amp;</code>を使えば簡潔に書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">double</span> temperature <span class="token operator">=</span> <span class="token number">36.6</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> temperature <span class="token operator">&gt;=</span> <span class="token number">36.1</span> <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span> temperature <span class="token operator">&lt;=</span> <span class="token number">37.2</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Good.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Bad.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="論理和-operator"><a href="005-the-restaurant-at-the-end-of-the-branch.html#論理和-operator" class="header-anchor">#</a> 論理和: operator ||</h3> <p><code>&quot;a || b&quot;</code>は<code>a</code>と<code>b</code>がともに<code>false</code>のときに<code>false</code>となる。それ以外の場合は<code>true</code>となる。これを論理和という。</p> <p>表にまとめると以下のようになる。</p> <p>式                    結果</p> <hr> <p><code>false || false</code> <code>false</code> <code>false || true</code> <code>true</code> <code>true || false</code> <code>true</code> <code>true || true</code> <code>true</code></p> <p>さっそく確かめてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> print <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span> <span class="token keyword">auto</span> b <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> b <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">||</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// false</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">||</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">||</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">||</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>論理和は、「AもしくはB」を表現するのに使える。</p> <p>例えば、ある遊園地の乗り物には安全上の理由で身長が1.1m未満、あるいは1.9mを超える人は乗れないものとする。この場合、乗り物に乗れる身長かどうかを確かめるコードは、<code>if文</code>を使うと以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">double</span> height <span class="token operator">=</span> <span class="token number">1.3</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> height <span class="token operator">&lt;</span> <span class="token number">1.1</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;No.&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span> height <span class="token operator">&gt;</span> <span class="token number">1.9</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;No.&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Yes.&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>論理和を使うと以下のように簡潔に書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">double</span> height <span class="token operator">=</span> <span class="token number">1.3</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> height <span class="token operator">&lt;</span> <span class="token number">1.1</span> <span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span> height <span class="token operator">&gt;</span> <span class="token number">1.9</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;No.&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Yes.&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="短絡評価"><a href="005-the-restaurant-at-the-end-of-the-branch.html#短絡評価" class="header-anchor">#</a> 短絡評価</h3> <p>論理積と論理和は短絡評価と呼ばれる特殊な評価が行われる。これは、左から右に最小限の評価をするという意味だ。</p> <p>論理積では、&quot;<code>a</code> &amp;&amp; <code>b</code>&quot;とある場合、<code>a</code>と<code>b</code>がともに<code>true</code>である場合のみ、結果は<code>true</code>になる。もし、<code>a</code>が<code>false</code>であった場合、<code>b</code>の結果如何にかかわらず結果は<code>false</code>となるので、<code>b</code>は評価されない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;a\n&quot;</span>s <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;b\n&quot;</span>s <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">bool</span> c <span class="token operator">=</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token operator">&lt;&lt;</span> c <span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre></div><p>これを実行すると以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>a
+false
+</code></pre></div><p>関数呼び出し<code>&quot;a()&quot;</code>の結果は<code>false</code>なので、<code>&quot;b()&quot;</code>は評価されない。評価されないということは関数呼び出しが行われず、当然標準出力も行われない。</p> <p>同様に、論理和では、<code>&quot;a || b&quot;</code>とある場合、<code>a</code>と<code>b</code>のどちらか片方でも<code>true</code>であれば、結果は<code>true</code>となる。もし、<code>a</code>が<code>true</code>であった場合、<code>b</code>の結果如何にかかわらず結果は<code>true</code>となるので、<code>b</code>は評価されない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;a\n&quot;</span>s <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;b\n&quot;</span>s <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">bool</span> c <span class="token operator">=</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token operator">&lt;&lt;</span> c <span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre></div><p>結果、</p> <div class="language- extra-class"><pre class="language-text"><code>a
+true
+</code></pre></div><p><code>&quot;b()&quot;</code>が評価されていないことがわかる。</p> <h2 id="boolの変換"><a href="005-the-restaurant-at-the-end-of-the-branch.html#boolの変換" class="header-anchor">#</a> boolの変換</h2> <p><code>bool</code>型の値と演算はこれで全部だ。値は<code>true</code>/<code>false</code>の2つのみ。演算は<code>==</code>, <code>!=</code>, <code>!</code>と<code>&amp;&amp;</code>と<code>||</code>の5つだけだ。</p> <p>読者の中には納得のいかないものもいるだろう。ちょっと待ってもらいたい。<code>bool</code>の大小比較できないのだろうか。<code>bool</code>の四則演算はできないのか。<code>&quot;if(123)&quot;</code>などと書けてしまうのは何なのか。</p> <p>好奇心旺盛な読者は本書の解説を待たずしてすでに自分でいろいろとコードを書いて試してしまっていることだろう。</p> <p><code>bool</code>の大小比較はどうなるのだろうか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token punctuation">;</span>
+
+    <span class="token keyword">bool</span> b <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token operator">&lt;</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> b <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードを実行すると、出力は<code>&quot;false&quot;</code>だ。<code>&quot;true \&lt; false&quot;</code>の結果が<code>&quot;false&quot;</code>だということは、<code>true</code>は<code>false</code>より大きいということになる。</p> <p>四則演算はどうか？</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> print <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> x<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">+</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">true</span>  <span class="token operator">+</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">+</span> <span class="token boolean">true</span>  <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> <span class="token boolean">false</span> <span class="token operator">+</span> <span class="token boolean">false</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>結果、</p> <div class="language- extra-class"><pre class="language-text"><code>2
+1
+1
+0
+</code></pre></div><p>不思議な結果だ。<code>&quot;true+true&quot;</code>は<code>&quot;2&quot;</code>、<code>&quot;true+false&quot;</code>は<code>&quot;1&quot;</code>、<code>&quot;false+false&quot;</code>は<code>&quot;0&quot;</code>。これは<code>true</code>が<code>1</code>で<code>false</code>が<code>0</code>ならば納得のいく結果だ。大小比較の結果としても矛盾していない。</p> <p>すでに見たように、<code>std::boolalpha</code>を出力していない状態で<code>bool</code>を出力すると<code>true</code>が<code>1</code>、<code>false</code>が<code>0</code>となる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token boolean">true</span> <span class="token operator">&lt;&lt;</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>結果、</p> <div class="language- extra-class"><pre class="language-text"><code>10
+</code></pre></div><p>これは<code>bool型</code>と<code>整数型</code>が変換されているのだ。</p> <p>異なる型の値が変換されるというのは、すでに例がある。<code>整数型</code>と<code>浮動小数点数型</code>だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 3</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">3.14</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token comment">// 123.0</span>
+    <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> d <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>浮動小数点数型</code>は<code>整数型</code>に変換できる。その際に小数部は切り捨てられる。<code>整数型</code>は<code>浮動小数点数型</code>に変換できる。小数部はない。</p> <p>これと同じように、<code>bool型</code>も<code>整数型</code>と変換ができる。</p> <p><code>bool</code>型の<code>true</code>を<code>整数型</code>に変換すると<code>1</code>になる。<code>false</code>は<code>0</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 1</span>
+    <span class="token keyword">int</span> True <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 0</span>
+    <span class="token keyword">int</span> False <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>同様に、<code>整数型</code>のゼロを<code>bool型</code>に変換すると<code>false</code>になる。非ゼロは<code>true</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// false</span>
+    <span class="token keyword">bool</span> Zero <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// すべてtrue</span>
+    <span class="token keyword">bool</span> One <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> minus_one <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> OneTwoThree <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>  
+<span class="token punctuation">}</span>
+</code></pre></div><p>したがって、<code>&quot;if (0)&quot;</code>は<code>&quot;if (false)&quot;</code>と等しく、<code>&quot;if (1)&quot;</code>や<code>&quot;if(-1)&quot;</code>など非ゼロな値は<code>&quot;if (true)&quot;</code>と等しい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 出力されない</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;No output.\n&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token comment">// 出力される</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Output.\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>大小比較は単に<code>bool</code>を整数に変換した結果を比較しているだけだ。<code>&quot;true \&lt; false&quot;</code>は<code>&quot;1 \&lt; 0&quot;</code>と書くのと同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>boolalpha <span class="token punctuation">;</span>
+
+    <span class="token comment">// 1 &lt; 0</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token boolean">true</span> <span class="token operator">&lt;</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>同様に四則演算も<code>bool</code>型を整数型に変換した上で計算をしているだけだ。<code>&quot;true + true&quot;</code>は<code>&quot;1 + 1&quot;</code>と書くのと同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 1 + 1</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token boolean">true</span> <span class="token operator">+</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>C++では、<code>bool型</code>と<code>整数型</code>の変換は暗黙に行われてしまうので注意が必要だ。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="004-debug-compile-error.html" class="prev">デバッグ：コンパイルエラーメッセージの読み方</a></span> <span class="next"><a href="006-debug-compile-warning.html">デバッグ: コンパイル警告メッセージ</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/10.0bc4fb9f.js" defer></script>
+  </body>
+</html>

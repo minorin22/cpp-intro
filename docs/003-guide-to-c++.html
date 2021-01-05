@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C++ヒッチハイクガイド | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/8.44430c93.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="active sidebar-link">C++ヒッチハイクガイド</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="003-guide-to-c++.html#最小のコード" class="sidebar-link">最小のコード</a></li><li class="sidebar-sub-header"><a href="003-guide-to-c++.html#標準出力" class="sidebar-link">標準出力</a></li><li class="sidebar-sub-header"><a href="003-guide-to-c++.html#文字列" class="sidebar-link">文字列</a></li><li class="sidebar-sub-header"><a href="003-guide-to-c++.html#整数と浮動小数点数" class="sidebar-link">整数と浮動小数点数</a></li><li class="sidebar-sub-header"><a href="003-guide-to-c++.html#変数-variable" class="sidebar-link">変数(variable)</a></li><li class="sidebar-sub-header"><a href="003-guide-to-c++.html#関数-function" class="sidebar-link">関数(function)</a></li><li class="sidebar-sub-header"><a href="003-guide-to-c++.html#本当の関数" class="sidebar-link">本当の関数</a></li></ul></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="c-ヒッチハイクガイド"><a href="003-guide-to-c++.html#c-ヒッチハイクガイド" class="header-anchor">#</a> C++ヒッチハイクガイド</h1> <p>プログラミング言語の個々の機能の解説を理解するためには、まず言語の全体像を掴まなければならない。この章ではC++のさまざまなコードをひと通り観光していく。ここではコードの詳細な解説はしない。</p> <h2 id="最小のコード"><a href="003-guide-to-c++.html#最小のコード" class="header-anchor">#</a> 最小のコード</h2> <p>以下はC++の最小のコードだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><p>暗号のようなコードで訳がわからないが、これが最小のコードだ。<code>main</code>というのは<code>main関数</code>のことだ。C++ではプログラムの実行は<code>main</code>関数から始まる。</p> <p>ソースコードにコメントを記述して、もう少しわかりやすく書いてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span>     <span class="token comment">// 関数の戻り値の型</span>
+main    <span class="token comment">// 関数名</span>
+<span class="token punctuation">(</span><span class="token punctuation">)</span>      <span class="token comment">// 関数の引数</span>
+<span class="token punctuation">{</span>       <span class="token comment">// 関数の始まり</span>
+        <span class="token comment">// 実行される処理</span>
+<span class="token punctuation">}</span>       <span class="token comment">// 関数の終わり</span>
+</code></pre></div><p><code>//</code>から行末まではコメントだ。コメントには好きなことを書くことができる。</p> <p>このコードと1つ前のコードは、コメントの有無を別にすれば何の違いもない。このコードで使っている、<code>int</code>とか<code>main</code>とか記号文字の1つ1つをトークン(token)と呼ぶ。C++ではトークンの間に空白文字や改行文字をいくら使ってもよい。</p> <p>なので、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><p>と書くこともできるし、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span>    main    <span class="token punctuation">(</span>    <span class="token punctuation">)</span>    <span class="token punctuation">{</span>   <span class="token punctuation">}</span>
+</code></pre></div><p>と書くこともできるし、紙に印刷する都合上とても読みづらくなるかもしれないが</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span>
+main
+<span class="token punctuation">(</span>
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>と書くこともできる。</p> <p>ただし、トークンの途中で空白文字や改行文字を使うことはできない。以下のコードは間違っている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>i
+nt ma <span class="token function">in</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><h2 id="標準出力"><a href="003-guide-to-c++.html#標準出力" class="header-anchor">#</a> 標準出力</h2> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// helloと改行を出力するプログラム</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;hello&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>標準出力はプログラムの基本だ。C++で標準出力する方法はいくつもあるが、<code>&lt;iostream&gt;</code>ライブラリを利用するものが最も簡単だ。</p> <p><code>std::cout</code>は標準出力を使うためのライブラリだ。</p> <p><code>&lt;&lt;</code>は<code>operator &lt;&lt;</code>という演算子だ。C++では演算子にも名前が付いていて、例えば<code>+</code>は<code>operator +</code>となる。<code>&lt;&lt;</code>も演算子の一種だ。</p> <p><code>&quot;hello&quot;s</code>というのは文字列で、二重引用符で囲まれた中の文字列が標準出力に出力される。</p> <p>セミコロン<code>;</code>は文の区切り文字だ。C++では文の区切りは明示的にセミコロンを書く必要がある。ほかの言語では改行文字を文脈から判断して文の区切りとみなすこともあるが、C++では明示的に文の区切り文字としてセミコロンを書かなければならない。</p> <p>セミコロンを書き忘れるとエラーとなる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// エラー！　セミコロンがない</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;error&quot;</span>s
+<span class="token punctuation">}</span>
+</code></pre></div><p>複数の文を書いてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;one &quot;</span>s <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;two &quot;</span>s <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;three &quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>C++はほかの多くの言語と同じように、逐次実行される。つまり、コードは書いた順番に実行される。そして標準出力のような外部への副作用は、実行された順番で出力される。このコードを実行した結果は以下のとおり。</p> <div class="language- extra-class"><pre class="language-text"><code>one two three 
+</code></pre></div><p><code>&quot;three two one &quot;</code>や<code>&quot;two one three &quot;</code>のような出力結果にはならない。</p> <p>C++を含む多くの言語で<code>a + b + c</code>と書けるように、<code>operator &lt;&lt;</code>も<code>a &lt;&lt; b &lt;&lt; c</code>と書ける。<code>operator &lt;&lt;</code>で標準出力をするには、左端は<code>std::cout</code>でなければならない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;aaa&quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;bbb&quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;ccc&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>出力は<code>aaabbbccc</code>となる。</p> <h2 id="文字列"><a href="003-guide-to-c++.html#文字列" class="header-anchor">#</a> 文字列</h2> <p>二重引用符で囲まれた文字列を、文字どおり<code>文字列</code>という。文字列には末尾に<code>s</code>が付くものと付かないものがある。これには違いがあるのだが、わからないうちは<code>s</code>を付けておいた方が便利だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// これは文字列</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;hello&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token comment">// これも文字列、ただし不便</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;hello&quot;</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>文字列リテラルの中にバックスラッシュを書くと、エスケープシーケンスとして扱われる。最もよく使われるのは改行文字を表す<code>\n</code>だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;aaa\nbbb\nccc&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これは以下のように出力される。</p> <div class="language- extra-class"><pre class="language-text"><code>aaa
+bbb
+ccc
+</code></pre></div><p>バックスラッシュを文字列で使いたい場合は<code>\\</code>と書かなければならない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\\n is a new-line.\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>文字列は演算子<code>operator +</code>で「足す」ことができる。「文字列を足す」というのは、「文字列を結合する」という意味だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;hello&quot;</span>s <span class="token operator">+</span> <span class="token string">&quot;world&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="整数と浮動小数点数"><a href="003-guide-to-c++.html#整数と浮動小数点数" class="header-anchor">#</a> 整数と浮動小数点数</h2> <p><code>iostream</code>は文字列のほかにも、整数や浮動小数点数を出力できる。さっそく試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout
+        <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Integer: &quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token number">42</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Floating Point: &quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token number">3.14</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>-123</code>や<code>0</code>や<code>123</code>といった数値を整数という。<code>3.14</code>のような数値を浮動小数点数という。</p> <p>数値を扱えるのだから、計算をしてみたいところだ。C++は整数同士の演算子として、四則演算(<code>+-*/</code>)や剰余(<code>%</code>)をサポートしている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout
+        <span class="token operator">&lt;&lt;</span> <span class="token number">3</span> <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token number">3</span> <span class="token operator">-</span> <span class="token number">5</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token number">5</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token number">3</span> <span class="token operator">/</span> <span class="token number">5</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token number">3</span> <span class="token operator">%</span> <span class="token number">5</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>演算子は組み合わせて使うこともできる。その場合、演算子<code>*/%</code>は演算子<code>+-</code>よりも優先される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 7</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">*</span> <span class="token number">3</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この場合、まず<code>2*3</code>が計算され6となり、<code>1+6</code>が計算され<code>7</code>となる。</p> <p><code>1+2</code>の方を先に計算したい場合、括弧<code>()</code>で囲むことにより、計算の優先度を変えることができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 9</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">3</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これは<code>1+2</code>が先に計算され<code>3</code>となり、<code>3*3</code>が計算され<code>9</code>となる。</p> <p>浮動小数点数同士でも四則演算ができる。剰余はできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout
+        <span class="token operator">&lt;&lt;</span> <span class="token number">3.5</span> <span class="token operator">+</span> <span class="token number">7.11</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token number">3.5</span> <span class="token operator">-</span> <span class="token number">7.11</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token number">3.5</span> <span class="token operator">*</span> <span class="token number">7.11</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token number">3.5</span> <span class="token operator">/</span> <span class="token number">7.11</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>では整数と浮動小数点数を演算した場合どうなるのだろう。さっそく試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">0.1</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>結果は<code>1.1</code>だ。整数と浮動小数点数を演算した結果は浮動小数点数になる。</p> <p>そういえばC++には文字列もあるのだった。文字列と文字列は足すことができる。数値と数値も足すことができる。では数値と文字列を足すとどうなるのだろう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token string">&quot;234&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この結果はエラーになる。</p> <p>いや待て、C++には末尾に<code>s</code>を付けない文字列もあるのだった。これも試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token string">&quot;234&quot;</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>結果はなんと<code>34</code>になるではないか。C++では謎の数学により<code>1 + &quot;234&quot; = &quot;34&quot;</code>であることが判明した。この謎はいずれ解き明かすとして、いまは文字列には必ず末尾に<code>s</code>を付けることにしよう。その方が安全だ。</p> <h2 id="変数-variable"><a href="003-guide-to-c++.html#変数-variable" class="header-anchor">#</a> 変数(variable)</h2> <p>さあどんどんプログラミング言語によくある機能を見ていこう。次は変数だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 整数の変数</span>
+    <span class="token keyword">auto</span> answer <span class="token operator">=</span> <span class="token number">42</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> answer <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token comment">// 浮動小数点数の変数</span>
+    <span class="token keyword">auto</span> pi <span class="token operator">=</span> <span class="token number">3.14</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> pi <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token comment">// 文字列の変数</span>
+    <span class="token keyword">auto</span> question <span class="token operator">=</span> <span class="token string">&quot;Life, The Universe, and Everything.&quot;</span>s <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> question <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>変数はキーワード<code>auto</code>に続いて変数名を書き、<code>=</code>に続いて値を書くことで宣言できる。変数の宣言は文なので、文末にはセミコロンが必要だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">auto</span> 変数名 <span class="token operator">=</span> 値 <span class="token punctuation">;</span>
+</code></pre></div><p><code>変数名</code>はキーワード、アンダースコア(<code>_</code>)で始まる名前、アンダースコア2つ(<code>__</code>)を含む名前以外は自由に名付けることができる。</p> <p>変数の最初の値は、<code>= 値</code>の代わりに<code>(値)</code>や<code>{値}</code>と書いてもよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> c<span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この<code>=</code>, <code>()</code>, <code>{}</code>による変数の初期値の指定を、<code>初期化</code>という。</p> <p>変数は使う前に宣言しなければならない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// エラー、名前xは宣言されていない</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>変数の値は初期化したあとにも演算子<code>=</code>で変更できる。これを<code>代入</code>という。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 変数の宣言</span>
+    <span class="token keyword">auto</span> x
+    <span class="token comment">// 初期化</span>
+    <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 123</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+
+    <span class="token comment">// 代入</span>
+    x <span class="token operator">=</span> <span class="token number">456</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 456</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+
+    <span class="token comment">// もう一度代入</span>
+    x <span class="token operator">=</span> <span class="token number">789</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 789</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>代入演算子<code>operator =</code>は左辺に変数名を、右辺に代入する値を書く。面白いこととして、右辺には代入する変数名そのものを書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">10</span> <span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x <span class="token operator">+</span> <span class="token number">5</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 15</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>operator =</code>は「代入」という意味で、「等号」という意味ではないからだ。<code>x=x+5</code>は、「<code>x</code>と<code>x+5</code>は等しい」という独創的な数学上の定義ではなく、「変数<code>x</code>に代入前の変数<code>x</code>の値に5を加えた数を代入する」という意味だ。</p> <p>変数のいまの値に対して演算した結果を変数に代入するという処理はとてもよく使うので、C++には<code>x = x + a</code>と同じ意味で使える演算子、<code>operator +=</code>もある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token comment">// x = x + 5と同じ</span>
+    x <span class="token operator">+=</span> <span class="token number">5</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>operator +=</code>と同様に、<code>operator -=</code>, <code>operator *=</code>, <code>operator /=</code>, <code>operator %=</code>もある。</p> <p>C++の変数は、専門用語を使うと「静的型付け」になる。静的型付けと対比されるのが「動的型付け」だ。もっと難しく書くと、動的型付け言語の変数は、C++で言えば型情報付きの<code>void *</code>型の変数のような扱いを受ける。</p> <p>C++の変数には<code>型</code>がある。<code>型</code>というのは値の種類を表す情報のことだ。</p> <p>例えば、以下は変数が動的型付けの言語JavaScriptのコードだ。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+x <span class="token operator">=</span> <span class="token string">&quot;hello&quot;</span> <span class="token punctuation">;</span>
+x <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+</code></pre></div><p>JavaScriptではこのコードは正しい。変数<code>x</code>は数値型であり、文字列型に代わり、また数値型に戻る。</p> <p>C++ではこのようなコードは書けない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token comment">// エラー</span>
+    x <span class="token operator">=</span> <span class="token string">&quot;hello&quot;</span>s <span class="token punctuation">;</span>
+    x <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>C++では、変数<code>x</code>は整数型であり、文字列型に変わることはない。整数型の変数に文字列型を代入しようとするとエラーとなる。</p> <p>C++では型に名前が付いている。整数型は<code>int</code>、浮動小数点数型は<code>double</code>、文字列型は<code>std::string</code>だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// iはint型</span>
+    <span class="token keyword">auto</span> i <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token comment">// dはdouble型</span>
+    <span class="token keyword">auto</span> d <span class="token operator">=</span> <span class="token number">1.23</span> <span class="token punctuation">;</span>
+    <span class="token comment">// sはstd::string型</span>
+    <span class="token keyword">auto</span> s <span class="token operator">=</span> <span class="token string">&quot;123&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>実は変数の宣言で<code>auto</code>と書く代わりに、具体的な型を書いてもよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i           <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token keyword">double</span> d        <span class="token operator">=</span> <span class="token number">1.23</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string s   <span class="token operator">=</span> <span class="token string">&quot;123&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>整数型(<code>int</code>)と浮動小数点数型(<code>double</code>)はそれぞれお互いの型の変数に代入できる。ただし、変数の型は変わらない。単に一方の型の値がもう一方の型の値に変換されるだけだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 浮動小数点数型を整数型に変換</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">3.14</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 3</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> a <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token comment">// 整数型を浮動小数点数型に変換</span>
+    <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 123</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> d <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>浮動小数点数型を整数型に変換すると、小数部が切り捨てられる。この場合、<code>3.14</code>の小数部<code>0.14</code>が切り捨てられ<code>3</code>となる。<code>0.9999</code>も小数部が切り捨てられ<code>0</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0.9999</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 0</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>整数型を浮動小数点数型に変換すると、値を正確に表現できる場合はその値になる。正確に表現できない場合は近い値になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">1234567890</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 正確に表現できるかどうかわからない</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> d <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>整数型と浮動小数点数型の挙動についてはあとの章で詳しく解説する。また、これ以外にも型はいくらでもあるし、読者が新しい型を作り出すこともできる。これもあとの章で詳しく解説する。</p> <h2 id="関数-function"><a href="003-guide-to-c++.html#関数-function" class="header-anchor">#</a> 関数(function)</h2> <p>「変数ぐらい知っている。さっさと教えてもらいたい。どうせC++の関数は書きづらいのだろう」と考える読者の皆さん、お待たせしました。こちらがC++の関数でございます。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 関数</span>
+    <span class="token keyword">auto</span> print <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> x<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 関数呼び出し</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token number">3.14</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;hello&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>C++では関数も変数として扱える。<code>auto print =</code>までは変数だ。変数の初期化として関数を書いている。より正確にはラムダ式と呼ばれる関数を値として書くための文法だ。</p> <p>ラムダ式は以下のような文法を持つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token comment">// ラムダ式導入部</span>
+<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 引数</span>
+<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// 本体</span>
+</code></pre></div><p>ラムダ式は<code>[]</code>で始まり、<code>()</code>の中に引数を書き、<code>{}</code>の中の文が実行される。</p> <p>例えば以下は引数を2回標準出力する関数だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> twice <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> x<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token function">twice</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>引数は<code>auto 引数名</code>で受け取れる。引数を複数取る場合は、カンマ<code>,</code>で区切る。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> print_two <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span> <span class="token keyword">auto</span> x<span class="token punctuation">,</span> <span class="token keyword">auto</span> y <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span>s <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token function">print_two</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print_two</span><span class="token punctuation">(</span> <span class="token string">&quot;Pi is&quot;</span><span class="token punctuation">,</span> <span class="token number">3.14</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>引数を取らないラムダ式を書く場合は、単に<code>()</code>と書く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> no_args <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Nothing.\n&quot;</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token function">no_args</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>関数は演算子<code>operator ()</code>を関数の直後に書いて呼び出す。これが演算子であるというのは少し不思議な感じがするが、C++では紛れもなく演算子だ。<code>operator +</code>とか<code>operator -</code>などと同じ演算子だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 何もしない関数</span>
+    <span class="token keyword">auto</span> func <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// operator ()の適用</span>
+    <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// これもoperator ()</span>
+    func    <span class="token punctuation">(</span>   <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>演算子<code>operator ()</code>は、ラムダ式そのものに対して適用することもできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 変数fをラムダ式で初期化</span>
+    <span class="token keyword">auto</span> f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 変数fを関数呼び出し</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// ラムダ式を関数呼び出し</span>
+    <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードを見ると、<code>operator ()</code>が単なる演算子であることがよくわかるだろう。<code>[](){}</code>がラムダ式でその直後の<code>()</code>が関数呼び出し演算子だ。</p> <p>関数は値を返すことができる。関数から値を返すには、<code>return文</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> plus <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span> <span class="token keyword">auto</span> x<span class="token punctuation">,</span> <span class="token keyword">auto</span> y <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span> <span class="token keyword">return</span> x <span class="token operator">+</span> y <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout
+        <span class="token operator">&lt;&lt;</span> <span class="token function">plus</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token function">plus</span><span class="token punctuation">(</span> <span class="token number">1.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span> <span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token function">plus</span><span class="token punctuation">(</span> <span class="token string">&quot;123&quot;</span>s<span class="token punctuation">,</span> <span class="token string">&quot;456&quot;</span>s<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>関数は<code>return</code>文を実行すると処理を関数の呼び出し元に返す。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;f is called.\n&quot;</span> <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token comment">// ここで処理が戻る</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;f returned zero.\n&quot;</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">auto</span> result <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これを実行すると以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>$ make
+f is called.
+</code></pre></div><p><code>return</code>文以降の文が実行されていないことがわかる。</p> <h2 id="本当の関数"><a href="003-guide-to-c++.html#本当の関数" class="header-anchor">#</a> 本当の関数</h2> <p>実はラムダ式は本当のC++の<code>関数</code>ではない。本当の<code>関数</code>はとても書きづらいので心して読むべきだ。</p> <p>読者は本書の冒頭で使った<code>main関数</code>という言葉を覚えているだろうか。覚えていないとしても、サンプルコードに必ずと言っていいほど出てくる<code>main</code>という名前は気になっていたことだろう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><p>これを見ると、聡明な読者はラムダ式と似通ったところがあることに気付くだろう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><p>末尾の<code>(){}</code>が同じだ。これは同じ意味だ。<code>()</code>は関数の引数で、<code>{}</code>は関数の本体だ。</p> <p>では残りの部分はどうだろうか。<code>int</code>は関数の戻り値の型、<code>main</code>は関数の名前だ。</p> <p>C++の本当の関数は以下のような文法で定義される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span>     <span class="token comment">// 戻り値の型</span>
+main    <span class="token comment">// 関数名</span>
+<span class="token punctuation">(</span><span class="token punctuation">)</span>      <span class="token comment">// 関数の引数</span>
+<span class="token punctuation">{</span><span class="token punctuation">}</span>      <span class="token comment">// 関数の本体</span>
+</code></pre></div><p>試しに、<code>int</code>型の引数を2つ取り足して返す関数<code>plus</code>を書いてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">plus</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> x <span class="token operator">+</span> y <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token function">plus</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>では次に、<code>double</code>型の引数を2つ取り足して返す関数<code>plus</code>を書いてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">double</span> <span class="token function">plus</span><span class="token punctuation">(</span> <span class="token keyword">double</span> x<span class="token punctuation">,</span> <span class="token keyword">double</span> y <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> x <span class="token operator">+</span> y <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token function">plus</span><span class="token punctuation">(</span> <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>最後の<code>std::string</code>型の引数を2つ取り足して返す関数<code>plus</code>は読者への課題とする。</p> <p>これがC++の本当の関数だ。C++の関数では、型をすべて明示的に書かなければならない。型を間違えるとエラーだ。</p> <p>しかも、C++の関数は、戻り値の型を正しく返さなければならない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// エラー、return文がない</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>もし、何も値を返さない関数を書く場合は、どの値でもないという特別な型、<code>void</code>型を関数の戻り値の型として書かなければならないという特別なルールまである。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// OK</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ただし、戻り値の型については、具体的な型の代わりに<code>auto</code>を書くこともできる。その場合、<code>return</code>文で同じ型さえ返していれば、気にする必要はない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// void</span>
+<span class="token keyword">auto</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token comment">// int</span>
+<span class="token keyword">auto</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token comment">// double</span>
+<span class="token keyword">auto</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">0.0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token comment">// std::string</span>
+<span class="token keyword">auto</span> <span class="token function">d</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token string">&quot;&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// エラー</span>
+<span class="token comment">// return文の型が一致しない。</span>
+<span class="token keyword">auto</span> <span class="token function">e</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0.0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="002-build.html" class="prev">C++の実行</a></span> <span class="next"><a href="004-debug-compile-error.html">デバッグ：コンパイルエラーメッセージの読み方</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/8.44430c93.js" defer></script>
+  </body>
+</html>

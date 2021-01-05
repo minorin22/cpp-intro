@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>クラスの基本 | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/23.45c08f75.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="active sidebar-link">クラスの基本</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="018-class.html#変数をまとめる" class="sidebar-link">変数をまとめる</a></li><li class="sidebar-sub-header"><a href="018-class.html#まとめた変数に関数を提供する" class="sidebar-link">まとめた変数に関数を提供する</a></li></ul></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="クラスの基本"><a href="018-class.html#クラスの基本" class="header-anchor">#</a> クラスの基本</h1> <p>C++はもともとC言語に<code>クラス</code>の機能を追加することを目的とした言語だった。</p> <p><code>クラス</code>とは何か。クラスにはさまざまな機能があるが、最も基本的な機能としては以下の2つがある。</p> <ul><li>変数をまとめる</li> <li>まとめた変数に関数を提供する</li></ul> <p>この章は<code>クラス</code>の数ある機能のうち、この2つの機能だけを説明する。</p> <h2 id="変数をまとめる"><a href="018-class.html#変数をまとめる" class="header-anchor">#</a> 変数をまとめる</h2> <p>2次元座標上の点<code>(x,y)</code>を表現するプログラムを書くとする。</p> <p>とりあえず<code>int</code>型で表現してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 表現</span>
+    <span class="token keyword">int</span> point_x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> point_y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これはわかりやすい。ところでものは相談だが、点は複数表現したい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x1 <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y1 <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> x2 <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y2 <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> x3 <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y3 <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これはわかりにくい。ところで点はユーザーがいくつでも入力できるものとしよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> xs <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> ys <span class="token punctuation">;</span>
+
+    <span class="token comment">// xs.at(i)とys.at(i)は同じ点のための変数</span>
+
+    <span class="token keyword">int</span> x <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>cin <span class="token operator">&gt;&gt;</span> x <span class="token operator">&gt;&gt;</span> y <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        xs<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+        ys<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これはとてもわかりにくい。</p> <p>ここで<code>クラス</code>の出番だ。<code>クラス</code>を使うと点を表現するコードは以下のように書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">point</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    point p <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> p<span class="token punctuation">.</span>x <span class="token operator">&lt;&lt;</span> p<span class="token punctuation">.</span>y <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>点を複数表現するのもわかりやすい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>point p1 <span class="token punctuation">;</span>
+point p2 <span class="token punctuation">;</span>
+point p3 <span class="token punctuation">;</span>
+</code></pre></div><p>ユーザーが好きなだけ点を入力できるプログラムもわかりやすく書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">point</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>point<span class="token operator">&gt;</span> ps <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> x <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span> std<span class="token operator">::</span>cin <span class="token operator">&gt;&gt;</span> x <span class="token operator">&gt;&gt;</span> y <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ps<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span> point<span class="token punctuation">{</span> x<span class="token punctuation">,</span> y <span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+</code></pre></div><p>これが<code>クラス</code>の変数をまとめる機能だ。</p> <p><code>クラス</code>を定義するには、キーワード<code>struct</code>に続いて<code>クラス名</code>を書く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">class_name</span> 
+<span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>変数は<code>{}</code>の中に書く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token keyword">double</span> b <span class="token operator">=</span> <span class="token number">0.0</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string c <span class="token operator">=</span> <span class="token string">&quot;hello&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>このクラスの中に書かれた変数のことを、<code>データメンバー</code>という。正確には変数ではない。</p> <p>定義した<code>クラス</code>は変数として宣言して使うことができる。<code>クラス</code>の<code>データメンバー</code>を使うには、クラス名に引き続いてドット文字を書きデータメンバー名を書く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 名前と年齢を表現するクラスPerson</span>
+<span class="token keyword">struct</span> <span class="token class-name">Person</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>string name <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> age <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Person john <span class="token punctuation">;</span>
+    john<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">&quot;john&quot;</span> <span class="token punctuation">;</span>
+    john<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">20</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>クラス</code>の<code>データメンバー</code>の定義は変数ではない。オブジェクトではない。つまり、それ自体にストレージが割り当てられてはいない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// これは変数ではない</span>
+    <span class="token keyword">int</span> data <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>クラスの変数を定義したときに、その変数のオブジェクトに紐付いたストレージが使われる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    S s1 <span class="token punctuation">;</span> <span class="token comment">// 変数</span>
+    <span class="token comment">// オブジェクトs1に紐付いたストレージ</span>
+    s1<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    S s2 <span class="token punctuation">;</span>
+    <span class="token comment">// 別のストレージ</span>
+    s2<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span> 
+
+    <span class="token comment">// false</span>
+    <span class="token keyword">bool</span> b <span class="token operator">=</span> s1<span class="token punctuation">.</span>data <span class="token operator">==</span> s2<span class="token punctuation">.</span>data <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>クラスの変数を定義するときにデータメンバーを初期化できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> z <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    S s <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token comment">// s.x == 1</span>
+    <span class="token comment">// s.y == 2</span>
+    <span class="token comment">// s.z == 3</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>クラスの初期化で<code>{1,2,3}</code>と書くと、クラスの最初のデータメンバーが<code>1</code>で、次のデータメンバーが<code>2</code>で、その次のデータメンバーが<code>3</code>で、それぞれ初期化される。</p> <p>クラスをコピーすると、データメンバーがそれぞれコピーされる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span> <span class="token punctuation">{</span> <span class="token keyword">int</span> a <span class="token punctuation">;</span> <span class="token keyword">double</span> b <span class="token punctuation">;</span> std<span class="token operator">::</span>string c <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    S a<span class="token punctuation">{</span><span class="token number">123</span><span class="token punctuation">,</span> <span class="token number">1.23</span><span class="token punctuation">,</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token comment">// データメンバーがそれぞれコピーされる</span>
+    S b <span class="token operator">=</span> a <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="まとめた変数に関数を提供する"><a href="018-class.html#まとめた変数に関数を提供する" class="header-anchor">#</a> まとめた変数に関数を提供する</h2> <p>分数を表現するプログラムを書いてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> denom <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 出力</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>denom<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>分子<code>num</code>と分母<code>denom</code>はクラスにまとめることができそうだ。そうすれば複数の分数を扱うのも楽になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">fractional</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> denom <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    fractional x<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 出力</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>num<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>denom<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ところで、この出力を毎回書くのが面倒だ。こういう処理は関数にまとめたい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">double</span> <span class="token function">value</span><span class="token punctuation">(</span> fractional <span class="token operator">&amp;</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>num<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>denom<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    fractional x<span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token function">value</span><span class="token punctuation">(</span> x <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この関数<code>value</code>はクラス<code>fractional</code>専用だ。であれば、この関数をクラス自体に関連付けたい。そこでC++には<code>メンバー関数</code>という機能がある。</p> <p><code>メンバー関数</code>はクラスの中で定義する関数だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">member_function</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> x <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>メンバー関数</code>はクラスの<code>データメンバー</code>を使うことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">fractional</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> denom <span class="token punctuation">;</span>
+
+    <span class="token keyword">double</span> <span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>denom<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>メンバー関数を呼び出すには、クラスのオブジェクトに続いてドット文字を書き、メンバー関数名を書く。あとは通常の関数のように書く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    fractional x<span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x<span class="token punctuation">.</span><span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>メンバー関数</code>から使える<code>データメンバー</code>は、メンバー関数が呼ばれたクラスのオブジェクトのデータメンバーだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    S <span class="token function">s1</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    s1<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 1</span>
+
+    S <span class="token function">s2</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    s2<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 2</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この<code>print</code>を非メンバー関数として書くと以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span> S <span class="token operator">&amp;</span> s <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span>x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>メンバー関数は隠し引数としてクラスのオブジェクトを受け取っている関数だ。メンバー関数の呼び出しには、対応するクラスのオブジェクトが必要になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// エラー</span>
+    S s <span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// OK</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>メンバー関数</code>はデータメンバーを変更することもできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">X</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data <span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        data <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>先ほどの分数クラスに値を設定するための<code>メンバー関数</code>を追加してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">fractional</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> denom <span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span> <span class="token keyword">int</span> num_ <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        num <span class="token operator">=</span> num_ <span class="token punctuation">;</span>
+        denom <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span> <span class="token keyword">int</span> num_<span class="token punctuation">,</span> <span class="token keyword">int</span> denom_ <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        num <span class="token operator">=</span> num_ <span class="token punctuation">;</span>
+        denom <span class="token operator">=</span> denom_ <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    fractional x <span class="token punctuation">;</span>
+
+
+    x<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// x.num == 5</span>
+    <span class="token comment">// x.denom == 1</span>
+
+    x<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// x.num == 2</span>
+    <span class="token comment">// x.denom == 3</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>メンバー関数<code>set(num)</code>を呼び出すと、値が$\frac{num}{1}$になる。メンバー関数<code>set(num, denom)</code>を呼び出すと、値が$\frac{num}{denom}$になる。</p> <p>ところで上のコードを見ると、<code>データメンバー</code>と引数の名前の衝突を避けるために、アンダースコアを使っている。</p> <p><code>データメンバー</code>と引数の名前が衝突するとどうなるのか。確かめてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        x <span class="token operator">=</span> x <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    S s<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span>x <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>結果は<code>0</code>だ。メンバー関数<code>f</code>の中の名前<code>x</code>は引数名の<code>x</code>だからだ。</p> <p>すでに名前は<code>スコープ</code>に属するということは説明した。実はクラスも<code>スコープ</code>を持つ。上のコードは以下のようなスコープを持つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// グローバル名前空間スコープ</span>
+<span class="token keyword">int</span> x <span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// クラススコープ</span>
+    <span class="token keyword">int</span> x <span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 関数のブロックスコープ</span>
+        x <span class="token operator">=</span> x <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>内側の<code>スコープ</code>は外側の<code>スコープ</code>の名前を隠す。そのため、クラススコープの<code>x</code>はグローバル名前空間スコープ<code>x</code>を隠す。関数のブロックスコープの<code>x</code>はクラススコープの<code>x</code>を隠す。</p> <p>名前がどのスコープに属するかを明示的に指定することによって、隠された名前を使うことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> x <span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 関数のブロックスコープのx</span>
+        x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+        <span class="token comment">// クラススコープのx</span>
+        S<span class="token operator">::</span>x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+        <span class="token comment">// グローバル名前空間のスコープ</span>
+        <span class="token operator">::</span>x <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>名前空間スコープを明示するために<code>namespace_name::name</code>を使うように、クラススコープを明示するために<code>class_name::name</code>を使うことができる。</p> <p>これを使えば、分数クラスは以下のように書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">fractional</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> denom <span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span> <span class="token keyword">int</span> num<span class="token punctuation">,</span> <span class="token keyword">int</span> denom <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        fractional<span class="token operator">::</span>num <span class="token operator">=</span> num <span class="token punctuation">;</span>
+        fractional<span class="token operator">::</span>denom <span class="token operator">=</span> denom <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="017-lambda.html" class="prev">ラムダ式</a></span> <span class="next"><a href="019-operator-overloading.html">より自然に振る舞うクラス</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/23.45c08f75.js" defer></script>
+  </body>
+</html>

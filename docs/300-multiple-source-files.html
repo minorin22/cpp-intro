@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>分割コンパイル | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+    <script>
+        MathJax = {
+            chtml: {
+                matchFontHeight: false
+            },
+            tex: {
+                inlineMath: [['$', '$']]
+            }
+        };
+    </script>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/53.4cfac598.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="active sidebar-link">分割コンパイル</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="300-multiple-source-files.html#オブジェクトファイル" class="sidebar-link">オブジェクトファイル</a></li><li class="sidebar-sub-header"><a href="300-multiple-source-files.html#複数のソースファイルの書き方" class="sidebar-link">複数のソースファイルの書き方</a></li></ul></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="分割コンパイル"><a href="300-multiple-source-files.html#分割コンパイル" class="header-anchor">#</a> 分割コンパイル</h1> <p>これまで、プログラムは1つのソースファイルから作っていた。プログラムは複数のソースファイルから作ることもできる。ソースファイルを複数に分割することで、ソースファイルの管理がしやすくなったり、プログラムのビルド時間の短縮にもつながる。</p> <h3 id="ソースファイルとコンパイル"><a href="300-multiple-source-files.html#ソースファイルとコンパイル" class="header-anchor">#</a> ソースファイルとコンパイル</h3> <p>ソースファイルを分割すると、C++の書き方にも注意が必要になる。だがその前に、複数のソースファイルをコンパイルして1つのプログラムにする方法を学ぶ。</p> <h3 id="単一のソースファイルのコンパイル"><a href="300-multiple-source-files.html#単一のソースファイルのコンパイル" class="header-anchor">#</a> 単一のソースファイルのコンパイル</h3> <p>C++のソースファイルをコンパイルして実行可能ファイルを作る方法をいま一度おさらいをしよう。</p> <p><code>source.cpp</code>という名前のソースファイルがあるとき、ここから<code>program</code>という名前の実行可能ファイルを作るには、</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -o program source.cpp
+</code></pre></div><p>としていた。毎回このコマンドを入力するのは面倒なので、<code>Makefile</code>を以下のように書いていた。</p> <div class="language-makefile extra-class"><pre class="language-makefile"><code><span class="token symbol">program</span><span class="token punctuation">:</span> source.cpp
+	g++ <span class="token variable">$&lt;</span> -o <span class="token variable"><a href="cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="416501">[email&#160;protected]</a></span>
+</code></pre></div><h3 id="ヘッダーファイルはコピペ"><a href="300-multiple-source-files.html#ヘッダーファイルはコピペ" class="header-anchor">#</a> ヘッダーファイルはコピペ</h3> <p>すでに、ソースファイルのほかにヘッダーファイルというファイルも使っている。ヘッダーファイルはソースファイルではない。コンパイル前にソースファイルにコピペされるだけのものだ。</p> <p>例えば以下のような内容の<code>header.h</code>というヘッダーファイルがあるとして、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// header.h</span>
+<span class="token operator">++</span>i <span class="token punctuation">;</span>
+</code></pre></div><p><code>source.cpp</code>が以下のようであるとき、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;header.h&quot;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;header.h&quot;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;header.h&quot;</span></span>
+    <span class="token keyword">int</span> result <span class="token operator">=</span> i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>source.cpp</code>をコンパイルすると、まずヘッダーファイルが以下のように展開される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token comment">// header.h</span>
+<span class="token operator">++</span>i <span class="token punctuation">;</span>
+<span class="token comment">// header.h</span>
+<span class="token operator">++</span>i <span class="token punctuation">;</span>
+<span class="token comment">// header.h</span>
+<span class="token operator">++</span>i <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> result <span class="token operator">=</span> i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ヘッダーファイルとはこれだけのものだ。コンパイラーが<code>#include</code>された場所に、ヘッダーファイルの中身を愚直にコピペするだけだ。</p> <h3 id="複数のソースファイルのコンパイル"><a href="300-multiple-source-files.html#複数のソースファイルのコンパイル" class="header-anchor">#</a> 複数のソースファイルのコンパイル</h3> <p>2つのソースファイル、<code>foo.cpp</code>と<code>bar.cpp</code>からなるプログラムをコンパイルするには、</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -o program foo.cpp bar.cpp
+</code></pre></div><p>とする。</p> <h2 id="オブジェクトファイル"><a href="300-multiple-source-files.html#オブジェクトファイル" class="header-anchor">#</a> オブジェクトファイル</h2> <p>単にソースファイルを分割したいだけならば、GCCに分割したソースファイルをすべて指定すればよい。しかしその場合、複数あるソースファイルの1つだけを編集した場合でも、すべてのソースファイルをコンパイルしなければならない。</p> <p>C++では伝統的に、ソースファイルを部分的にコンパイルしてオブジェクトファイルを生成し、オブジェクトファイルをリンクしてプログラムを生成する方法がある。</p> <p>ソースファイルをオブジェクトファイルにコンパイルするのは<code>コンパイラー</code>、オブジェクトファイルをプログラムにリンクするのは<code>リンカー</code>の仕事だ。</p> <div class="language- extra-class"><pre class="language-text"><code>TODO: 図示
+ソースファイル→(コンパイラー)→オブジェクトファイル→(リンカー)→プログラム
+</code></pre></div><p><img src="fig/fig300-01.png"></p> <p>GCCではC++コンパイラーの名前は<code>g++</code>で、リンカーの名前は<code>ld</code>だ。ただし、C++のオブジェクトファイルをリンクするのにリンカーを直接使うことはない。<code>g++</code>は<code>ld</code>を適切に呼び出してくれるからだ。</p> <p>ソースファイル<code>source.cpp</code>をコンパイルしてオブジェクトファイルを生成するには、<code>-c</code>オプションを使う。</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -c source.cpp
+</code></pre></div><p>生成されるオブジェクトファイルの名前はソースファイルの名前の拡張子を<code>.o</code>に置き換えたものになる。上のコマンドを実行した結果、オブジェクトファイル<code>source.o</code>が生成される。</p> <p>生成したオブジェクトファイルは、<code>g++</code>の入力として使うことで、リンクしてプログラムにすることができる。<code>g++</code>は裏でリンカー<code>ld</code>を適切に呼び出してくれる。</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -o program source.o
+</code></pre></div><p>オブジェクトファイル名を別の名前にしたい場合は、<code>-o object-file-name</code>オプションを使う。</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -o object.o -c source.cpp
+</code></pre></div><p>複数のソースファイル、<code>foo.cpp</code>と<code>bar.cpp</code>からオブジェクトファイルを生成し、リンクして実行可能ファイル<code>program</code>を生成するには以下のようにする。</p> <div class="language- extra-class"><pre class="language-text"><code>$ ls
+bar.cpp  foo.cpp
+$ g++ -c foo.cpp
+$ g++ -c bar.cpp
+$ ls
+bar.cpp  bar.o  foo.cpp  foo.o
+$ g++ -o program foo.o bar.o
+$ ls
+bar.cpp  bar.o  foo.cpp  foo.o  program
+</code></pre></div><p>こうすることによって、1つのソースファイルを編集しただけで、すべてのソースファイルをコンパイルする必要がなくなる。</p> <p>これを<code>Makefile</code>で書くには、出力するファイルと依存するファイルを考える。</p> <ul><li><code>program</code>は<code>foo.o</code>と<code>bar.o</code>に依存する</li> <li><code>foo.o</code>は<code>foo.cpp</code>に依存する</li> <li><code>bar.o</code>は<code>bar.cpp</code>に依存する</li></ul> <p>これを素直に書き出していけばよい。</p> <div class="language- extra-class"><pre class="language-text"><code># programはfoo.oとbar.oに依存する
+program : foo.o bar.o
+	g++ -o <a href="cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7e387">[email&#160;protected]</a> $^
+# foo.oはfoo.cppに依存する
+foo.o : foo.cpp
+	g++ -c $&lt;
+# bar.oはbar.cppに依存する
+bar.o : bar.cpp
+	g++ -c $&lt;
+</code></pre></div><p><code>$^</code>はそのルールの依存するファイル名をすべて空白区切りで得る自動変数だ。この場合、<code>foo.o bar.o</code>に置換される。</p> <h2 id="複数のソースファイルの書き方"><a href="300-multiple-source-files.html#複数のソースファイルの書き方" class="header-anchor">#</a> 複数のソースファイルの書き方</h2> <p>C++の1つのソースファイルは、1つの<code>翻訳単位</code>(translation unit)として扱われる。別の翻訳単位の定義を使うには、さまざまな制約がある。具体的な例で学ぼう。</p> <h3 id="関数"><a href="300-multiple-source-files.html#関数" class="header-anchor">#</a> 関数</h3> <p>以下のコードを見てみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token number">123</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードには2つの定義がある。<code>print_int</code>と<code>main</code>だ。</p> <p>関数<code>print_int</code>を別のソースファイルである<code>print_int.cpp</code>に分割してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// print_int.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードは問題なくコンパイルできる。</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -c print_int.cpp
+</code></pre></div><p>すると残りのソースファイルを<code>main.cpp</code>とすると以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// main.cpp</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token number">123</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードはコンパイルできない。なぜならば、C++では名前は使う前に宣言しなければならないからだ。</p> <p>関数を宣言するには、関数の本体以外の部分を書き、セミコロンで終端する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// main.cpp</span>
+<span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token number">123</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これでコンパイル、リンクができるようになった。</p> <div class="language- extra-class"><pre class="language-text"><code>$ g++ -c main.cpp
+$ g++ -o program main.o print_int.o
+</code></pre></div><p>このとき、<code>main.cpp</code>で関数<code>print_int</code>を定義することはできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// エラー、print_int.cppでも定義されている</span>
+<span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token number">123</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>C++では定義は全翻訳単位に1つしか書くことができないルール、ODR(One Definition Rule、単一定義原則)があるからだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 宣言</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// OK、再宣言</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 定義</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// エラー、再定義</span>
+<span class="token comment">// ODR違反</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><p>なぜODRがあるのか。なぜ定義は1つしか書けないのか。理由は簡単だ。もし定義が複数書けるならば、異なる定義を書くことができてしまうからだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">bool</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token boolean">true</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">bool</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token boolean">false</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>もし定義を複数書くことができる場合、この関数<code>f</code>は<code>true</code>を返すべきだろうか。それとも<code>false</code>を返すべきだろうか。</p> <p>この問題を防ぐために、C++にはODRがある。</p> <p>複数のソースファイル、つまり複数の翻訳単位からなるプログラムの場合でもODRは適用される。定義はすべての翻訳単位内で1つでなければならない。</p> <p>引数リストが違う関数は別の関数で、別の定義になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 定義</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// OK、別の定義</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// OK、別の定義</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">double</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><p>名前は使う前に宣言が必要だが、肝心の定義は別のソースファイルに書いてある。宣言と定義を間違えてしまった場合はエラーになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// print_int.cpp</span>
+<span class="token comment">// 失敗状態を返す</span>
+<span class="token keyword">bool</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> std<span class="token operator">::</span>cout<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// main.cpp</span>
+<span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// エラー</span>
+    <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token number">123</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このような間違いを防ぐためのお作法として、宣言はヘッダーファイルに書いて<code>#include</code>する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// print_int.h</span>
+<span class="token keyword">bool</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// main.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;print_int.h&quot;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 間違えない</span>
+    <span class="token keyword">bool</span> result <span class="token operator">=</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token number">123</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="変数"><a href="300-multiple-source-files.html#変数" class="header-anchor">#</a> 変数</h3> <p>変数にも宣言と定義がある。通常、変数の宣言は定義を兼ねる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 宣言かつ定義</span>
+<span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+</code></pre></div><p>そのため、別の翻訳単位の変数を使うために変数を書くと、定義が重複してしまい、ODR違反になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// global.cpp</span>
+<span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+
+<span class="token comment">// main.cpp</span>
+<span class="token comment">// エラー、ODR違反</span>
+<span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    variable <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>変数を定義せずに宣言だけしたい場合は、<code>extern</code>キーワードを使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// global.cpp</span>
+<span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+
+<span class="token comment">// main.cpp</span>
+<span class="token comment">// OK</span>
+<span class="token comment">// 別の翻訳単位の定義を参照する</span>
+<span class="token keyword">extern</span> <span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    variable <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>extern</code>キーワードを名前空間スコープで宣言された変数に使うと、定義せずに別の翻訳単位の定義を参照する意味になる。</p> <p>変数の場合も、間違いを防ぐためにヘッダーファイルに書いて<code>#include</code>するとよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// global.h</span>
+<span class="token keyword">extern</span> <span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+
+<span class="token comment">// main.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;global.h&quot;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    variable <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="インライン関数-インライン変数"><a href="300-multiple-source-files.html#インライン関数-インライン変数" class="header-anchor">#</a> インライン関数/インライン変数</h3> <p>変数や関数の定義はODRにより重複できない。ということはヘッダーファイルに書いて複数の翻訳単位で<code>#include</code>できないということだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// library.h</span>
+std<span class="token operator">::</span>string delimiter<span class="token punctuation">{</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> delimiter <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// foo.cpp</span>
+<span class="token comment">// エラー、ODR違反</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;library.h&quot;</span></span>
+
+<span class="token comment">// bar.cpp</span>
+<span class="token comment">// エラー、ODR違反</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;library.h&quot;</span></span>
+</code></pre></div><p><code>library.h</code>には宣言だけを書いて、別途翻訳単位となるソースファイル、例えば<code>library.cpp</code>を用意しなければならない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// library.h</span>
+<span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// library.cpp</span>
+std<span class="token operator">::</span>string delimiter<span class="token punctuation">{</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> delimiter <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>小さなライブラリの場合、この制約は煩わしい。できればヘッダーファイルだけで済ませてしまいたい。このためにC++には特別なODRを例外的に回避する方法がある。</p> <p>キーワード<code>inline</code>を付けて定義した関数と変数は、インライン関数、インライン変数となる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// library.h</span>
+<span class="token comment">// インライン変数</span>
+<span class="token keyword">inline</span> std<span class="token operator">::</span>string delimiter<span class="token punctuation">{</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token comment">// インライン関数</span>
+<span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">print_int</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> delimiter <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>インライン関数とインライン変数は、複数の翻訳単位で重複して定義できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// foo.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;library.h&quot;</span></span>
+
+<span class="token comment">// bar.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;library.h&quot;</span></span>
+</code></pre></div><p><code>inline</code>はODRを例外的に回避できるとはいえ、強い制約がある。</p> <ol><li>異なる翻訳単位に限る</li></ol> <p>同じ翻訳単位の中で重複することはできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 1つの翻訳単位</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+<span class="token comment">// エラー、再定義</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+</code></pre></div><ol start="2"><li>同じトークン列である</li></ol> <p>インライン関数、インライン変数の定義のトークン列、つまりソースコードの文字列は完全に同じでなければならない。</p> <p>たとえば以下はトークン列が違う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">inline</span> <span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> x <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> y <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> y <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>インライン関数と変数のトークン列を同じにするには、ヘッダーファイルに書いて<code>#include</code>で取り込むことを徹底する。</p> <ol start="3"><li>意味が同じである</li></ol> <p>同じトークン列でも意味が異なることがある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// foo.cpp</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token punctuation">}</span>
+<span class="token keyword">inline</span> <span class="token keyword">bool</span> <span class="token function">g</span><span class="token punctuation">(</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// bar.cpp</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">double</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token punctuation">}</span>
+<span class="token keyword">inline</span> <span class="token keyword">bool</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>foo.cpp</code>のインライン関数<code>g</code>は<code>f(int)</code>を呼び出すが、<code>bar.cpp</code>のインライン関数<code>g</code>は<code>f(double)</code>を呼び出す。インライン関数<code>g</code>のトークン列はどちらも同じだが、意味が異なる。</p> <p>ODRの例外的な回避の怖いところは、間違えてしまってもコンパイラーがエラーメッセージを出してくれる保証がないところだ。上の同じトークン列で違う意味のような関数は、そのままコンパイルが通ってリンクされ、実行可能なプログラムが生成されてしまうかもしれない。そのようなプログラムの挙動がどうなるかはわからない。この理由は、ODR違反を完全に発見するコンパイラーの実装が技術的に困難だからだ。ODR違反をしないのはユーザーの責任だ。</p> <p>インライン変数とインライン関数はわざわざ翻訳単位を分けて分割コンパイルするまでもないライブラリに使うとよい。</p> <h3 id="クラス"><a href="300-multiple-source-files.html#クラス" class="header-anchor">#</a> クラス</h3> <p>クラスにも宣言と定義がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 宣言</span>
+<span class="token keyword">struct</span> <span class="token class-name">Foo</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 定義</span>
+<span class="token keyword">struct</span> <span class="token class-name">Foo</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data_member <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>クラスを複数の翻訳単位で使うには、関数と同じように宣言と定義に分ければよいと考えるかもしれないが、残念ながらクラスの宣言だけでできることは少ない。</p> <p>クラスの宣言だけでできることは、クラス名を型名として使うとか、クラスのポインター型を作るぐらいのものだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Foo</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> Bar <span class="token operator">=</span> Foo <span class="token punctuation">;</span>
+Foo <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+</code></pre></div><p>宣言だけされたクラスのオブジェクトを作ることはできないし、ポインターの演算もできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Foo</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// エラー</span>
+    Foo foo <span class="token punctuation">;</span>
+
+    Foo <span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span> <span class="token punctuation">;</span>
+    <span class="token comment">// エラー</span>
+    <span class="token operator">++</span>ptr <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この理由は、宣言だけされたクラスは<code>不完全型</code>(Incomplete type)という特別な扱いの型になるからだ。クラスのオブジェクトを作ったりポインター演算をするには、クラスのオブジェクトのサイズを決定する必要があるが、そのための情報はまだコンパイラーが得ていないために起こる制約だ。</p> <p>クラスの定義では、インライン変数やインライン関数と同じく、ODRの例外的な回避が認められている。条件も同じで、1. 異なる翻訳単位で、2. 同じトークン列で、3. 意味も同じ場合だ。</p> <p>ODR違反を起こさないために、クラス定義はインクルードファイルに書いて<code>#include</code>するのがお作法だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// Foo.h</span>
+<span class="token comment">// クラス定義</span>
+<span class="token keyword">struct</span> <span class="token class-name">Foo</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data_member <span class="token punctuation">;</span>
+    <span class="token comment">// メンバー関数の宣言</span>
+    <span class="token keyword">int</span> <span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// Foo.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;Foo.h&quot;</span></span>
+<span class="token comment">// メンバー関数の定義</span>
+<span class="token keyword">int</span> Foo<span class="token operator">::</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> data_member <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> 
+
+<span class="token comment">// main.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;Foo.h&quot;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Foo foo <span class="token punctuation">;</span>
+    foo<span class="token punctuation">.</span>data_member <span class="token operator">=</span> <span class="token number">42</span> <span class="token punctuation">;</span>
+    <span class="token keyword">int</span> value <span class="token operator">=</span> foo<span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>クラス定義の中で定義されたメンバー関数は、自動的にインライン関数になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// Foo.h</span>
+<span class="token keyword">struct</span> <span class="token class-name">Foo</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data_member <span class="token punctuation">;</span>
+    <span class="token comment">// インライン関数</span>
+    <span class="token keyword">int</span> <span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> data_member <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>このように書くと、ヘッダーファイル<code>Foo.h</code>を<code>#include</code>するだけでどこでもクラス<code>Foo</code>が使えるようになる。メンバー関数を定義するための<code>Foo.cpp</code>は必要がなくなる。</p> <p>クラスのデータメンバーは具体的なオブジェクトではないので、インライン変数ではない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// これはオブジェクトではない</span>
+    <span class="token keyword">int</span> data_member <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// オブジェクト</span>
+    S s <span class="token punctuation">;</span>
+    <span class="token comment">// サブオブジェクト</span>
+    s<span class="token punctuation">.</span>data_member <span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre></div><h5 id="staticメンバー"><a href="300-multiple-source-files.html#staticメンバー" class="header-anchor">#</a> staticメンバー</h5> <p>クラスのメンバーは非<code>static</code>メンバーと<code>static</code>メンバーに分けることができる。<code>static</code>メンバーは<code>static</code>キーワードを付けて宣言する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 非staticメンバー</span>
+    <span class="token keyword">int</span> data_member <span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// staticメンバー</span>
+    <span class="token keyword">inline</span> <span class="token keyword">static</span> <span class="token keyword">int</span> static_data_member <span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">static_member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>static</code>メンバー関数はクラスのオブジェクトには依存していない。そのため、クラスのオブジェクトなしで呼び出すことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 非staticメンバー</span>
+    <span class="token keyword">void</span> <span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// staticメンバー</span>
+    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">static_member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    S s <span class="token punctuation">;</span>
+    <span class="token comment">// オブジェクトが必要</span>
+    s<span class="token punctuation">.</span><span class="token function">member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// オブジェクトは不要</span>
+    S<span class="token operator">::</span><span class="token function">static_member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// このように呼び出すこともできる</span>
+    s<span class="token punctuation">.</span><span class="token function">static_member_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>static</code>メンバー関数の呼び出しにクラスのオブジェクトを必要としない。そのため、<code>this</code>も使うことはできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> <span class="token function">data_member</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span><span class="token comment">// thisが使える</span>
+        <span class="token keyword">this</span><span class="token operator">-&gt;</span>data_member <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span><span class="token comment">// thisは使えない</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>static</code>データメンバーはクラスのオブジェクトの外の独立したオブジェクトだ。<code>static</code>データメンバーのクラス定義内での宣言は定義ではないので、クラスの定義外で定義する必要がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 宣言</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> static_data_member <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token comment">// 定義</span>
+<span class="token keyword">int</span> S<span class="token operator">::</span>static_data_member <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    S<span class="token operator">::</span>static_data_member <span class="token operator">=</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>複数の翻訳単位からなるプログラムの場合、ODRにより定義は1つしか書けないので、どこか1つのソースファイルだけに定義を書くことになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// S.h</span>
+<span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 宣言</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> static_data_member <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// S.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;S.h&quot;</span></span>
+<span class="token comment">// 定義</span>
+<span class="token keyword">int</span> S<span class="token operator">::</span>static_data_member <span class="token punctuation">;</span>
+</code></pre></div><p>これは面倒なので、通常は<code>static</code>変数はインライン変数にする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// S.h</span>
+<span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// インライン変数かつstatic変数</span>
+    <span class="token keyword">inline</span> <span class="token keyword">static</span> <span class="token keyword">int</span> static_data_member <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>これで<code>static</code>変数を定義するだけのソースファイルを用意する必要はない。ただしインライン変数はC++17以降の機能なので、読者が昔のC++で書かれたコードを読む際には、まだ昔ながらの<code>static</code>データメンバーの定義に出くわすだろうから、覚えておこう。</p> <p><code>static</code>メンバーはクラススコープの下に関数と変数というだけで、その実態は名前空間スコープ内の関数と変数と同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 名前空間</span>
+<span class="token keyword">namespace</span> A <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// クラス</span>
+<span class="token keyword">struct</span> <span class="token class-name">B</span> <span class="token punctuation">{</span>
+    <span class="token keyword">inline</span> <span class="token keyword">static</span> <span class="token keyword">int</span> variable <span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 名前空間</span>
+    A<span class="token operator">::</span>variable <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    A<span class="token operator">::</span><span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// クラス</span>
+    B<span class="token operator">::</span>variable <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+    B<span class="token operator">::</span><span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="テンプレート"><a href="300-multiple-source-files.html#テンプレート" class="header-anchor">#</a> テンプレート</h3> <p>テンプレートにもODRの例外が認められている。</p> <p>テンプレートは具体的なテンプレート引数が与えられて実体化する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">holder</span>
+<span class="token punctuation">{</span>
+    T value <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+holder<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> a <span class="token punctuation">;</span>
+holder<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span> b <span class="token punctuation">;</span>
+</code></pre></div><p>このため、翻訳単位ごとに、同じトークン列で同じ意味のテンプレートコードが必要だ。インクルードファイルに書いて<code>#include</code>するお作法も同じだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// holder.h</span>
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">holder</span>
+<span class="token punctuation">{</span>
+    T value <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+holder<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> a <span class="token punctuation">;</span>
+holder<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span> b <span class="token punctuation">;</span>
+</code></pre></div><p>C++に将来的に追加される予定のモジュールが入るまでは、テンプレートコードはすべてをインクルードファイルに書いて<code>#include</code>して使う慣習が続くだろう。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="200-cpp.html" class="prev">Cプリプロセッサー</a></span> <span class="next"><a href="400-gdb.html">デバッガー</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/53.4cfac598.js" defer></script>
+  </body>
+</html>
