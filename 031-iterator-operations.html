@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>イテレーター詳細 | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/36.93604af5.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="active sidebar-link">イテレーター詳細</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="031-iterator-operations.html#イテレーターとポインターの関係" class="sidebar-link">イテレーターとポインターの関係</a></li><li class="sidebar-sub-header"><a href="031-iterator-operations.html#イテレーターカテゴリー" class="sidebar-link">イテレーターカテゴリー</a></li><li class="sidebar-sub-header"><a href="031-iterator-operations.html#iterator-traits" class="sidebar-link">iterator_traits</a></li><li class="sidebar-sub-header"><a href="031-iterator-operations.html#イテレーターカテゴリーの実例" class="sidebar-link">イテレーターカテゴリーの実例</a></li><li class="sidebar-sub-header"><a href="031-iterator-operations.html#イテレーター操作" class="sidebar-link">イテレーター操作</a></li><li class="sidebar-sub-header"><a href="031-iterator-operations.html#リバースイテレーター" class="sidebar-link">リバースイテレーター</a></li></ul></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="イテレーター詳細"><a href="031-iterator-operations.html#イテレーター詳細" class="header-anchor">#</a> イテレーター詳細</h1> <h2 id="イテレーターとポインターの関係"><a href="031-iterator-operations.html#イテレーターとポインターの関係" class="header-anchor">#</a> イテレーターとポインターの関係</h2> <p><code>array</code>のイテレーターの実装を振り返ろう。前回実装したイテレーターは、リファレンスとインデックスを使うものだった。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> Array <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">array_iterator</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">using</span> reference <span class="token operator">=</span> <span class="token keyword">typename</span> Array<span class="token operator">::</span>reference <span class="token punctuation">;</span>
+
+    Array <span class="token operator">&amp;</span> a <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>size_t i <span class="token punctuation">;</span>
+
+    <span class="token function">array_iterator</span><span class="token punctuation">(</span> Array <span class="token operator">*</span> a<span class="token punctuation">,</span> std<span class="token operator">::</span>size_t i <span class="token punctuation">)</span>
+        <span class="token operator">:</span> <span class="token function">a</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">i</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+    reference <span class="token keyword">operator</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    array_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">++</span>i <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    reference <span class="token keyword">operator</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t n <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> a<span class="token punctuation">[</span>i <span class="token operator">+</span> n<span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>このコードは単にポインターをクラスで実装しているだけではないだろうか。ならば、ポインターでイテレーターを実装することもできるのではないか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Array <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">array_iterator</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">using</span> pointer <span class="token operator">=</span> <span class="token keyword">typename</span> Array<span class="token operator">::</span>pointer <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> reference <span class="token operator">=</span> <span class="token keyword">typename</span> Array<span class="token operator">::</span>reference <span class="token punctuation">;</span>
+    pointer p <span class="token punctuation">;</span>
+
+    <span class="token function">array_iterator</span><span class="token punctuation">(</span> pointer p <span class="token punctuation">)</span>
+        <span class="token operator">:</span> <span class="token function">p</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+    reference <span class="token keyword">operator</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">*</span>p <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    array_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">++</span>p <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    reference <span class="token keyword">operator</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t n <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> p<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>このコードは本当にポインターをクラスで実装しているだけだ。ならばイテレータークラスの代わりにポインターでもいいのではないだろうか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T<span class="token punctuation">,</span> std<span class="token operator">::</span>size_t N <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">array</span>
+<span class="token punctuation">{</span>
+
+    T storage<span class="token punctuation">[</span>N<span class="token punctuation">]</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// ポインター</span>
+    <span class="token keyword">using</span> iterator <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+
+    iterator <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">&amp;</span>storage<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">;</span>  <span class="token punctuation">}</span>
+
+    iterator <span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> N <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>これは動く。そして実際の<code>std::array</code>の実装もこうなっている。</p> <p>実はイテレーターはポインターを参考にして作られた。インクリメントで次の要素を参照、<code>operator *</code>で参照先の要素にアクセスといった操作は、すべてポインターの操作をより抽象化したものだ。</p> <p>ポインターの操作をすべてサポートしたイテレーターは、ランダムアクセスイテレーターと呼ばれる。</p> <h2 id="イテレーターカテゴリー"><a href="031-iterator-operations.html#イテレーターカテゴリー" class="header-anchor">#</a> イテレーターカテゴリー</h2> <p>イテレーターにはサポートしている操作に応じて以下のような種類が存在する。</p> <ul><li>入力イテレーター(Input Iterator)</li> <li>出力イテレーター(Output Iterator)</li> <li>前方イテレーター(Forward Iterator)</li> <li>双方向イテレーター(Bidirectional Iterator)</li> <li>ランダムアクセスイテレーター(Random Access Iterator)</li></ul> <p>イテレーターの関係は以下のようになっている。</p> <div class="language- extra-class"><pre class="language-text"><code>TODO: 図示
+ランダムアクセスイテレーター → 双方向イテレーター → 前方イテレーター → 入力イテレーター
+                                                                     → 出力イテレーター
+</code></pre></div><p>fig/fig31-01.png</p> <p>矢印<code>A → B</code>は<code>A</code>が<code>B</code>であることを意味している。</p> <p>ランダムアクセスイテレーターは双方向イテレーターのすべての操作をサポートする。故にランダムアクセスイテレーターは双方向イテレーターである。</p> <p>同様に、双方向イテレーターは前方イテレーターである。前方イテレーターは入力イテレーター/出力イテレーターである。</p> <p><code>A</code>は<code>B</code>であることに加えて、追加の操作をサポートしている。</p> <h3 id="ランダムアクセスイテレーター"><a href="031-iterator-operations.html#ランダムアクセスイテレーター" class="header-anchor">#</a> ランダムアクセスイテレーター</h3> <p>ランダムアクセスイテレーターは名前のとおりランダムアクセスができる。イテレーターが<code>n</code>番目の要素を指すとき、<code>n+m</code>番目の要素を指すことができる。<code>m</code>は負数でもよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> RandomAccessIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> RandomAccessIterator i<span class="token punctuation">,</span> <span class="token keyword">int</span> n  <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    i <span class="token operator">+</span> n <span class="token punctuation">;</span>
+    i <span class="token operator">-</span> n <span class="token punctuation">;</span>
+    n <span class="token operator">+</span> i <span class="token punctuation">;</span> <span class="token comment">// i+nと同じ</span>
+    n <span class="token operator">-</span> i <span class="token punctuation">;</span> <span class="token comment">// n-iと同じ</span>
+
+    i <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">-</span>n<span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// i - nと同じ</span>
+
+    <span class="token comment">// i = i + n ; と同じ</span>
+    i <span class="token operator">+=</span> n <span class="token punctuation">;</span>
+    <span class="token comment">// i = i - n ; と同じ</span>
+    i <span class="token operator">-=</span> n <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>と書ける。<code>n</code>の型が符号付き整数型でよい。<code>i + (-5)</code>は<code>i-5</code>と同じ意味だ。</p> <p>イテレーター間の距離を計算したいときはイテレーター同士を引き算する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> RandomAccessIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> RandomAccessIterator a<span class="token punctuation">,</span> RandomAccessIterator b <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    b <span class="token operator">-</span> a <span class="token punctuation">;</span> <span class="token comment">// aからbまでの距離</span>
+    a <span class="token operator">-</span> b <span class="token punctuation">;</span> <span class="token comment">// bからaまでの距離</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>イテレーター間の距離は負数にもなる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> RandomAccessIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> RandomAccessIterator a <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> b <span class="token operator">=</span> a <span class="token punctuation">;</span>
+    <span class="token comment">// bはaより3進んでいる</span>
+    <span class="token operator">++</span>b <span class="token punctuation">;</span> <span class="token operator">++</span>b <span class="token punctuation">;</span> <span class="token operator">++</span>b <span class="token punctuation">;</span>
+    b <span class="token operator">-</span> a <span class="token punctuation">;</span> <span class="token comment">// 3</span>
+    a <span class="token operator">-</span> b <span class="token punctuation">;</span> <span class="token comment">// -3</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>イテレーター<code>b</code>は<code>a</code>より3進んでいるので、<code>a</code>から<code>b</code>までの距離である<code>b - a</code>は3になる。では<code>b</code>から<code>a</code>までの距離である<code>a - b</code>はどうなるかというと、$-3$になる。<code>b</code>にとって<code>a</code>は3戻っているからだ。</p> <p>イテレーター <code>i</code>の<code>n</code>個先の要素を参照したい場合は、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> RandomAccessIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> RandomAccessIterator i<span class="token punctuation">,</span> std<span class="token operator">::</span>size_t n <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// *(i + n) ; と同じ</span>
+    i<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>と書ける。</p> <p>ランダムアクセスイテレーターは大小比較ができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> RandomAccessIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> RandomAccessIterator i<span class="token punctuation">,</span> RandomAccessIterator j <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    i   <span class="token operator">&lt;</span>   j <span class="token punctuation">;</span>
+    i   <span class="token operator">&gt;</span>   j <span class="token punctuation">;</span>
+    i   <span class="token operator">&lt;=</span>  j <span class="token punctuation">;</span>
+    i   <span class="token operator">&gt;=</span>  j <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>イテレーターの比較は、イテレーターが参照する要素の値の比較ではない。イテレーターが参照する要素の順番の比較だ。</p> <p><code>n</code>番目の要素を参照するイテレーターは、<code>n+1</code>番目の要素を参照するイテレーターより小さい。<code>n-1</code>番目を参照するイテレーターより大きい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// jはn+1番目を指す</span>
+    <span class="token keyword">auto</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+    i <span class="token operator">&lt;</span> j <span class="token punctuation">;</span> <span class="token comment">// true</span>
+    i <span class="token operator">&gt;</span> j <span class="token punctuation">;</span> <span class="token comment">// false</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ここまでの操作はランダムアクセスイテレーターにしかできない。</p> <p>双方向イテレーター以下のイテレーターができる比較は同値比較だけだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i<span class="token punctuation">,</span> Iterator j <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    i <span class="token operator">==</span> j <span class="token punctuation">;</span>
+    i <span class="token operator">!=</span> j <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>イテレーターは同じ<code>n</code>番目の要素を指しているときに等しいと比較される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> j <span class="token operator">=</span> i <span class="token punctuation">;</span>
+    i <span class="token operator">==</span> j <span class="token punctuation">;</span>    <span class="token comment">// true</span>
+    <span class="token operator">++</span>j <span class="token punctuation">;</span>
+    i <span class="token operator">=</span> j <span class="token punctuation">;</span>     <span class="token comment">// false</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="双方向イテレーター"><a href="031-iterator-operations.html#双方向イテレーター" class="header-anchor">#</a> 双方向イテレーター</h3> <p>双方向イテレーターは名前のとおり双方向のイテレーターの移動ができる。双方向というのはイテレーターが参照している<code>n</code>番目の要素の<code>n-1</code>番目の要素と<code>n+1</code>番目の要素だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> BidirectionalIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> BidirectionalIterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token operator">++</span>i <span class="token punctuation">;</span> <span class="token comment">// i+1</span>
+    <span class="token operator">--</span>i <span class="token punctuation">;</span> <span class="token comment">// i-1</span>
+
+    <span class="token comment">// r1, r2は変更する前のiの値</span>
+    <span class="token keyword">auto</span> r1 <span class="token operator">=</span> i<span class="token operator">++</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> r2 <span class="token operator">=</span> i<span class="token operator">--</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>と書ける。この操作は前方イテレーターにはできない。</p> <p>1個ずつ移動できるのであれば、イテレーターを<code>n</code>個進めることもできそうなものだ。実際、双方向イテレーターを以下のようにして<code>n</code>個進めることができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> BidirectionalIterator <span class="token operator">&gt;</span>
+BidirectionalIterator
+<span class="token function">nth_next</span><span class="token punctuation">(</span> BidirectionalIterator iter<span class="token punctuation">,</span> std<span class="token operator">::</span>size_t n <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> i <span class="token operator">!=</span> n <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+        <span class="token operator">++</span>iter <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> iter <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>確かにこれはできる。できるが、効率的ではない。双方向イテレーターが提供される場合というのは、ランダムアクセスが技術的に可能ではあるが非効率的な場合だ。具体的なデータ構造を出すと、例えばリンクリストがある。リンクリストに対するランダムアクセスは技術的に可能であるが非効率的だ。</p> <h3 id="前方イテレーター"><a href="031-iterator-operations.html#前方イテレーター" class="header-anchor">#</a> 前方イテレーター</h3> <p>前方イテレーターは前方にしか移動できない。イテレーターが0番目の要素を指しているならば1番目、1番目の要素を指しているならば2番目に移動できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> ForwardIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> ForwardIterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token operator">++</span>i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>前方イテレーターにはマルチパス保証がある。イテレーターの指す要素を動かす前のイテレーターの値を保持しておき、保持した値を動かしたとき、2つのイテレーターは同一になるという保証だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> ForwardIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> ForwardIterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 動かす前の値を保持</span>
+    <span class="token keyword">auto</span> prev <span class="token operator">=</span> i <span class="token punctuation">;</span>
+    <span class="token comment">// 次の要素を指す</span>
+    <span class="token operator">++</span>i <span class="token punctuation">;</span>
+    <span class="token comment">// 動かす前の値も次の要素を指すようにする</span>
+    <span class="token operator">++</span>prev <span class="token punctuation">;</span>
+
+    <span class="token comment">// true</span>
+    <span class="token keyword">bool</span> b <span class="token operator">=</span> <span class="token punctuation">(</span> i <span class="token operator">==</span> prev <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// r1, r2は同じ要素を指す</span>
+    <span class="token keyword">auto</span> <span class="token operator">&amp;</span> r1 <span class="token operator">=</span> <span class="token operator">*</span>i <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> <span class="token operator">&amp;</span> r2 <span class="token operator">=</span> <span class="token operator">*</span>prev <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>入力イテレーター、出力イテレーターにはこの保証がない。</p> <h3 id="入力イテレーター"><a href="031-iterator-operations.html#入力イテレーター" class="header-anchor">#</a> 入力イテレーター</h3> <p>入力イテレーターはイテレーターの比較、イテレーターの参照、イテレーターのインクリメントができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> InputIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> InputIterator i<span class="token punctuation">,</span> InputIterator j <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 比較</span>
+    <span class="token keyword">bool</span> b1 <span class="token operator">=</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> j<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> b2 <span class="token operator">=</span> <span class="token punctuation">(</span>i <span class="token operator">!=</span> j<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 参照</span>
+    <span class="token operator">*</span>i <span class="token punctuation">;</span>
+    <span class="token comment">// (*i).m と同じ</span>
+    i<span class="token operator">-&gt;</span>m <span class="token punctuation">;</span>
+
+    <span class="token comment">// インクリメント</span>
+    <span class="token operator">++</span>i <span class="token punctuation">;</span>
+    i<span class="token operator">++</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>入力イテレーターの参照は、読み込むことしか保証されていない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> InputIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> InputIterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// OK</span>
+    <span class="token keyword">auto</span> value <span class="token operator">=</span> <span class="token operator">*</span>i <span class="token punctuation">;</span>
+    <span class="token comment">// エラー</span>
+    <span class="token operator">*</span>i <span class="token operator">=</span> value <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>書き込みは出力イテレーターの仕事だ。</p> <h3 id="出力イテレーター"><a href="031-iterator-operations.html#出力イテレーター" class="header-anchor">#</a> 出力イテレーター</h3> <p>出力イテレーターはイテレーターのインクリメントと、イテレーターの参照への代入ができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> OutputIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> OutputIterator i<span class="token punctuation">,</span> <span class="token keyword">typename</span> OutputIterator<span class="token operator">::</span>value_type v <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 参照への代入</span>
+    <span class="token operator">*</span>i <span class="token operator">=</span> v <span class="token punctuation">;</span>
+
+    <span class="token comment">// インクリメント</span>
+    <span class="token operator">++</span>i <span class="token punctuation">;</span>
+    i<span class="token operator">++</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>出力イテレーターを参照した結果は定められていない。<code>void</code>かもしれない。したがって出力イテレーターの値を読むのは意味がない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> OutputIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> OutputIterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 意味がない</span>
+    <span class="token keyword">auto</span> value <span class="token operator">=</span> <span class="token operator">*</span>i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="iterator-traits"><a href="031-iterator-operations.html#iterator-traits" class="header-anchor">#</a> iterator_traits</h2> <p>イテレーターカテゴリーやイテレーターの参照する値を見分けるためのライブラリとして、<code>iterator_traits&lt;T&gt;</code>がある。これは以下のようになっている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> std <span class="token punctuation">{</span>
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iterator</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">using</span> difference_type <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> value_type <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> pointer <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> reference <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> iterator_category <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>difference_type</code>はイテレーター同士の距離を指す数値だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i<span class="token punctuation">,</span> Iterator j <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// イテレーター同士の距離</span>
+    <span class="token keyword">typename</span> std<span class="token operator">::</span>iterator_traits<span class="token operator">&lt;</span>Iterator<span class="token operator">&gt;</span><span class="token operator">::</span>difference_type diff <span class="token operator">=</span> j <span class="token operator">-</span> i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>value_type</code>はイテレーターの参照する値の型、<code>pointer</code>はそのポインター型、<code>reference</code>はそのリファレンス型だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 値型</span>
+    <span class="token keyword">typename</span> std<span class="token operator">::</span>iterator_traits<span class="token operator">&lt;</span>Iterator<span class="token operator">&gt;</span><span class="token operator">::</span>value_type v <span class="token operator">=</span> <span class="token operator">*</span>i <span class="token punctuation">;</span>
+    <span class="token comment">// ポインター型 </span>
+    <span class="token keyword">typename</span> std<span class="token operator">::</span>iterator_traits<span class="token operator">&lt;</span>Iterator<span class="token operator">&gt;</span><span class="token operator">::</span>pointer p <span class="token operator">=</span> <span class="token operator">&amp;</span>v <span class="token punctuation">;</span>
+    <span class="token comment">// リファレンス型</span>
+    <span class="token keyword">typename</span> std<span class="token operator">::</span>iterator_traits<span class="token operator">&lt;</span>Iterator<span class="token operator">&gt;</span><span class="token operator">::</span>reference r <span class="token operator">=</span> v <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>iterator_category</code>はイテレーターカテゴリーを示す型で、以下のようになっている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> std <span class="token punctuation">{</span>
+<span class="token keyword">struct</span> <span class="token class-name">input_iterator_tag</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">output_iterator_tag</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">forward_iterator_tag</span><span class="token operator">:</span> <span class="token keyword">public</span> input_iterator_tag <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">bidirectional_iterator_tag</span><span class="token operator">:</span> <span class="token keyword">public</span> forward_iterator_tag <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">random_access_iterator_tag</span><span class="token operator">:</span> <span class="token keyword">public</span> bidirectional_iterator_tag <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>forward_iterator_tag</code>以降のコロン文字のあとに続くコードについては、いまは気にしなくてもよい。これは派生というまだ説明していないクラスの機能だ。</p> <p>あるイテレーターがあるイテレーターカテゴリーを満たすかどうかを調べるには以下のようにする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> tag<span class="token punctuation">,</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">constexpr</span> <span class="token keyword">bool</span> <span class="token function">is_category_of</span><span class="token punctuation">(</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">using</span> iter_tag <span class="token operator">=</span> <span class="token keyword">typename</span> std<span class="token operator">::</span>iterator_traits<span class="token operator">&lt;</span>Iterator<span class="token operator">&gt;</span><span class="token operator">::</span>iterator_category <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> std<span class="token operator">::</span>is_base_of_v<span class="token operator">&lt;</span> tag<span class="token punctuation">,</span> iter_tag<span class="token operator">&gt;</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">using</span> iterator <span class="token operator">=</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">::</span>iterator <span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> b <span class="token operator">=</span> is_category_of<span class="token operator">&lt;</span> std<span class="token operator">::</span>forward_iterator_tag<span class="token punctuation">,</span> iterator <span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vectorのイテレーターはランダムアクセスイテレーターなので前方イテレーターでもある</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> b <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードはまだ学んでいないC++の機能をふんだんに使っているので、現時点で理解するのは難しい。</p> <h2 id="イテレーターカテゴリーの実例"><a href="031-iterator-operations.html#イテレーターカテゴリーの実例" class="header-anchor">#</a> イテレーターカテゴリーの実例</h2> <p>イテレーターカテゴリーについて学んだので、イテレーターカテゴリーの実例について見ていこう。</p> <h3 id="出力イテレーター-2"><a href="031-iterator-operations.html#出力イテレーター-2" class="header-anchor">#</a> 出力イテレーター</h3> <p>前方イテレーター以上のイテレーターカテゴリーを満たすイテレーターはすべて、出力イテレーターとして使える。例えば<code>std::array</code>の内容を<code>std::vector</code>にコピーしたければ以下のように書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token operator">&gt;</span> a <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>std::vector</code>のイテレーターは出力イテレーターとして振る舞う。</p> <p>出力イテレーターの要件しか満たさないイテレーターは、例えば以下のようなものだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">cout_iterator</span>
+<span class="token punctuation">{</span>
+<span class="token comment">// --- ボイラープレートコード</span>
+    <span class="token comment">// 出力イテレーターでは使わないのでvoidでいい</span>
+    <span class="token keyword">using</span> difference_type <span class="token operator">=</span> <span class="token keyword">void</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> value_type <span class="token operator">=</span> <span class="token keyword">void</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> reference <span class="token operator">=</span> <span class="token keyword">void</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> pointer <span class="token operator">=</span> <span class="token keyword">void</span> <span class="token punctuation">;</span>
+    <span class="token comment">// イテレーターカテゴリーは出力イテレーター</span>
+    <span class="token keyword">using</span> iterator_category <span class="token operator">=</span> std<span class="token operator">::</span>output_iterator_tag <span class="token punctuation">;</span>
+    <span class="token comment">// 何もしない</span>
+    <span class="token comment">// 自分自身を返すだけ</span>
+    cout_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    cout_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    cout_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token comment">// --- ボイラープレートコード</span>
+
+    <span class="token comment">// ここが肝心</span>
+    <span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+    cout_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">=</span><span class="token punctuation">(</span> T <span class="token keyword">const</span> <span class="token operator">&amp;</span> x <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    cout_iterator out <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> out <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>cout_iterator</code>は<code>*i = x;</code>と書いたときに、値<code>x</code>を<code>std::cout</code>で出力する。</p> <p><code>cout_iterator</code>は出力イテレーターの要件を満たすので<code>std::copy</code>に渡せる。<code>std::copy</code>はイテレーターを順番に<code>*out = *i ;</code>のように実行するので、結果として値がすべて<code>std::cout</code>で出力される。</p> <p><code>cout_iterator</code>はとても便利なので、標準ライブラリには<code>std::ostream_iterator&lt;T&gt;</code>がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>ostream_iterator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">out</span><span class="token punctuation">(</span>std<span class="token operator">::</span>cout<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> out <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>ostream_iterator</code>は出力ストリーム(<code>ostream</code>)に対するイテレーターだ。コンストラクターに出力先の出力ストリームを渡すことで値を出力先に出力してくれる。今回は<code>std::cout</code>だ。</p> <p>上のような出力イテレーターが<code>operator =</code>で以下のようなことをしていたらどうだろう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Container <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">back_inserter</span>
+<span class="token punctuation">{</span>
+    <span class="token function">back_inserter</span><span class="token punctuation">(</span> Container <span class="token operator">&amp;</span> c <span class="token punctuation">)</span>
+        <span class="token operator">:</span> <span class="token function">c</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// その他のボイラープレートコード</span>
+
+    
+    back_inserter <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">=</span><span class="token punctuation">(</span> <span class="token keyword">const</span> <span class="token keyword">typename</span> Container<span class="token operator">::</span>value_type <span class="token operator">&amp;</span> value <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        c<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    Container <span class="token operator">&amp;</span> c <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Container <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Container <span class="token keyword">const</span> <span class="token operator">&amp;</span> c <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// cの全要素をコピーしたい</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span> <span class="token keyword">typename</span> Container<span class="token operator">::</span>value_type <span class="token operator">&gt;</span> temp <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> out <span class="token operator">=</span> <span class="token function">back_inserter</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">,</span> out <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードが何をするかわかるだろうか。コンテナー<code>c</code>の全要素を出力イテレーターで出力する。出力イテレーターは渡された値<code>value</code>を<code>temp.push_back(value) ;</code>する。その結果、<code>temp</code>は<code>c</code>のすべての要素を保持していることになる。</p> <p>C++の標準ライブラリには<code>std::back_inserter</code>がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> temp <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> out <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">back_inserter</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> out <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>std::back_inserter(c)</code>はコンテナー<code>c</code>に出力イテレーターとして渡された値を<code>puch_back</code>する。</p> <p>ただし、<code>std::back_inserter</code>は古いライブラリなので、ここで示した方法とは少し違う実装がされている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 出力イテレーター</span>
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Container <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">back_insert_iterator</span>
+<span class="token punctuation">{</span>
+    <span class="token function">back_insert_iterator</span><span class="token punctuation">(</span> Container <span class="token operator">&amp;</span> c <span class="token punctuation">)</span>
+        <span class="token operator">:</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    Container <span class="token operator">*</span> c <span class="token punctuation">;</span>
+
+    <span class="token comment">// その他のコード</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 出力イテレーターを返す関数</span>
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Container <span class="token operator">&gt;</span>
+back_insert_iterator<span class="token operator">&lt;</span>Container<span class="token operator">&gt;</span> <span class="token function">back_inserter</span><span class="token punctuation">(</span> Container <span class="token operator">&amp;</span> c <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> back_insert_iterator<span class="token operator">&lt;</span>Container<span class="token operator">&gt;</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この理由は、C++17以前のC++ではクラスのコンストラクターからテンプレート実引数の推定ができなかったためだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> T <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">{</span>
+    <span class="token function">S</span><span class="token punctuation">(</span> T <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// f&lt;int&gt;と推定</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// S&lt;int&gt;と推定</span>
+    S <span class="token function">s</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>C++17以前のC++では関数の実引数からテンプレート仮引数<code>T</code>の型を推定することはできたが、クラスのコンストラクターから推定することはできなかった。C++17以降は可能だ。</p> <p><code>std::cout</code>に出力したり、コンテナーに<code>push_back</code>する実装のイテレーターは、マルチパス保証を満たさない。実装を見ればわかるように、イテレーターをコピーして別々にインクリメントした結果のイテレーターのオブジェクトに対する操作は同一ではないからだ。</p> <h3 id="入力イテレーター-2"><a href="031-iterator-operations.html#入力イテレーター-2" class="header-anchor">#</a> 入力イテレーター</h3> <p>入力イテレーターの実例はどうか。</p> <p><code>std::cin</code>から<code>T</code>型を読み込む入力イテレーターの実装は以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">cin_iterator</span>
+<span class="token punctuation">{</span>
+<span class="token comment">// --- ボイラープレートコード</span>
+    <span class="token keyword">using</span> difference_type <span class="token operator">=</span> std<span class="token operator">::</span>ptrdiff_t <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> value_type <span class="token operator">=</span> T <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> reference <span class="token operator">=</span> T <span class="token operator">&amp;</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> pointer <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+    <span class="token comment">// イテレーターカテゴリーは入力イテレーター</span>
+    <span class="token keyword">using</span> iterator_category <span class="token operator">=</span> std<span class="token operator">::</span>input_iterator_tag <span class="token punctuation">;</span>
+<span class="token comment">// --- ボイラープレートコード</span>
+
+    <span class="token comment">// コンストラクター</span>
+    <span class="token function">cin_iterator</span><span class="token punctuation">(</span> <span class="token keyword">bool</span> fail <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token punctuation">)</span>
+        <span class="token operator">:</span> <span class="token function">fail</span><span class="token punctuation">(</span>fail<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token operator">++</span><span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>    
+
+    <span class="token comment">// キャッシュした値を返す</span>
+    <span class="token keyword">const</span> reference <span class="token keyword">operator</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> value <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// 新しい値をキャッシュする</span>
+    cin_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>fail <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cin <span class="token operator">&gt;&gt;</span> value <span class="token punctuation">;</span>
+            fail <span class="token operator">=</span> std<span class="token operator">::</span>cin<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 後置インクリメント</span>
+    cin_iterator <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> old <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+        <span class="token operator">++</span><span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> old <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// イテレーターの等価比較の状態</span>
+    <span class="token keyword">bool</span> fail <span class="token punctuation">;</span>
+    <span class="token comment">// 値のキャッシュ</span>
+    value_type value <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// 比較演算子</span>
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">==</span><span class="token punctuation">(</span> cin_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> l<span class="token punctuation">,</span> cin_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> r <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> l<span class="token punctuation">.</span>fail <span class="token operator">==</span> r<span class="token punctuation">.</span>fail <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">!=</span><span class="token punctuation">(</span> cin_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> l<span class="token punctuation">,</span> cin_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> r <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">!</span><span class="token punctuation">(</span>l <span class="token operator">==</span> r<span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>以下のように使える。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    cin_iterator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> input<span class="token punctuation">,</span> <span class="token function">fail</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> buffer <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> input<span class="token punctuation">,</span> fail<span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">back_inserter</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>実装としては、まずボイラープレートコード</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> difference_type <span class="token operator">=</span> std<span class="token operator">::</span>ptrdiff_t <span class="token punctuation">;</span>
+<span class="token keyword">using</span> value_type <span class="token operator">=</span> T <span class="token punctuation">;</span>
+<span class="token keyword">using</span> reference <span class="token operator">=</span> T <span class="token operator">&amp;</span> <span class="token punctuation">;</span>
+<span class="token keyword">using</span> pointer <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+<span class="token comment">// イテレーターカテゴリーは入力イテレーター</span>
+<span class="token keyword">using</span> iterator_category <span class="token operator">=</span> std<span class="token operator">::</span>input_iterator_tag <span class="token punctuation">;</span>
+</code></pre></div><p><code>difference_type</code>はイテレーターの距離を表現する型で、通常は<code>std::ptrdiff_t</code>という型が使われる。これはポインターの距離を表現する型だ。</p> <p><code>value_type</code>は参照している要素の型、<code>reference</code>と<code>pointer</code>は要素に対するリファレンスとポインターだ。</p> <p><code>iterator_category</code>は今回は入力イテレーターなので<code>std::input_iterator_tag</code>になる。</p> <p>データメンバーが2つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">bool</span> fail <span class="token punctuation">;</span>
+value_type value <span class="token punctuation">;</span>
+</code></pre></div><p><code>fail</code>は<code>std::cin</code>が失敗状態のときに<code>true</code>になる。通常は<code>false</code>だ。<code>std::cin</code>が失敗状態かどうかは、メンバー関数<code>fail</code>で確かめることができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> b <span class="token operator">=</span> std<span class="token operator">::</span>cin<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>std:cin</code>が失敗状態になる理由はいくつかあるが、EOFが入力された場合や、指定した型の値を読み込めなかった場合、例えば<code>int</code>型を読み込むのに入力が<code>&quot;abcd&quot;</code>のような文字列だった場合に<code>true</code>になる。</p> <p><code>value</code>は<code>std::cin</code>から読み込んだ値だ。</p> <p>イテレーターから値を読み込むのは<code>operator *</code>の仕事だ。これは単に<code>value</code>を返す。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">const</span> reference <span class="token keyword">operator</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> value <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>入力イテレーターでは値の読み込みのみをサポートしている。書き込みはサポートしない。イテレーター <code>i</code>に対して<code>*i</code>は書けるが、<code>*i = x</code>とは書けない。</p> <p>実際に<code>std::cin</code>から値を読み込むのは<code>operator ++</code>で行われる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>cin_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 失敗状態でなければ</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>fail <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 値を読み込む</span>
+        std<span class="token operator">::</span>cin <span class="token operator">&gt;&gt;</span> value <span class="token punctuation">;</span>
+        <span class="token comment">// 失敗状態かどうかも調べる</span>
+        fail <span class="token operator">=</span> std<span class="token operator">::</span>cin<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>まず<code>std::cin</code>が失敗状態でないかどうかを確認する。失敗状態となった<code>std::cin</code>からは読み込めないからだ。失敗状態でなければ値を読み込み、失敗状態かどうかを確認する。結果の値は<code>value</code>に、失敗状態かどうかは<code>fail</code>に保持される。</p> <p>後置インクリメントは前置インクリメントを呼び出すだけの汎用的な実装だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>cin_iterator <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 元の値をコピーし</span>
+    <span class="token keyword">auto</span> old <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 次の値を読み込み</span>
+    <span class="token operator">++</span><span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 元の値を返す</span>
+    <span class="token keyword">return</span> old <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>コンストラクターに<code>true</code>を渡すと、イテレーターを最初から失敗状態にしておく</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token function">cin_iterator</span><span class="token punctuation">(</span> <span class="token keyword">bool</span> fail <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token function">fail</span><span class="token punctuation">(</span>fail<span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token operator">++</span><span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>    
+</code></pre></div><p>コンストラクターは最初の値を読み込むために自分自身にインクリメントを呼び出す。</p> <p>入力イテレーターは同値比較ができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">==</span><span class="token punctuation">(</span> cin_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> l<span class="token punctuation">,</span> cin_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> r <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> l<span class="token punctuation">.</span>fail <span class="token operator">==</span> r<span class="token punctuation">.</span>fail <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">!=</span><span class="token punctuation">(</span> cin_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> l<span class="token punctuation">,</span> cin_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> r <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">!</span><span class="token punctuation">(</span>l <span class="token operator">==</span> r<span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>イテレーターが同値比較できると、イテレーターが終了条件に達したかどうかの判定ができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> InputIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span> InputIterator iter<span class="token punctuation">,</span> InputIterator end_iter <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 終了条件に達するまで</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span> iter <span class="token operator">!=</span> end_iter <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>   <span class="token comment">// 値を標準出力する</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>iter <span class="token punctuation">;</span>
+        <span class="token operator">++</span>iter <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このような関数<code>print</code>に、<code>vector</code>の<code>begin</code>/<code>end</code>を渡すと、<code>vector</code>の要素をすべて標準出力する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>cin_iterator</code>を渡した場合、失敗状態になるまで標準出力する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    cin_iterator iter<span class="token punctuation">,</span> <span class="token function">fail</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span> iter<span class="token punctuation">,</span> fail <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>cin_iterator</code>が比較するのは<code>std::cin</code>の失敗状態の有無だ。この比較によって、<code>cin_iterator</code>で標準入力から失敗するまで値を読み込み続けることができる。</p> <p>このようなイテレーターは標準に<code>std::istream_iterator&lt;T&gt;</code>として存在する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>istream_iterator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">iter</span><span class="token punctuation">(</span> std<span class="token operator">::</span>cin <span class="token punctuation">)</span><span class="token punctuation">,</span> end_iter <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> iter<span class="token punctuation">,</span> end_iter<span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">back_inserter</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>標準ライブラリは読み込むストリームをコンストラクターで取る。何も指定しない場合は失敗状態になる。</p> <h3 id="前方イテレーター-2"><a href="031-iterator-operations.html#前方イテレーター-2" class="header-anchor">#</a> 前方イテレーター</h3> <p>前方イテレーター以上のイテレーターの例として、<code>iota_iterator&lt;T&gt;</code>を実装してみよう。</p> <p>このイテレーターは<code>T</code>型の整数を保持し、<code>operator *</code>でリファレンスを返し、<code>operator ++</code>でインクリメントする。</p> <p>以下のように使える。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    iota_iterator <span class="token function">iter</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token operator">*</span>iter <span class="token punctuation">;</span> <span class="token comment">// 0</span>
+    <span class="token operator">*</span><span class="token operator">++</span>iter <span class="token punctuation">;</span> <span class="token comment">// 1</span>
+    <span class="token operator">*</span><span class="token operator">++</span>iter <span class="token punctuation">;</span> <span class="token comment">// 2</span>
+
+    iota_iterator <span class="token function">first</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">last</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 0123456789と出力される</span>
+    std<span class="token operator">::</span><span class="token function">for_each</span><span class="token punctuation">(</span> first<span class="token punctuation">,</span> last<span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> i<span class="token punctuation">)</span><span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> first<span class="token punctuation">,</span> last<span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">back_inserter</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{0,1,2,3,4,5,6,7,8,9}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>さっそく実装してみよう。まずはネストされた型名と初期化から。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iota_iterator</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// イテレーター同士の距離を表現する型</span>
+    <span class="token keyword">using</span> difference_type <span class="token operator">=</span> std<span class="token operator">::</span>ptrdiff_t <span class="token punctuation">;</span>
+    <span class="token comment">// 要素の型</span>
+    <span class="token keyword">using</span> value_type <span class="token operator">=</span> T <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> reference <span class="token operator">=</span> T <span class="token operator">&amp;</span> <span class="token punctuation">;</span>
+    <span class="token keyword">using</span> pointer <span class="token operator">=</span> T <span class="token operator">*</span> <span class="token punctuation">;</span>
+    <span class="token comment">// イテレーターカテゴリーは前方イテレーター</span>
+    <span class="token keyword">using</span> iterator_category <span class="token operator">=</span> std<span class="token operator">::</span>forward_iterator_tag <span class="token punctuation">;</span>
+
+    <span class="token comment">// 値を保持する</span>
+    T value <span class="token punctuation">;</span>
+
+    <span class="token comment">// コンストラクター</span>
+    <span class="token function">iota_iterator</span><span class="token punctuation">(</span> T value <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+        <span class="token operator">:</span> <span class="token function">value</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// 残りのコード</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>これでイテレーターとしてオブジェクトを作ることができるようになる。コピーは自動的に生成されるので書く必要はない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// i(0)</span>
+    iota_iterator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> i <span class="token punctuation">;</span>
+    <span class="token comment">// iota_iterator&lt;int&gt;</span>
+    iota_iterator <span class="token function">first</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">last</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// lastをiにコピー</span>
+    i <span class="token operator">=</span> last <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>残りのコードも書いていこう。<code>operator *</code>は単に<code>value</code>を返すだけだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 非const版</span>
+reference       <span class="token keyword">operator</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> value <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token comment">// const版</span>
+<span class="token keyword">const</span> reference <span class="token keyword">operator</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> value <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>非<code>const</code>版と<code>const</code>版があるのは、<code>const</code>な<code>iota_iterator</code>のオブジェクトからも使えるようにするためだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 非constなオブジェクト</span>
+    iota_iterator <span class="token function">non_const</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 非const版のoperator *を呼び出す</span>
+    <span class="token keyword">int</span> value <span class="token operator">=</span> <span class="token operator">*</span>non_const <span class="token punctuation">;</span>
+    <span class="token comment">// 変更できる</span>
+    <span class="token operator">*</span>non_const <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// constなオブジェクト</span>
+    iota_iterator <span class="token function">immutable</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// const版のoperator *を呼び出す</span>
+    <span class="token keyword">int</span> const_value <span class="token operator">=</span> <span class="token operator">*</span>immutable <span class="token punctuation">;</span>
+    <span class="token comment">// 変更はできない</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>noexcept</code>はこの関数は例外を外に投げないという宣言だ。今回、例外を投げる処理は使わないので、<code>noexcept</code>を指定できる。</p> <p><code>operator ++</code>を実装しよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 前置</span>
+iota_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span>
+    <span class="token operator">++</span>value <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 後置</span>
+iota_iterator   <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> temp <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token operator">++</span><span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> temp <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>すでに説明したようにインクリメント演算子には前置後置の2種類が存在する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token operator">++</span>i <span class="token punctuation">;</span> <span class="token comment">// 前置</span>
+i<span class="token operator">++</span> <span class="token punctuation">;</span> <span class="token comment">// 後置</span>
+</code></pre></div><p>前置インクリメント演算子は引数を取らず、後置インクリメント演算子は区別のためだけに特に意味のない<code>int</code>型の引数を取る。</p> <p>インクリメント演算子も例外を投げないので<code>noexcept</code>を指定する。</p> <p>インクリメント演算子はデータメンバーを変更するので<code>const</code>は指定しない。</p> <p>最後は比較演算子だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">==</span> <span class="token punctuation">(</span> iota_iterator <span class="token keyword">const</span> <span class="token operator">&amp;</span> i <span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> value <span class="token operator">==</span> i<span class="token punctuation">.</span>value <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">!=</span> <span class="token punctuation">(</span> iota_iterator <span class="token keyword">const</span> <span class="token operator">&amp;</span> i <span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token keyword">this</span> <span class="token operator">==</span> i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>前方イテレーターがサポートする比較演算子は2つ、<code>operator ==</code>と<code>operator !=</code>だ。<code>!=</code>は<code>==</code>で実装してしまうとして、<code>==</code>は単に<code>value</code>を比較する。通常、イテレーターの比較は要素の値の比較ではなく、同じ要素を参照するイテレーターかどうかの比較になるが、<code>iota_iterator</code>の場合、<code>vector</code>や<code>array</code>のようなメモリー上に構築された要素は存在しないので、<code>value</code>の比較でよい。</p> <p>前方イテレーターが提供される実例としては、前方リンクリストがある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">forward_link_list</span>
+<span class="token punctuation">{</span>
+    T value <span class="token punctuation">;</span>
+    forward_link_list <span class="token operator">*</span> next <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    forward_link_list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> list3<span class="token punctuation">{</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token keyword">nullptr</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    forward_link_list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> list2<span class="token punctuation">{</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>list3 <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    forward_link_list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> list1<span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>list2 <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    forward_link_list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> list0<span class="token punctuation">{</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>list1 <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この<code>forward_link_list&lt;T&gt;</code>というクラスは<code>T</code>型の値を保持する<code>value</code>と、次のクラスのオブジェクトを参照するポインター<code>next</code>を持っている。このクラス<code>list</code>の次の要素は<code>*(list.next)</code>で、<code>list</code>の2つ次の要素は<code>*(*list.next).next)</code>だ。</p> <p>このような<code>forward_link_list&lt;T&gt;</code>へのイテレーターの骨子は以下のように書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iterator</span> 
+<span class="token punctuation">{</span>
+    forward_link_list<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token operator">*</span> ptr <span class="token punctuation">;</span>
+
+    T <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> ptr<span class="token operator">-&gt;</span>value <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span>
+        ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token comment">// 省略</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>前方リンクリストは<code>vector</code>や<code>array</code>のように要素の線形の集合を表現できる。<code>n</code>番目の要素から<code>n+1</code>番目の要素を返すことはできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// n+1番目の要素を返す関数</span>
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+forward_link_list<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token function">next</span><span class="token punctuation">(</span> forward_link_list<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token operator">&amp;</span> list <span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 次の要素</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span>list<span class="token punctuation">.</span>next <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ただし<code>n-1</code>番目の要素を返すことはできない。その方法がないからだ。</p> <p>前方イテレーターが入力/出力イテレーターと違う点は、マルチパス保証があることだ。イテレーターのコピーを使い回して複数回同じ要素をたどることができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> ForwardIterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> ForwardIterator first<span class="token punctuation">,</span> ForwardIterator last <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">using</span> vector_type <span class="token operator">=</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span> <span class="token keyword">typename</span> ForwardIterator<span class="token operator">::</span>value_type <span class="token operator">&gt;</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 全要素の値をv1にコピー</span>
+    vector_type v1 <span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> iter <span class="token operator">=</span> first <span class="token punctuation">;</span> iter <span class="token operator">!=</span> last <span class="token punctuation">;</span> <span class="token operator">++</span>iter <span class="token punctuation">)</span>
+        v1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span> <span class="token operator">*</span>iter <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 全要素の値をv2にコピー</span>
+    <span class="token comment">// イテレーターがもう一度使われる</span>
+    vector_type v2 <span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> iter <span class="token operator">=</span> first <span class="token punctuation">;</span> iter <span class="token operator">!=</span> last <span class="token punctuation">;</span> <span class="token operator">++</span>iter <span class="token punctuation">)</span>
+        v2<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span> <span class="token operator">*</span>iter <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// マルチパス保証があれば常にtrue</span>
+    <span class="token keyword">bool</span> b <span class="token operator">=</span> v1 <span class="token operator">==</span> v2 <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>前方イテレーター以上のイテレーターにはこのマルチパス保証がある。</p> <h3 id="双方向イテレーター-2"><a href="031-iterator-operations.html#双方向イテレーター-2" class="header-anchor">#</a> 双方向イテレーター</h3> <p>双方向イテレーターは<code>n</code>番目の要素を指すイテレーターから<code>n-1</code>番目を指すイテレーターを得られるイテレーターだ。<code>n-1</code>番目を指すには<code>operator --</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token operator">++</span>i <span class="token punctuation">;</span> <span class="token comment">// n+1番目</span>
+    <span class="token operator">--</span>i <span class="token punctuation">;</span> <span class="token comment">// n-1番目</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>iota_iterator</code>を双方向イテレーターにするのは簡単だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iota_iterator</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// イテレーターカテゴリー</span>
+    <span class="token keyword">using</span> iterator_category <span class="token operator">=</span> std<span class="token operator">::</span>bidirectional_iterator_tag <span class="token punctuation">;</span>
+
+    iota_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">--</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">--</span>value <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    iota_iterator   <span class="token keyword">operator</span> <span class="token operator">--</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> temp <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+        <span class="token operator">--</span><span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> temp <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 省略</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>イテレーターカテゴリーは双方向イテレーターを表現する<code>std::bidirectional_iterator_tag</code>を指定する。</p> <p><code>operator --</code>の実装は<code>operator ++</code>の実装と要領は同じだ。</p> <p>これで<code>iota_iterator</code>が双方向イテレーターになった。</p> <p>双方向イテレーターが提供される実例としては、双方向リンクリストがある。前方リンクリストが前方の要素への参照を持つのに対し、双方向リンクリストは後方の要素への参照も持つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">bidirectional_link_list</span>
+<span class="token punctuation">{</span>
+    T value <span class="token punctuation">;</span>
+
+    bidirectional_link_list <span class="token operator">*</span> next <span class="token punctuation">;</span>
+    bidirectional_link_list <span class="token operator">*</span> prev <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>双方向リンクリストに対するイテレーター操作の骨子は以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iterator</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment">// 前方 n+1</span>
+    iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span>
+        ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>next <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 後方 n-1</span>
+    iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">--</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span>
+        ptr <span class="token operator">=</span> ptr<span class="token operator">-&gt;</span>prev <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="ランダムアクセスイテレーター-2"><a href="031-iterator-operations.html#ランダムアクセスイテレーター-2" class="header-anchor">#</a> ランダムアクセスイテレーター</h3> <p>ランダムアクセスイテレーターにできることは多い。すでにランダムアクセスイテレーターでできることは解説したので、<code>iota_iterator</code>を対応させていこう。</p> <p>イテレーターの参照する要素の移動の部分。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iota_iterator</span>
+<span class="token punctuation">{</span>
+    iota_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">+=</span> <span class="token punctuation">(</span> difference_type n <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        value <span class="token operator">+=</span> n <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    iota_iterator <span class="token keyword">operator</span> <span class="token operator">+</span> <span class="token punctuation">(</span> difference_type n <span class="token punctuation">)</span> <span class="token keyword">const</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> temp <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+        temp <span class="token operator">+=</span> n <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    iota_iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">-=</span> <span class="token punctuation">(</span> difference_type n <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        value <span class="token operator">-=</span> n <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    iota_iterator <span class="token keyword">operator</span> <span class="token operator">-</span> <span class="token punctuation">(</span> difference_type n <span class="token punctuation">)</span> <span class="token keyword">const</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> temp <span class="token operator">=</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+        temp <span class="token operator">-=</span> n <span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 省略</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// difference_type + iota_iteratorの場合</span>
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">operator</span> <span class="token operator">+</span>
+<span class="token punctuation">(</span>
+    <span class="token keyword">typename</span> iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token operator">::</span>difference_type n<span class="token punctuation">,</span>
+    iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> i
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> i <span class="token operator">+</span> n <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">operator</span> <span class="token operator">-</span> 
+<span class="token punctuation">(</span>
+    <span class="token keyword">typename</span> iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token operator">::</span>difference_type n<span class="token punctuation">,</span>
+    iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> i
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> i <span class="token operator">-</span> n <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>ランダムアクセスイテレーター <code>i</code>と<code>difference_type n</code>があるとき、<code>i + n</code>と<code>n + i</code>は同じ意味だ。<code>i + n</code>はイテレーターのメンバー関数としても、クラス外のフリー関数としても実装できる。どちらでも好きな方法で実装してよい。</p> <p>参考に、クラス外のフリー関数として実装する場合は以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">operator</span> <span class="token operator">+</span>
+<span class="token punctuation">(</span>
+    iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> i<span class="token punctuation">,</span>
+    <span class="token keyword">typename</span> iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token operator">::</span>difference_type n
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> i <span class="token operator">+</span> n <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">operator</span> <span class="token operator">-</span> 
+<span class="token punctuation">(</span>
+    iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> i<span class="token punctuation">,</span>
+    <span class="token keyword">typename</span> iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token operator">::</span>difference_type n
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token keyword">return</span> i <span class="token operator">-</span> n <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p><code>n + i</code>は必ずクラス外のフリー関数として実装しなければならない。クラスのメンバー関数として演算子のオーバーロードをする場合はオペランドが<code>this</code>になるからだ。</p> <p>イテレーターの距離の実装は<code>iota_iterator</code>の場合、単に<code>value</code>の差だ。</p> <p>メンバー関数として実装する場合は以下のとおり。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iota_iterator</span>
+<span class="token punctuation">{</span>
+    difference_type <span class="token keyword">operator</span> <span class="token operator">-</span> <span class="token punctuation">(</span> iota_iterator <span class="token keyword">const</span> <span class="token operator">&amp;</span> i <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> value <span class="token operator">-</span> i<span class="token punctuation">.</span>value <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>クラス外のフリー関数として実装する場合は以下のとおり。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">typename</span> iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token operator">::</span>difference_type
+<span class="token punctuation">(</span> iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> a<span class="token punctuation">,</span> iota_iterator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token keyword">const</span> <span class="token operator">&amp;</span> b <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a<span class="token punctuation">.</span>value <span class="token operator">-</span> b<span class="token punctuation">.</span>value <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>大小比較の実装も<code>value</code>を比較するだけだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iota_iterator</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">&lt;</span> <span class="token punctuation">(</span> iota_iterator <span class="token keyword">const</span> <span class="token operator">&amp;</span> i <span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span> 
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> value <span class="token operator">&lt;</span> i<span class="token punctuation">.</span>value <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">&lt;=</span> <span class="token punctuation">(</span> iota_iterator <span class="token keyword">const</span> <span class="token operator">&amp;</span> i <span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span> 
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> value <span class="token operator">&lt;=</span> i<span class="token punctuation">.</span>value <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">&gt;</span> <span class="token punctuation">(</span> iota_iterator <span class="token keyword">const</span> <span class="token operator">&amp;</span> i <span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span> 
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> value <span class="token operator">&gt;</span> i<span class="token punctuation">.</span>value <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">&gt;=</span> <span class="token punctuation">(</span> iota_iterator <span class="token keyword">const</span> <span class="token operator">&amp;</span> i <span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span> 
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> value <span class="token operator">&gt;=</span> i<span class="token punctuation">.</span>value <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token comment">// 省略</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>ランダムアクセスイテレーターの実例としては、連続したメモリー上に構築された要素の集合に対するイテレーターがある。標準ライブラリでは、<code>vector</code>や<code>array</code>が該当する。</p> <p><code>vector</code>や<code>array</code>の中身は連続したメモリー上に確保された要素で、要素の参照にはポインターか、ポインターとインデックスが用いられる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// arrayやvectorのイテレーター</span>
+<span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">iterator</span>
+<span class="token punctuation">{</span>
+    T <span class="token operator">*</span> ptr <span class="token punctuation">;</span>
+
+    T <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">*</span>ptr <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    iterator <span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">++</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span> <span class="token operator">++</span>ptr <span class="token punctuation">;</span> <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token comment">// その他のメンバー</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>vector</code>や<code>array</code>のイテレーターの実装は、ポインターとほぼ同じ処理をしている。その実装は上にあるように、単にポインターに処理をデリゲートするだけだ。</p> <p>そこで、C++標準ライブラリの実装によっては、<code>vector</code>や<code>array</code>の実装は単に生のポインターを返す。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T<span class="token punctuation">,</span> std<span class="token operator">::</span>size_t N <span class="token operator">&gt;</span>
+<span class="token keyword">struct</span> <span class="token class-name">array</span>
+<span class="token punctuation">{</span>
+    T storage<span class="token punctuation">[</span>N<span class="token punctuation">]</span> <span class="token punctuation">;</span>
+
+    T <span class="token operator">*</span> <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> storage <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    T <span class="token operator">*</span> <span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> storage <span class="token operator">+</span> N <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p>イテレーターはクラスであり、そのネストされた型名に<code>value_type</code>や<code>difference_type</code>や<code>iterator_category</code>などの型がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token comment">// ネストされた型名を使う</span>
+<span class="token keyword">typename</span> Iterator<span class="token operator">::</span>reference_type
+<span class="token function">get_value</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span>i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>vector</code>や<code>array</code>のイテレーターが単に生のポインターを返す実装の場合、上のコードは動かない。</p> <p>こういうときのために、<code>iterator_traits&lt;T&gt;</code>がある。もし<code>T</code>がポインターの場合は、ネストされた型名を都合のいいように宣言してくれる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token comment">// ポインターにも対応</span>
+<span class="token keyword">typename</span> std<span class="token operator">::</span>iterator_traits<span class="token operator">&lt;</span>Iterator<span class="token operator">&gt;</span><span class="token operator">::</span>reference_type
+<span class="token function">get_value</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span>i <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>そのため、イテレーターのネストされた型名を使うときには、直接使うのではなく、一度<code>iterator_traits</code>を経由して使うとよい。</p> <h2 id="イテレーター操作"><a href="031-iterator-operations.html#イテレーター操作" class="header-anchor">#</a> イテレーター操作</h2> <p>イテレーターはそのまま使うこともできるが、一部の操作を簡単に行うための標準ライブラリがある。</p> <h3 id="advance-i-n-n移動する"><a href="031-iterator-operations.html#advance-i-n-n移動する" class="header-anchor">#</a> <code>advance( i, n )</code>: n移動する</h3> <p>イテレーター <code>i</code>を<code>n</code>回移動したいとする。ランダムアクセスイテレーターならば以下のようにする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>i <span class="token operator">+=</span> n <span class="token punctuation">;</span>
+</code></pre></div><p>しかし前方イテレーターの場合、<code>operator +=</code>は使えない。<code>n</code>回<code>operator ++</code>を呼び出す必要がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> count <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> count <span class="token operator">!=</span> n <span class="token punctuation">;</span> <span class="token operator">++</span>count <span class="token punctuation">)</span>
+    <span class="token operator">++</span>i <span class="token punctuation">;</span>
+</code></pre></div><p>双方向イテレーターの場合、<code>n</code>は負数の場合がある。<code>n</code>が負数の場合、<code>n</code>回<code>operator --</code>を呼び出すことになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">if</span> <span class="token punctuation">(</span> n <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> count <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> count <span class="token operator">!=</span> n <span class="token punctuation">;</span> <span class="token operator">++</span>count <span class="token punctuation">)</span>
+        <span class="token operator">++</span>i <span class="token punctuation">;</span>
+<span class="token keyword">else</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> count <span class="token operator">=</span> <span class="token number">0</span> count <span class="token operator">!=</span> n <span class="token punctuation">;</span> <span class="token operator">--</span>count <span class="token punctuation">)</span>
+        <span class="token operator">--</span>i <span class="token punctuation">;</span>
+</code></pre></div><p>双方向イテレーター用のコードはランダムアクセスイテレーターでも動くが非効率的だ。</p> <p>いま使っているイテレーターの種類を把握して適切な方法を選ぶコードを書くのは面倒だ。そこで標準ライブラリには、イテレーター <code>i</code>を<code>n</code>回移動してくれる<code>advance(i, n)</code>がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// iを1前方に移動</span>
+std<span class="token operator">::</span><span class="token function">advance</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token comment">// iを5前方に移動</span>
+std<span class="token operator">::</span><span class="token function">advance</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token comment">// iを5後方に移動</span>
+std<span class="token operator">::</span><span class="token function">advance</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token comment">// iは移動しない</span>
+std<span class="token operator">::</span><span class="token function">advance</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>n</code>が正数の場合は前方(<code>i+1</code>の方向)に、<code>n</code>が負数の場合は後方(<code>i-1</code>の方向)に、それぞれ<code>n</code>回移動させる。</p> <p><code>advance(i,n)</code>は<code>i</code>自体が書き換わる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>i <span class="token punctuation">;</span> <span class="token comment">// n番目を指す</span>
+std<span class="token operator">::</span><span class="token function">advance</span><span class="token punctuation">(</span> i<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+i <span class="token punctuation">;</span> <span class="token comment">// n+1番目を指す</span>
+</code></pre></div><h3 id="distance-first-last-firstからlastまでの距離"><a href="031-iterator-operations.html#distance-first-last-firstからlastまでの距離" class="header-anchor">#</a> <code>distance( first, last )</code>: firstからlastまでの距離</h3> <p>イテレーター<code>first</code>から<code>last</code>までの距離を求めたいとする。</p> <p>ランダムアクセスイテレーターならば以下のようにする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">auto</span> dist <span class="token operator">=</span> last <span class="token operator">-</span> first <span class="token punctuation">;</span>
+</code></pre></div><p>それ以外のイテレーターならば、<code>first</code>が<code>last</code>と等しくなるまで<code>operator ++</code>を呼び出す。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>std<span class="token operator">::</span>size_t dist <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> iter <span class="token operator">=</span> first <span class="token punctuation">;</span> iter <span class="token operator">!=</span> last <span class="token punctuation">;</span> <span class="token operator">++</span>iter <span class="token punctuation">)</span>
+    <span class="token operator">++</span>dist <span class="token punctuation">;</span>
+</code></pre></div><p>これをやるのも面倒なので標準ライブラリがある。</p> <p><code>distance( first, last )</code>は<code>first</code>から<code>last</code>までの距離を返す。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// iからjまでの距離を返す</span>
+<span class="token keyword">auto</span> dist <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">distance</span><span class="token punctuation">(</span> i<span class="token punctuation">,</span> j <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><p>ランダムアクセスイテレーターならば<code>j - i</code>と同じで、そうでなければ<code>i</code>が<code>j</code>と等しくなるまで<code>operator ++</code>を呼び出す。</p> <p><code>distance</code>に渡したイテレーターは変更されない。</p> <h3 id="next-prev-移動したイテレーターを返す"><a href="031-iterator-operations.html#next-prev-移動したイテレーターを返す" class="header-anchor">#</a> next/prev : 移動したイテレーターを返す</h3> <p><code>advance(i, n)</code>はイテレーター<code>i</code>を変更してしまう。イテレーターを変更させずに移動後のイテレーターもほしい場合、以下のように書かなければならない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> j <span class="token operator">=</span> i <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">advance</span><span class="token punctuation">(</span> j<span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// jはiより3前方に移動している</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>標準ライブラリの<code>next</code>/<code>prev</code>は、引数に渡したイテレーターを変更せず、移動後のイテレーターを返してくれる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> j <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">next</span><span class="token punctuation">(</span> i<span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// jはiより3前方に移動している</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>prev</code>はその逆だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> j <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">prev</span><span class="token punctuation">(</span> i<span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// jはiより3後方に移動している</span>
+    <span class="token comment">// jはstd::advance(i, 3)したあとのiと同じ値</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>next</code>/<code>prev</code>に第二引数を渡さない場合、前後に1だけ移動する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Iterator i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> j <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">next</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// jは++iしたのと同じ値</span>
+    <span class="token keyword">auto</span> k <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">prev</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// kは--iしたのと同じ値</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="リバースイテレーター"><a href="031-iterator-operations.html#リバースイテレーター" class="header-anchor">#</a> リバースイテレーター</h2> <p>イテレーターは要素を順番どおりにたどる。例えば以下は要素を順番に出力する関数テンプレート<code>print</code>だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Iterator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span> Iterator first<span class="token punctuation">,</span> Iterator last <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> iter <span class="token operator">=</span> first <span class="token punctuation">;</span> iter <span class="token operator">!=</span> last <span class="token punctuation">;</span> <span class="token operator">++</span>iter <span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>iter <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>逆順に出力するにはどうすればいいのだろうか。</p> <p>双方向イテレーター以上ならば逆順にたどることはできる。すると逆順に出力する関数テンプレート<code>reverse_print</code>は以下のように書ける。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">reverse_print</span><span class="token punctuation">(</span> Iterator first<span class="token punctuation">,</span> Iterator last <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> iter <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">prev</span><span class="token punctuation">(</span>last<span class="token punctuation">)</span> <span class="token punctuation">;</span> iter <span class="token operator">!=</span> first <span class="token punctuation">;</span> <span class="token operator">--</span>iter <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>iter <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 最初の要素の出力</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>iter <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>しかしイテレーターを正順にたどるか逆順にたどるかという違いだけで、本質的に同じアルゴリズム、同じコードを2度も書きたくはない。そういうときに役立つのがリバースイテレーターだ。</p> <p><code>std::reverse_iterator&lt;Iterator&gt;</code>はイテレーター<code>Iterator</code>に対するリバースイテレーターを提供する。リバースイテレーターはイテレーターのペア <code>[first,last)</code>を受け取り、<code>last</code>の1つ前の要素が先頭で<code>first</code>の要素が末尾になるような順番のイテレーターにしてくれる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// std::reverse_iterator&lt; std::vector&lt;int&gt;::iterator &gt;</span>
+    std<span class="token operator">::</span>reverse_iterator first<span class="token punctuation">{</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>reverse_iterator last<span class="token punctuation">{</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 54321</span>
+    std<span class="token operator">::</span><span class="token function">for_each</span><span class="token punctuation">(</span> first<span class="token punctuation">,</span> last<span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> x <span class="token punctuation">)</span><span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これで、<code>print</code>と<code>reverse_print</code>のような本質的に同じコードを重複して書かずに済む。</p> <p>リバースイテレーターはとても便利なので、<code>std::vector</code>のような標準ライブラリのコンテナーには最初からネストされた型名としてリバースイテレーター<code>::reverse_iterator</code>がある。リバースイテレーターを返す<code>rbegin</code>/<code>rend</code>もある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// std::vector&lt;int&gt;::reverse_iterator</span>
+    <span class="token keyword">auto</span> first <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">rbegin</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> last <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">rend</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span><span class="token function">for_each</span><span class="token punctuation">(</span> first<span class="token punctuation">,</span> last<span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> x <span class="token punctuation">)</span><span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> x <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="030-pointer-details.html" class="prev">ポインターの内部実装</a></span> <span class="next"><a href="032-memory-allocation.html">動的メモリー確保</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/36.93604af5.js" defer></script>
+  </body>
+</html>

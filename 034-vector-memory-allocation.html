@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vectorの実装 : メモリー確保 | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/39.bab7cf23.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="active sidebar-link">vectorの実装 : メモリー確保</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#メモリー確保と解放の起こるタイミング" class="sidebar-link">メモリー確保と解放の起こるタイミング</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#デフォルトコンストラクター" class="sidebar-link">デフォルトコンストラクター</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#アロケーターを取るコンストラクター" class="sidebar-link">アロケーターを取るコンストラクター</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#要素数と初期値を取るコンストラクターの実装" class="sidebar-link">要素数と初期値を取るコンストラクターの実装</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#ヘルパー関数" class="sidebar-link">ヘルパー関数</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#clear" class="sidebar-link">clear</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#デストラクター" class="sidebar-link">デストラクター</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#reserveの実装" class="sidebar-link">reserveの実装</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#resize" class="sidebar-link">resize</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#push-back" class="sidebar-link">push_back</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#イテレーターのペア" class="sidebar-link">イテレーターのペア</a></li><li class="sidebar-sub-header"><a href="034-vector-memory-allocation.html#初期化リスト" class="sidebar-link">初期化リスト</a></li></ul></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vectorの実装-メモリー確保"><a href="034-vector-memory-allocation.html#vectorの実装-メモリー確保" class="header-anchor">#</a> vectorの実装 : メモリー確保</h1> <h2 id="メモリー確保と解放の起こるタイミング"><a href="034-vector-memory-allocation.html#メモリー確保と解放の起こるタイミング" class="header-anchor">#</a> メモリー確保と解放の起こるタイミング</h2> <p><code>std::vector</code>はどこでメモリーを確保と解放しているのだろうか。</p> <p>デフォルト構築すると空になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// true</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>コンストラクターに要素数を渡すことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 100</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>すると<code>std::vector</code>は指定した要素数の有効な要素を持つ。</p> <p>コンストラクターに要素数と初期値を渡すことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">123</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token comment">// 123</span>
+    v<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token comment">// 123</span>
+    v<span class="token punctuation">[</span><span class="token number">68</span><span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token comment">// 123</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>すると、指定した要素数で、要素の値はすべて初期値になる。</p> <p><code>vector</code>のオブジェクトを構築したあとでも、メンバー関数<code>resize(size)</code>で要素数を<code>size</code>個にできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 10</span>
+    <span class="token comment">// 減らす</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 5</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>resize</code>で要素数が増える場合、増えた要素の初期値も指定できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">123</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{123,123,123}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>resize</code>で要素数が減る場合、末尾が削られる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1,2,3}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>メンバー関数<code>push_back(value)</code>を呼び出すと要素数が1増え、要素の末尾の要素が値<code>value</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    <span class="token comment">// vは{}</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1}</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは[1,2}</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1,2,3}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>reserve(size)</code>は少なくとも<code>size</code>個の要素が追加の動的メモリー確保なしで追加できるようにメモリーを予約する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    <span class="token comment">// 少なくとも3個の要素を追加できるように動的メモリー確保</span>
+    v<span class="token punctuation">.</span><span class="token function">reserve</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 0</span>
+    v<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 3以上</span>
+
+    <span class="token comment">// 動的メモリー確保は発生しない</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 動的メモリー確保が発生する可能性がある。</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>clear()</code>は要素数を0にする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 0</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この章ではここまでの実装をする。</p> <h2 id="デフォルトコンストラクター"><a href="034-vector-memory-allocation.html#デフォルトコンストラクター" class="header-anchor">#</a> デフォルトコンストラクター</h2> <p>簡易<code>vector</code>のデフォルトコンストラクターは何もしない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token function">vector</span><span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><p>何もしなくてもポインターはすべて<code>nullptr</code>で初期化され、アロケーターもデフォルト構築されるからだ。</p> <p>これで簡易<code>vector</code>の変数を作れるようになった。ただしまだ何もできない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    <span class="token comment">// まだ何もできない。</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="アロケーターを取るコンストラクター"><a href="034-vector-memory-allocation.html#アロケーターを取るコンストラクター" class="header-anchor">#</a> アロケーターを取るコンストラクター</h2> <p><code>std::vector</code>のコンストラクターは最後の引数にアロケーターを取れる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>allocator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> alloc <span class="token punctuation">;</span>
+    <span class="token comment">// 空</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v1</span><span class="token punctuation">(</span>alloc<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 要素数5</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v2</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> alloc<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 要素数5で初期値123</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v3</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">123</span><span class="token punctuation">,</span> alloc<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これを実装するには、アロケーターを取ってデータメンバーにコピーするコンストラクターを書く。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token function">vector</span><span class="token punctuation">(</span> <span class="token keyword">const</span> allocator_type <span class="token operator">&amp;</span> alloc <span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+    <span class="token operator">:</span> <span class="token function">alloc</span><span class="token punctuation">(</span> alloc <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><p>ほかのコンストラクターはこのコンストラクターにまずデリゲートすればよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token function">vector</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token function">vector</span><span class="token punctuation">(</span> <span class="token function">allocator_type</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token function">vector</span><span class="token punctuation">(</span> size_type size<span class="token punctuation">,</span> <span class="token keyword">const</span> allocator_type <span class="token operator">&amp;</span> alloc <span class="token operator">=</span> <span class="token function">allocator_type</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token function">vector</span><span class="token punctuation">(</span> alloc <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token comment">/*実装*/</span> <span class="token punctuation">}</span>
+<span class="token function">vector</span><span class="token punctuation">(</span> size_type size<span class="token punctuation">,</span> const_reference value<span class="token punctuation">,</span> <span class="token keyword">const</span> allocator_type <span class="token operator">&amp;</span> alloc <span class="token operator">=</span> <span class="token function">allocator_type</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token function">vector</span><span class="token punctuation">(</span> alloc <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token comment">/*実装*/</span> <span class="token punctuation">}</span>
+</code></pre></div><h2 id="要素数と初期値を取るコンストラクターの実装"><a href="034-vector-memory-allocation.html#要素数と初期値を取るコンストラクターの実装" class="header-anchor">#</a> 要素数と初期値を取るコンストラクターの実装</h2> <p>要素数と初期値を取るコンストラクターは<code>resize</code>を使えば簡単に実装できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token function">vector</span><span class="token punctuation">(</span> size_type size<span class="token punctuation">,</span> <span class="token keyword">const</span> allocator_type <span class="token operator">&amp;</span> alloc <span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token function">vector</span><span class="token punctuation">(</span> alloc <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">resize</span><span class="token punctuation">(</span> size <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">vector</span><span class="token punctuation">(</span> size_type size<span class="token punctuation">,</span> const_reference value<span class="token punctuation">,</span> <span class="token keyword">const</span> allocator_type <span class="token operator">&amp;</span> alloc <span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token function">vector</span><span class="token punctuation">(</span> alloc <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">resize</span><span class="token punctuation">(</span> size<span class="token punctuation">,</span> value <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>しかしこれは実装を<code>resize</code>に丸投げしただけだ。<code>resize</code>の実装をする前に、実装を楽にするヘルパー関数を実装する。</p> <h2 id="ヘルパー関数"><a href="034-vector-memory-allocation.html#ヘルパー関数" class="header-anchor">#</a> ヘルパー関数</h2> <p>ここでは<code>vector</code>の実装を楽にするためのヘルパー関数をいくつか実装する。このヘルパー関数はユーザーから使うことは想定しないので、<code>private</code>メンバーにする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 例</span>
+<span class="token keyword">struct</span> <span class="token class-name">vector</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">private</span> <span class="token operator">:</span>
+    <span class="token comment">// ユーザーからは使えないヘルパー関数</span>
+    <span class="token keyword">void</span> <span class="token function">helper_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token operator">:</span>
+    <span class="token comment">// ユーザーが使える関数</span>
+    <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// ヘルパー関数を使って実装</span>
+        <span class="token function">helper_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><h3 id="ネストされた型名traits"><a href="034-vector-memory-allocation.html#ネストされた型名traits" class="header-anchor">#</a> ネストされた型名traits</h3> <p>アロケーターは<code>allocator_traits</code>を経由して使う。実際のコードはとても冗長になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Allocator <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Allocator <span class="token operator">&amp;</span> alloc <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>allocator_traits<span class="token operator">&lt;</span>Allocator<span class="token operator">&gt;</span><span class="token operator">::</span><span class="token function">allocate</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この問題はエイリアス名を使えば解決できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">private</span> <span class="token operator">:</span>
+    <span class="token keyword">using</span> traits <span class="token operator">=</span> std<span class="token operator">::</span>allocator_traits<span class="token operator">&lt;</span>allocator_type<span class="token operator">&gt;</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> Allocator <span class="token operator">&gt;</span>
+    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> Allocator <span class="token operator">&amp;</span> alloc <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        traits<span class="token operator">::</span><span class="token function">allocate</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><h3 id="allocate-deallocate"><a href="034-vector-memory-allocation.html#allocate-deallocate" class="header-anchor">#</a> allocate/deallocate</h3> <p><code>allocate(n)</code>はアロケーターから<code>n</code>個の要素を格納できる生のメモリーの動的確保をして先頭要素へのポインターを返す。</p> <p><code>deallocate(ptr)</code>はポインター<code>ptr</code>を解放する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">private</span><span class="token operator">:</span> 
+    pointer <span class="token function">allocate</span><span class="token punctuation">(</span> size_type n <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> traits<span class="token operator">::</span><span class="token function">allocate</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> n <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">deallocate</span><span class="token punctuation">(</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> traits<span class="token operator">::</span><span class="token function">deallocate</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> first<span class="token punctuation">,</span> <span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><h3 id="construct-destroy"><a href="034-vector-memory-allocation.html#construct-destroy" class="header-anchor">#</a> construct/destroy</h3> <p><code>construct(ptr)</code>は生のメモリーへのポインター<code>ptr</code>に<code>vector</code>の<code>value_type</code>型の値をデフォルト構築する。</p> <p><code>construct(ptr, value)</code>は生のメモリーへのポインター<code>ptr</code>に値<code>value</code>のオブジェクトを構築する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>    <span class="token keyword">void</span> <span class="token function">construct</span><span class="token punctuation">(</span> pointer ptr <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> traits<span class="token operator">::</span><span class="token function">construct</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> ptr <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">construct</span><span class="token punctuation">(</span> pointer ptr<span class="token punctuation">,</span> const_reference value <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> traits<span class="token operator">::</span><span class="token function">construct</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> ptr<span class="token punctuation">,</span> value <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token comment">// ムーブ用</span>
+    <span class="token keyword">void</span> <span class="token function">construct</span><span class="token punctuation">(</span> pointer ptr<span class="token punctuation">,</span> value_type <span class="token operator">&amp;&amp;</span> value <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> traits<span class="token operator">::</span><span class="token function">construct</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> ptr<span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">move</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><p>ムーブ用の<code>construct</code>についてはまだ気にする必要はない。この理解には、まずムーブセマンティクスを学ぶ必要がある。</p> <p><code>destroy(ptr)</code>は<code>ptr</code>の指すオブジェクトを破棄する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">private</span> <span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span> pointer ptr <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> traits<span class="token operator">::</span><span class="token function">destroy</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> ptr <span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre></div><h3 id="destroy-until"><a href="034-vector-memory-allocation.html#destroy-until" class="header-anchor">#</a> <code>destroy_until</code></h3> <p><code>destroy_until(rend)</code>は、<code>vector</code>が保持する<code>rbegin()</code>からリバースイテレーター<code>rend</code>までの要素を破棄する。リバースイテレーターを使うので、要素の末尾から先頭に向けて順番に破棄される。なぜ末尾から先頭に向けて要素を破棄するかというと、C++では値の破棄は構築の逆順で行われるという原則があるからだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">private</span> <span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">destroy_until</span><span class="token punctuation">(</span> reverse_iterator rend <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> riter <span class="token operator">=</span> <span class="token function">rbegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> riter <span class="token operator">!=</span> rend <span class="token punctuation">;</span> <span class="token operator">++</span>riter<span class="token punctuation">,</span> <span class="token operator">--</span>last <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">destroy</span><span class="token punctuation">(</span> <span class="token operator">&amp;</span><span class="token operator">*</span>riter <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><p><code>&amp;*riter</code>はやや泥臭い方法だ。簡易<code>vector&lt;T&gt;</code>の<code>iterator</code>は単なる<code>T *</code>だが、<code>riter</code>はリバースイテレーターなのでポインターではない。ポインターを取るために<code>*riter</code>でまず<code>T &amp;</code>を得て、そこに<code>&amp;</code>を適用することで<code>T *</code>を得ている。</p> <p>破棄できたら有効な要素数を減らすために<code>--last</code>する。</p> <h2 id="clear"><a href="034-vector-memory-allocation.html#clear" class="header-anchor">#</a> clear</h2> <p><code>clear()</code>はすべての要素を破棄する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span>
+<span class="token punctuation">{</span>
+    <span class="token function">destroy_until</span><span class="token punctuation">(</span> <span class="token function">rend</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>先ほど実装した<code>destroy_until(rend)</code>にリバースイテレーターの終端を渡せばすべての要素が破棄される。</p> <h2 id="デストラクター"><a href="034-vector-memory-allocation.html#デストラクター" class="header-anchor">#</a> デストラクター</h2> <p>ヘルパー関数を組み合わせることでデストラクターが実装できるようになった。</p> <p><code>std::vector</code>のデストラクターは、</p> <ol><li>要素を末尾から先頭に向かう順番で破棄</li> <li>生のメモリーを解放する</li></ol> <p>この2つの処理はすでに実装した。デストラクターの実装は単にヘルパー関数を並べて呼び出すだけでよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token operator">~</span><span class="token function">vector</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 1. 要素を末尾から先頭に向かう順番で破棄</span>
+    <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 2. 生のメモリーを解放する</span>
+    <span class="token function">deallocate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>    
+<span class="token punctuation">}</span>         
+</code></pre></div><h2 id="reserveの実装"><a href="034-vector-memory-allocation.html#reserveの実装" class="header-anchor">#</a> reserveの実装</h2> <p><code>reserve</code>の実装は生の動的メモリーを確保してデータメンバーを適切に設定する。</p> <p>ただし、いろいろと考慮すべきことが多い。</p> <p>現在の<code>capacity</code>より小さい要素数が<code>reserve</code>された場合、無視してよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 要素数5</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 3個の要素を保持できるよう予約</span>
+    v<span class="token punctuation">.</span><span class="token function">reserve</span><span class="token punctuation">(</span> <span class="token number">3</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 無視する</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>すでに指定された要素数以上に予約されているからだ。</p> <p>動的メモリー確保が行われていない場合、単に動的メモリー確保をすればよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    <span class="token comment">// おそらく動的メモリー確保</span>
+    v<span class="token punctuation">.</span><span class="token function">reserve</span><span class="token punctuation">(</span> <span class="token number">10000</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>「おそらく」というのは、C++の規格は<code>vector</code>のデフォルトコンストラクターが予約するストレージについて何も言及していないからだ。すでに要素数10000を超えるストレージが予約されている実装も規格準拠だ。本書で実装している<code>vector</code>は、デフォルトコンストラクターでは動的メモリー確保をしない実装になっている。</p> <p>有効な要素が存在する場合、その要素の値は引き継がなければならない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 要素数3</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 1万個の要素を保持できるだけのメモリーを予約</span>
+    v<span class="token punctuation">.</span><span class="token function">reserve</span><span class="token punctuation">(</span> <span class="token number">10000</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1,2,3}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>つまり動的メモリー確保をしたあとに、既存の要素を新しいストレージにコピーしなければならないということだ。</p> <p>まとめよう。</p> <ol><li>すでに指定された要素数以上に予約されているなら何もしない</li> <li>まだ動的メモリー確保が行われていなければ動的メモリー確保をする</li> <li>有効な要素がある場合は新しいストレージにコピーする</li></ol> <p>古いストレージから新しいストレージに要素をコピーするとき、古いストレージと新しいストレージが一時的に同時に存在しなければならない。</p> <p>疑似コード風に記述すると以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// すでに動的確保した古いストレージ</span>
+    <span class="token keyword">auto</span> old_ptr <span class="token operator">=</span> <span class="token keyword">new</span> T <span class="token punctuation">;</span>
+
+    <span class="token comment">// いま構築した新しいストレージ</span>
+    <span class="token keyword">auto</span> new_ptr <span class="token operator">=</span> <span class="token keyword">new</span> T <span class="token punctuation">;</span>
+    <span class="token comment">// 古いストレージから新しいストレージにコピー</span>
+    <span class="token comment">// *new_ptr = *old_ptr ;</span>
+    <span class="token comment">// 古いストレージを解放</span>
+    <span class="token keyword">delete</span> old_value <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このとき、<code>T</code>型がコピーの最中に例外を投げると、後続の<code>delete</code>が実行されなくなる。この問題に対処して例外安全にするために、C++20に入る見込みの標準ライブラリ、<code>std::scope_exit</code>を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T <span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// すでに動的確保した古いストレージ</span>
+    <span class="token keyword">auto</span> old_ptr <span class="token operator">=</span> <span class="token keyword">new</span> T <span class="token punctuation">;</span>
+
+    <span class="token comment">// いま構築した新しいストレージ</span>
+    <span class="token keyword">auto</span> new_ptr <span class="token operator">=</span> <span class="token keyword">new</span> T <span class="token punctuation">;</span>
+
+    <span class="token comment">// 関数fを抜けるときに古いストレージを解放する。</span>
+    std<span class="token operator">::</span>scope_exit <span class="token function">e</span><span class="token punctuation">(</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token punctuation">]</span><span class="token punctuation">{</span> <span class="token keyword">delete</span> old_ptr <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 古いストレージから新しいストレージにコピー</span>
+    <span class="token comment">// *new_ptr = *old_ptr ;</span>
+
+    <span class="token comment">// 変数eの破棄に伴って古いストレージが解放される</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これを踏まえて<code>reserve</code>を実装する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">reserve</span><span class="token punctuation">(</span> size_type sz <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// すでに指定された要素数以上に予約されているなら何もしない</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> sz <span class="token operator">&lt;=</span> <span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 動的メモリー確保をする</span>
+    <span class="token keyword">auto</span> ptr <span class="token operator">=</span> <span class="token function">allocate</span><span class="token punctuation">(</span> sz <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 古いストレージの情報を保存</span>
+    <span class="token keyword">auto</span> old_first <span class="token operator">=</span> first <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> old_last <span class="token operator">=</span> last <span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> old_capacity <span class="token operator">=</span> <span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 新しいストレージに差し替え</span>
+    first <span class="token operator">=</span> ptr <span class="token punctuation">;</span>
+    last <span class="token operator">=</span> first <span class="token punctuation">;</span>
+    reserved_last <span class="token operator">=</span> first <span class="token operator">+</span> sz <span class="token punctuation">;</span>
+
+    <span class="token comment">// 例外安全のため</span>
+    <span class="token comment">// 関数を抜けるときに古いストレージを破棄する</span>
+    std<span class="token operator">::</span>scope_exit <span class="token function">e</span><span class="token punctuation">(</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token punctuation">]</span><span class="token punctuation">{</span>
+        traits<span class="token operator">::</span><span class="token function">deallocate</span><span class="token punctuation">(</span> alloc<span class="token punctuation">,</span> old_first<span class="token punctuation">,</span> old_capacity  <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 古いストレージから新しいストレージに要素をコピー構築</span>
+    <span class="token comment">// 実際にはムーブ構築</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> old_iter <span class="token operator">=</span> old_first <span class="token punctuation">;</span> old_iter <span class="token operator">!=</span> old_last <span class="token punctuation">;</span> <span class="token operator">++</span>old_iter<span class="token punctuation">,</span> <span class="token operator">++</span>last <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// このコピーの理解にはムーブセマンティクスの理解が必要</span>
+        <span class="token function">construct</span><span class="token punctuation">(</span> last<span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token operator">*</span>old_iter<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 新しいストレージにコピーし終えたので</span>
+    <span class="token comment">// 古いストレージの値は破棄</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>   <span class="token keyword">auto</span> riter <span class="token operator">=</span> <span class="token function">reverse_iterator</span><span class="token punctuation">(</span>old_last<span class="token punctuation">)</span><span class="token punctuation">,</span> rend <span class="token operator">=</span> <span class="token function">reverse_iterator</span><span class="token punctuation">(</span>old_first<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+            riter <span class="token operator">!=</span> rend <span class="token punctuation">;</span> <span class="token operator">++</span>riter <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">destroy</span><span class="token punctuation">(</span> <span class="token operator">&amp;</span><span class="token operator">*</span>riter <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// scope_exitによって自動的にストレージが破棄される</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ここではまだ学んでいないムーブの概念が出てくる。これはムーブセマンティクスの章で詳しく学ぶ。</p> <h2 id="resize"><a href="034-vector-memory-allocation.html#resize" class="header-anchor">#</a> resize</h2> <p><code>resize(sz)</code>は要素数を<code>sz</code>個にする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 要素数0</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    <span class="token comment">// 要素数10</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 要素数5</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+    <span class="token comment">// 要素数変わらず</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>resize</code>は呼び出し前より要素数を増やすことも減らすこともある。また変わらないこともある。</p> <p>要素数が増える場合、増えた要素数の値はデフォルト構築された値になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">X</span>
+<span class="token punctuation">{</span>
+    <span class="token function">X</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;default constructed.\n&quot;</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>X<span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムを実行すると、<code>&quot;default constructed.\n&quot;</code>は5回標準出力される。</p> <p><code>resize(sz, value)</code>は<code>resize</code>を呼び出した結果要素が増える場合、その要素を<code>value</code>で初期化する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1,2,3,4,4} </span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>要素数が減る場合、要素は末尾から順番に破棄されていく。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">X</span>
+<span class="token punctuation">{</span>
+    <span class="token operator">~</span><span class="token function">X</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;destructed.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>X<span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;resized.\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムを実行すると、以下のように出力される。</p> <div class="language- extra-class"><pre class="language-text"><code>destructed.
+destructed.
+destructed.
+resized.
+destructed.
+destructed.
+</code></pre></div><p>最初の<code>v.resize(2)</code>で、<code>v[4], v[3], v[2]</code>が書いた順番で破棄されていく。<code>main</code>関数を抜けるときに残りの<code>v[1], v[0]</code>が破棄される。</p> <p><code>resize(sz)</code>を呼び出したときに<code>sz</code>が現在の要素数と等しい場合は何もしない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 要素数5</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// 何もしない   </span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>まとめると<code>resize</code>は以下のように動作する。</p> <ol><li>現在の要素数より少なくリサイズする場合、末尾から要素を破棄する</li> <li>現在の要素数より大きくリサイズする場合、末尾に要素を追加する</li> <li>現在の要素数と等しくリサイズする場合、何もしない</li></ol> <p>実装しよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>    <span class="token keyword">void</span> <span class="token function">resize</span><span class="token punctuation">(</span> size_type sz <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 現在の要素数より少ない</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span> sz <span class="token operator">&lt;</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">auto</span> diff <span class="token operator">=</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> sz <span class="token punctuation">;</span>
+            <span class="token function">destroy_until</span><span class="token punctuation">(</span> <span class="token function">rbegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> diff <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+            last <span class="token operator">=</span> first <span class="token operator">+</span> sz <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 現在の要素数より大きい</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span> sz <span class="token operator">&gt;</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">reserve</span><span class="token punctuation">(</span> sz <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token punctuation">;</span> last <span class="token operator">!=</span> reserved_last <span class="token punctuation">;</span> <span class="token operator">++</span>last <span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">construct</span><span class="token punctuation">(</span> last <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><p>要素を破棄する場合、破棄する要素数だけ末尾から順番に破棄する。</p> <p>要素を増やす場合、<code>reserve</code>を呼び出してメモリーを予約してから、追加の要素を構築する。</p> <p><code>sz == size()</code>の場合は、どちらの<code>if</code>文の条件にも引っかからないので、何もしない。</p> <p><code>size(sz, value)</code>は、追加の引数を取るほか、<code>construct( iter )</code>の部分が<code>construct( iter, value )</code>に変わるだけだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">resize</span><span class="token punctuation">(</span> size_type sz<span class="token punctuation">,</span> const_reference value <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+            <span class="token function">construct</span><span class="token punctuation">(</span> iter<span class="token punctuation">,</span> value <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これで自作の<code>vector</code>はある程度使えるようになった。コンストラクターで要素数を指定できるし、リサイズもできる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">99</span> <span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1,1,99,1,1}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="push-back"><a href="034-vector-memory-allocation.html#push-back" class="header-anchor">#</a> push_back</h2> <p><code>push_back</code>は<code>vector</code>の末尾に要素を追加する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    <span class="token comment">// vは{}</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1}</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1,2}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>push_back</code>の実装は、末尾の予約された未使用のストレージに値を構築する。もし予約された未使用のストレージがない場合は、新しく動的メモリー確保する。</p> <p>追加の動的メモリー確保なしで保持できる要素の個数はすでに実装した<code>capacity()</code>で取得できる。<code>push_back</code>は要素を1つ追加するので、<code>size() + 1 &lt;= capacity()</code>ならば追加の動的メモリー確保はいらない。逆に、<code>size() + 1 &gt; capacity()</code>ならば追加の動的メモリー確保をしなければならない。追加の動的メモリー確保はすでに実装した<code>reserve</code>を使えばよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">push_back</span><span class="token punctuation">(</span> const_reference value <span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment">// 予約メモリーが足りなければ拡張</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&gt;</span> <span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 1つだけ増やす</span>
+        <span class="token function">reserve</span><span class="token punctuation">(</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 要素を末尾に追加</span>
+    <span class="token function">construct</span><span class="token punctuation">(</span> last<span class="token punctuation">,</span> value <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 有効な要素数を更新</span>
+    <span class="token operator">++</span>last <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これは動く。ただし、効率的ではない。自作の<code>vector</code>を使った以下のような例を見てみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 要素数10000</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 10001個分のメモリーを確保する</span>
+    <span class="token comment">// 10000個の既存の要素をコピーする</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 10002個分のメモリーを確保する</span>
+    <span class="token comment">// 10001個の既存の要素をコピーする</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>たった1つの要素を追加するのに、毎回動的メモリー確保と既存の全要素のコピーをしている。これは無駄だ。</p> <p><code>std::vector</code>は<code>push_back</code>で動的メモリー確保が必要な場合、<code>size()+1</code>よりも多くメモリーを確保する。こうすると、<code>push_back</code>を呼び出すたびに毎回動的メモリー確保と全要素のコピーを行う必要がなくなるので、効率的になる。</p> <p>ではどのくらい増やせばいいのか。10個ずつ増やす戦略は以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">push_back</span><span class="token punctuation">(</span> const_reference value <span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment">// 予約メモリーが足りなければ拡張</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&gt;</span> <span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 10個増やす</span>
+        <span class="token function">reserve</span><span class="token punctuation">(</span> <span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">10</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">construct</span><span class="token punctuation">(</span> last<span class="token punctuation">,</span> value <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token operator">++</span>last <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>しかしこの場合、以下のようなコードで効率が悪い。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> i <span class="token operator">!=</span> <span class="token number">10000</span> <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>10個ずつ増やす戦略では、この場合に1000回の動的メモリー確保と全要素のコピーが発生する。</p> <p>上のような場合、<code>vector</code>の利用者が事前に<code>v.reserve(10000)</code>とすれば効率的になる。しかし、コンパイル時に要素数がわからない場合、その手も使えない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> inputs <span class="token punctuation">;</span>
+    <span class="token comment">// 要素数は実行時にしかわからない</span>
+    <span class="token comment">// 10万個の入力が行われるかもしれない</span>
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span>
+        std<span class="token operator">::</span>ostream_iterator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>std<span class="token operator">::</span>cin<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        std<span class="token operator">::</span>ostream_iterator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        std<span class="token operator">::</span><span class="token function">back_inserter</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>よくある実装は、現在のストレージサイズの2倍のストレージを確保する戦略だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">push_back</span><span class="token punctuation">(</span> const_reference value <span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment">// 予約メモリーが足りなければ拡張</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&gt;</span> <span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 現在のストレージサイズ</span>
+        <span class="token keyword">auto</span> c <span class="token operator">=</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+        <span class="token comment">// 0の場合は1に</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span> c <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+            c <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            <span class="token comment">// それ以外の場合は2倍する</span>
+            c <span class="token operator">*=</span> <span class="token number">2</span> <span class="token punctuation">;</span>
+
+        <span class="token function">reserve</span><span class="token punctuation">(</span> c <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">construct</span><span class="token punctuation">(</span> last<span class="token punctuation">,</span> value <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token operator">++</span>last <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>size()</code>は<code>0</code>を返す場合もあるということに注意。単に<code>reserve(size()*2)</code>としたのでは<code>size() == 0</code>のときに動かない。</p> <h3 id="shrink-to-fit"><a href="034-vector-memory-allocation.html#shrink-to-fit" class="header-anchor">#</a> <code>shrink_to_fit</code></h3> <p><code>shrink_to_fit()</code>は<code>vector</code>が予約しているメモリーのサイズを実サイズに近づけるメンバー関数だ。</p> <p>本書で実装してきた自作の<code>vector</code>は、<code>push_back</code>時に予約しているメモリーがなければ、現在の要素数の2倍のメモリーを予約する実装だった。すると以下のようなコードで、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+    std<span class="token operator">::</span><span class="token function">copy</span><span class="token punctuation">(</span> std<span class="token operator">::</span>istream_iterator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>std<span class="token operator">::</span>cin<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span>istream_iterator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        std<span class="token operator">::</span><span class="token function">back_inserter</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>ユーザーが4万個の<code>int</code>型の値を入力した場合、65536個の<code>int</code>型の値を保持できるだけのメモリーが確保されてしまい、差し引き<code>sizeof(int) * 25536</code>バイトのメモリーが未使用のまま確保され続けてしまう。</p> <p>メモリー要件の厳しい環境ではこのようなメモリーの浪費を避けたい。しかし、実行時にユーザーから任意の個数の入力を受けるプログラムを書く場合には、<code>push_back</code>を使いたい。</p> <p>こういうとき、<code>shrink_to_fit</code>は<code>vector</code>が予約するメモリーを切り詰めて実サイズに近くする、かもしれない。「かもしれない」というのは、C++の標準規格は<code>shrink_to_fit</code>が必ずメモリーの予約サイズを切り詰めるよう規定してはいないからだ。</p> <p>自作の<code>vector</code>では必ず切り詰める実装にしてみよう。</p> <p>まず予約するメモリーを切り詰めるとはどういうことか。現在予約しているメモリーで保持できる最大の要素数は<code>capacity()</code>で得られる。実際に保持している要素数を返すのは<code>size()</code>だ。すると<code>size() == capacity()</code>になるようにすればいい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token punctuation">;</span>
+<span class="token comment">// ...</span>
+v<span class="token punctuation">.</span><span class="token function">shrink_to_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> v<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// trueにする</span>
+</code></pre></div><p><code>shrink_to_fit()</code>を呼んだとき、すでに<code>size() == capacity()</code>が<code>true</code>である場合は、何もしなくてもよい。</p> <p>それ以外の場合は、現在の有効な要素数分の新しいストレージを確保し、現在の値を新しいストレージにコピーし、古いメモリーは破棄する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">shrink_to_fit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 何もする必要がない</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 新しいストレージを確保</span>
+    <span class="token keyword">auto</span> ptr <span class="token operator">=</span> <span class="token function">allocate</span><span class="token punctuation">(</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// コピー</span>
+    <span class="token keyword">auto</span> current_size <span class="token operator">=</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>   <span class="token keyword">auto</span> raw_ptr <span class="token operator">=</span> ptr<span class="token punctuation">,</span> iter <span class="token operator">=</span> <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> iter_end <span class="token operator">=</span> <span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+            iter <span class="token operator">!=</span> iter_end <span class="token punctuation">;</span> <span class="token operator">++</span>iter<span class="token punctuation">,</span> <span class="token operator">++</span>raw_ptr <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">construct</span><span class="token punctuation">(</span> raw_ptr<span class="token punctuation">,</span> <span class="token operator">*</span>iter <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 破棄</span>
+    <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">deallocate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 新しいストレージを使う</span>
+    first <span class="token operator">=</span> ptr <span class="token punctuation">;</span>
+    last <span class="token operator">=</span> ptr <span class="token operator">+</span> current_size <span class="token punctuation">;</span>
+    reserved_last <span class="token operator">=</span> last <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この実装は<code>reserve</code>と似ている。</p> <h1 id="vectorのその他のコンストラクター"><a href="034-vector-memory-allocation.html#vectorのその他のコンストラクター" class="header-anchor">#</a> vectorのその他のコンストラクター</h1> <h2 id="イテレーターのペア"><a href="034-vector-memory-allocation.html#イテレーターのペア" class="header-anchor">#</a> イテレーターのペア</h2> <p><code>std::vector</code>はイテレーターのペアを取り、その参照する値で要素を初期化できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token operator">&gt;</span> a <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">v</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// vは{1,2,3,4,5}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これはすでに実装したメンバー関数を使えば簡単に実装できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> InputIterator <span class="token operator">&gt;</span>
+<span class="token function">vector</span><span class="token punctuation">(</span> InputIterator first<span class="token punctuation">,</span> InputIterator last<span class="token punctuation">,</span> <span class="token keyword">const</span> Allocator <span class="token operator">&amp;</span> <span class="token operator">=</span> <span class="token function">Allocator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">reserve</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">distance</span><span class="token punctuation">(</span> first<span class="token punctuation">,</span> last <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token keyword">auto</span> i <span class="token operator">=</span> first <span class="token punctuation">;</span> i <span class="token operator">!=</span> last <span class="token punctuation">;</span> <span class="token operator">++</span>i <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">push_back</span><span class="token punctuation">(</span> <span class="token operator">*</span>i <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="初期化リスト"><a href="034-vector-memory-allocation.html#初期化リスト" class="header-anchor">#</a> 初期化リスト</h2> <p><code>std::vector</code>は配列のように初期化できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このような初期化を<em>リスト初期化</em>と呼ぶ。</p> <p>リスト初期化に対応するためには、<code>std::initializer_list&lt;T&gt;</code>を引数に取るコンストラクターを追加する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">template</span> <span class="token operator">&lt;</span> <span class="token keyword">typename</span> T<span class="token punctuation">,</span> Allocator <span class="token operator">=</span> std<span class="token operator">::</span>allocator<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token operator">&gt;</span>
+<span class="token punctuation">{</span>
+<span class="token comment">// コンストラクター</span>
+<span class="token function">vector</span><span class="token punctuation">(</span> std<span class="token operator">::</span>initializer_list<span class="token operator">&lt;</span>value_type<span class="token operator">&gt;</span> init<span class="token punctuation">,</span> <span class="token keyword">const</span> Allocator <span class="token operator">&amp;</span> <span class="token operator">=</span> <span class="token function">Allocator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> 
+    <span class="token comment">// 省略...</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>std::initializer_list&lt;T&gt;</code>は<code>T</code>型の要素を格納する標準ライブラリで、<code>{a,b,c,...}</code>のようなリスト初期化で構築することができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>std<span class="token operator">::</span>initializer_list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> init <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+</code></pre></div><p><code>std::initializer_list</code>は<code>begin/end</code>によるイテレーターを提供しているので、すでに実装したコンストラクターにデリゲートすればよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token function">vector</span><span class="token punctuation">(</span> std<span class="token operator">::</span>initializer_list<span class="token operator">&lt;</span>value_type<span class="token operator">&gt;</span> init<span class="token punctuation">,</span> <span class="token keyword">const</span> Allocator <span class="token operator">&amp;</span> alloc <span class="token operator">=</span> <span class="token function">Allocator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span> 
+    <span class="token operator">:</span> <span class="token function">vector</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>init<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>init<span class="token punctuation">)</span><span class="token punctuation">,</span> alloc <span class="token punctuation">)</span>
+<span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="033-vector-implementation.html" class="prev">vectorの実装 : 基礎</a></span> <span class="next"><a href="035-copy.html">コピー</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/39.bab7cf23.js" defer></script>
+  </body>
+</html>

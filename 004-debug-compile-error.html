@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>デバッグ：コンパイルエラーメッセージの読み方 | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/9.39e986e2.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="active sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="004-debug-compile-error.html#文法エラー" class="sidebar-link">文法エラー</a></li><li class="sidebar-sub-header"><a href="004-debug-compile-error.html#意味エラー" class="sidebar-link">意味エラー</a></li><li class="sidebar-sub-header"><a href="004-debug-compile-error.html#コンパイラーのバグ" class="sidebar-link">コンパイラーのバグ</a></li></ul></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="デバッグ：コンパイルエラーメッセージの読み方"><a href="004-debug-compile-error.html#デバッグ：コンパイルエラーメッセージの読み方" class="header-anchor">#</a> デバッグ：コンパイルエラーメッセージの読み方</h1> <p>やれやれ疲れた。この辺でひと休みして、デバッグについて考えよう。まずはコンパイルエラーについてだ。</p> <p>プログラムにはさまざまなバグがあるが、コンパイルエラーは最も簡単なバグだ。というのも、プログラムのバグの存在が実行前に発覚したわけだから、手間が省ける。もしコンパイルエラーにならない場合、実行した結果から、バグがあるかどうかを判断しなければならない。</p> <p>読者の中には、せっかく書いたソースコードをコンパイルしたらコンパイルエラーが出たので、運が悪かったとか、失敗したとか、怒られてつらい気持ちになったなどと感じることがあるかもしれない。しかしそれは大違いだ。コンパイラーによって読者はプログラムを実行することなくバグが発見できたのだから、読者は運が良かった、大成功した、褒められて最高の気持ちになったと感じるべきなのだ。</p> <p>さあ皆さんご一緒に、</p> <ul><li>コンパイルエラーは普通</li> <li>コンパイルエラーが出たらありがとう</li> <li>コンパイルエラーが出たら大喜び</li></ul> <p>熟練のプログラマーは自分の書いたコードがコンパイルエラーを出さずに一発でコンパイルが通った場合、逆に不安になるくらいだ。</p> <p>もしバグがあるのにコンパイルエラーが出なければ、バグの存在に気が付かないまま、読者の書いたソフトウェアは広く世の中に使われ、10年後、20年後に最もバグが発見されてほしくない方法で発見されてしまうかもしれない。すなわち、セキュリティ上問題となる脆弱性という形での発覚だ。しかし安心してほしい。いま読者が出したコンパイルエラーによって、そのような悲しい未来の可能性は永久に排除されたのだ。コンパイルエラーはどんどん出すとよい。</p> <p>コンパイルエラーの原因は2つ。</p> <ol><li>文法エラー</li> <li>意味エラー</li> <li>コンパイラーのバグ</li></ol> <p>3つだった。コンパイルエラーの原因は3つ。</p> <ol><li>文法エラー</li> <li>意味エラー</li> <li>コンパイラーのバグ</li> <li>コンピューターの故障</li></ol> <p>4つだった。ただ、3.と4.はめったにないから無視してよい。</p> <h2 id="文法エラー"><a href="004-debug-compile-error.html#文法エラー" class="header-anchor">#</a> 文法エラー</h2> <p>文法エラーとは、C++というプログラミング言語の文法に従っていないエラーのことだ。これはC++として解釈できないので、当然エラーになる。</p> <p>よくある文法エラーとしては、文末のセミコロンを打ち忘れたものがある。例えば以下のコードには間違いがある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">1</span> 
+    <span class="token keyword">auto</span> y <span class="token operator">=</span> x <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これをコンパイルすると以下のようにコンパイルエラーメッセージが出力される。</p> <div class="language- extra-class"><pre class="language-text"><code>$ make
+g++ -std=c++17 -Wall --pedantic-error -include all.h main.cpp -o program
+main.cpp: In function ‘int main()’:
+main.cpp:4:5: error: expected ‘,’ or ‘;’ before ‘auto’
+     auto y = x + 1 ;
+     ^~~~
+main.cpp:3:10: warning: unused variable ‘x’ [-Wunused-variable]
+     auto x = 1 + 1
+          ^
+Makefile:4: recipe for target 'program' failed
+make: *** [program] Error 1
+</code></pre></div><p>コンパイラーのメッセージを読み慣れていない読者はここで考えることを放棄してコンピューターの電源を落とし家を出て街を徘徊し夕日を見つめて人生、宇宙、すべてについての究極の質問への答えを模索してしまうことだろう。</p> <p>しかし恐れるなかれ。コンパイラーのエラーメッセージを読み解くのは難しくない。</p> <p>まず最初の2行を見てみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>$ make
+g++ -std=c++17 -Wall --pedantic-error -include all.h main.cpp -o program
+</code></pre></div><p>1行目はシェルに<code>make</code>を実行させるためのコマンド、2行目は<code>make</code>が実行したレシピの中身だ。これはコンパイラーによるメッセージではない。</p> <p>3行目からはコンパイラーによる出力だ。</p> <div class="language- extra-class"><pre class="language-text"><code>main.cpp: In function ‘int main()’:
+</code></pre></div><p>コンパイラーはソースファイル<code>main.cpp</code>の中の、<code>int main()</code>という関数について、特に言うべきことがあると主張している。</p> <p>言うべきこととは以下だ。</p> <div class="language- extra-class"><pre class="language-text"><code>main.cpp:4:5: error: expected ‘,’ or ‘;’ before ‘auto’
+     auto y = x + 1 ;
+     ^~~~
+</code></pre></div><p>GCCというコンパイラーのエラーメッセージは、以下のフォーマットを採用している。</p> <div class="language- extra-class"><pre class="language-text"><code>ソースファイル名:行番号:列番号: メッセージの種類: メッセージの内容
+</code></pre></div><p>ここでのメッセージの種類は<code>error</code>、つまりこのメッセージはエラーを伝えるものだ。</p> <p>ソースファイル名は<code>main.cpp</code>、つまりエラーは<code>main.cpp</code>の中にあるということだ。</p> <p>行番号というのは、最初の行を1行目とし、改行ごとにインクリメントされていく。今回のソースファイルの場合、以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>1 int main()
+2 {
+3     auto x = 1 + 1 
+4     auto y = x + 1 ;
+5 }
+</code></pre></div><p>もし読者が素晴らしいテキストエディターであるVimを使っている場合、<code>:set nu</code>すると行番号を表示できる。</p> <p>その上でエラーメッセージの行番号を確認すると<code>4</code>とある。つまりコンパイラーは4行目に問題があると考えているわけだ。</p> <p>4行目を確認してみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>    auto y = x + 1 ;
+</code></pre></div><p>何の問題もないように見える。さらにエラーメッセージを読んでみよう。</p> <p>列番号が<code>5</code>となっている。列番号というのは、行頭からの文字数だ。最初の文字を1文字目とし、文字ごとにインクリメントされていく。</p> <div class="language- extra-class"><pre class="language-text"><code>123456789...
+    auto y = x + 1 ;
+</code></pre></div><p>4行目は空白文字を4つ使ってインデントしているので、<code>auto</code>の<code>a</code>の列番号は<code>5</code>だ。ここに問題があるのだろうか。何も問題がないように見える。</p> <p>この謎を解くためには、メッセージの内容を読まなければならない。</p> <div class="language- extra-class"><pre class="language-text"><code>expected ‘,’ or ‘;’ before ‘auto’
+     auto y = x + 1 ;
+     ^~~
+</code></pre></div><p>これは日本語に翻訳すると以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>‘auto’の前に','か';'があるべき
+     auto y = x + 1 ;
+     ^~~
+</code></pre></div><p>1行目はエラー内容をテキストで表現したものだ。これによると、<code>'auto'</code>の前に<code>','</code>か<code>';'</code>があるべきとあるが、やはりまだわからない。</p> <p>2行目は問題のある箇所のソースコードを部分的に抜粋したもので、3行目はそのソースコードの問題のある文字を視覚的にわかりやすく示しているものだ。</p> <p>ともかく、コンパイラーの指示に従って<code>'auto'</code>の前に<code>','</code>を付けてみよう。</p> <div class="language- extra-class"><pre class="language-text"><code>    ,auto y = x + 1 ;
+</code></pre></div><p>これをコンパイルすると、また違ったエラーメッセージが表示される。</p> <div class="language- extra-class"><pre class="language-text"><code>main.cpp: In function ‘int main()’:
+main.cpp:4:6: error: expected unqualified-id before ‘auto’
+     ,auto y = x + 1 ;
+      ^~~~
+</code></pre></div><p>では<code>';'</code>ならばどうか。</p> <div class="language- extra-class"><pre class="language-text"><code>    ;auto y = x + 1 ;
+</code></pre></div><p>これはコンパイルが通るようだ。</p> <p>しかしなぜこれでコンパイルが通るのだろう。そのためには、コンパイラーが問題だとした行の1つ上の行を見る必要がある。</p> <div class="language- extra-class"><pre class="language-text"><code>    auto x = 1 + 1
+    auto y = x + 1 ;
+</code></pre></div><p>コンパイラーにとって、改行は空白文字と同じくソースファイル中の意味のあるトークン(キーワードや名前や記号)を区切る文字でしかない。コンパイラーにとって、このコードは実質以下のように見えている。</p> <div class="language- extra-class"><pre class="language-text"><code>auto x=1+1 auto y=x+1;
+</code></pre></div><p><code>&quot;1 auto&quot;</code>というのは文法エラーだ。なのでコンパイラーは文法エラーが発覚する最初の文字である<code>'auto'</code>の<code>'a'</code>を指摘したのだ。</p> <p>人間にとって自然になるように修正すると、コンパイラーが指摘した行の1つ上の行の行末に<code>';'</code>を追加すべきだ。</p> <div class="language- extra-class"><pre class="language-text"><code>    auto x = 1 + 1 ;
+    auto y = x + 1 ;
+</code></pre></div><p>さて、問題自体は解決したわけだが、残りのメッセージも見ていこう。</p> <div class="language- extra-class"><pre class="language-text"><code>main.cpp:3:10: warning: unused variable ‘x’ [-Wunused-variable]
+     auto x = 1 + 1
+</code></pre></div><p>これはコンパイラーによる警告メッセージだ。警告メッセージについて詳しくは、デバッグ：警告メッセージの章で解説する。</p> <div class="language- extra-class"><pre class="language-text"><code>Makefile:4: recipe for target 'program' failed
+make: *** [program] Error 1
+</code></pre></div><p>これはGNU Makeによるメッセージだ。GCCがソースファイルを正しくコンパイルできず、実行が失敗したとエラーを返したので、レシピの実行が失敗したことを伝えるメッセージだ。</p> <p>プログラムはどうやってエラーを通知するのか。<code>main</code>関数の戻り値によってだ。<code>main</code>関数は関数であるので、戻り値がある。<code>main</code>関数の戻り値は<code>int</code>型だ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 戻り値の型</span>
+<span class="token keyword">int</span>
+<span class="token comment">// main関数の残りの部分</span>
+<span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><p><code>main</code>関数が何も値を返さない場合、<code>return 0</code>したものとみなされる。<code>main</code>関数が<code>0</code>もしくは<code>EXIT_SUCCESS</code>を返した場合、プログラムの実行の成功を通知したことになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 必ず実行が成功したと通知するプログラム</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>プログラムの実行が失敗した場合、<code>main</code>関数は<code>EXIT_FAILURE</code>を返すことでエラーを通知できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 必ず実行が失敗したと通知するプログラム</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> EXIT_FAILURE <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>EXIT_SUCCESS</code>と<code>EXIT_FAILURE</code>はマクロだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> EXIT_SUCCESS</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> EXIT_FAILURE</span>
+</code></pre></div><p>その中身はC++標準規格では規定されていない。どうしても値を知りたい場合は以下のプログラムを実行してみるとよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout
+        <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;EXIT_SUCCESS: &quot;</span>s <span class="token operator">&lt;&lt;</span> EXIT_SUCCESS <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span>s
+        <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;EXIT_FAILURE: &quot;</span>s   <span class="token operator">&lt;&lt;</span> EXIT_FAILURE <span class="token punctuation">;</span>  
+<span class="token punctuation">}</span>
+</code></pre></div><p>文法エラーというのは厄介なバグだ。というのも、コンパイラーというのは正しい文法のソースファイルを処理するように作られている。文法を間違えた場合、ソースファイル全体が正しくないということになる。コンパイラーは文法違反に遭遇した場合、なるべく人間がよく間違えそうなパターンをヒューリスティックに指摘することもしている。そのため、エラーメッセージに指摘された行番号と列番号は、必ずしも人間にとっての問題の箇所と一致しない。</p> <p>もう1つ例を見てみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 引数を3つ取って足して返す関数</span>
+    <span class="token keyword">auto</span> f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">auto</span> a<span class="token punctuation">,</span> <span class="token keyword">auto</span> b<span class="token punctuation">,</span> <span class="token keyword">auto</span> c<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> <span class="token keyword">return</span> a <span class="token operator">+</span> b <span class="token operator">+</span> c <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token operator">/</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>GCCによるコンパイルエラーメッセージだけ抜粋すると以下のとおり。</p> <div class="language- extra-class"><pre class="language-text"><code>main.cpp: In function ‘int main()’:
+main.cpp:7:40: error: expected ‘;’ before ‘)’ token
+     std::cout &lt;&lt; f(1+(2*3),4-5,6/(7-8))) ;
+                                        ^
+</code></pre></div><p>さてさっそく読んでみよう。すでに学んだように、GCCのメッセージのフォーマットは以下のとおりだ。</p> <div class="language- extra-class"><pre class="language-text"><code>ソースファイル名:行番号:列番号: メッセージの種類: メッセージの内容
+</code></pre></div><p>これに当てはめると、問題はソースファイル<code>main.cpp</code>の7行目の40列目にある。</p> <p>エラーメッセージは、「<code>';'</code>がトークン<code>')'</code>の前にあるべき」だ。</p> <p>トークン(token)というのは<code>'std'</code>とか<code>'::'</code>とか<code>'cout'</code>といったソースファイルの空白文字で区切られた最小の文字列の単位のことだ。</p> <p>抜粋されたソースコードに示された問題の箇所、つまり7行目40列目にあるトークンは<code>')'</code>だ。この前に<code>';'</code>が必要とはどういうことだろう。</p> <p>問題を探るため、7行目のトークンを詳しく分解してみよう。以下は7行目と同じソースコードだが、トークンをわかりやすく分解してある。</p> <div class="language- extra-class"><pre class="language-text"><code>std::cout &lt;&lt; // 標準出力
+f // 関数名
+    ( // 開き括弧
+        1+(2*3),    // 第1引数
+        4-5,        // 第2引数
+        6/(7-8)     // 第3引数
+    ) // 開き括弧に対応する閉じ括弧
+    ) // ???
+    ; // 終端文字
+</code></pre></div><p>これを見ると、閉じ括弧が1つ多いことがわかる。</p> <h2 id="意味エラー"><a href="004-debug-compile-error.html#意味エラー" class="header-anchor">#</a> 意味エラー</h2> <p>意味エラーとは、ソースファイルは文法的に正しいが、意味的に間違っているコンパイルエラーのことだ。</p> <p>さっそく例を見ていこう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> x <span class="token operator">=</span> <span class="token number">1.0</span> <span class="token operator">%</span> <span class="token number">1.0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードをコンパイルすると出力されるエラーメッセージは以下のとおり。</p> <div class="language- extra-class"><pre class="language-text"><code>main.cpp: In function ‘int main()’:
+main.cpp:3:18: error: invalid operands of types ‘double’ and ‘double’ to binary ‘operator%’
+     auto x = 1.0 % 1.0 ;
+              ~~~~^~~~~
+</code></pre></div><p>問題の箇所は3行目の18列目、<code>'%'</code>だ。</p> <p>エラーメッセージは、「二項 <code>'operator%'</code>に対して不適切なオペランドである型<code>'double'</code>と<code>'double'</code>」とある。</p> <p>前の章を読み直すとわかるとおり、<code>operator %</code>は剰余を計算する演算子だが、この演算子には<code>double</code>型を渡すことはできない。</p> <p>このコードはどうだろう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 引数を1つ取る関数</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 引数を2つ渡す</span>
+    <span class="token function">f</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このようなエラーメッセージになる。</p> <div class="language- extra-class"><pre class="language-text"><code>main.cpp: In function ‘int main()’:
+main.cpp:7:13: error: too many arguments to function ‘void f(int)’
+     f( 1, 2 ) ;
+             ^
+main.cpp:2:6: note: declared here
+ void f( int x ) { }
+      ^
+</code></pre></div><p>問題の箇所は7行目。「関数<code>'void f(int)'</code>に対して実引数が多すぎる」とある。<code>関数f</code>は引数を1つしか取らないのに、2つの引数を渡しているのがエラーの原因だ。</p> <p>2つ目のメッセージはエラーではなくて、エラーを補足説明するための注記(note)メッセージだ。ここで言及している<code>関数f</code>とは、2行目に宣言されていることを説明してくれている。</p> <p>意味エラーはときとしておぞましいほどのエラーメッセージを生成することがある。例えば以下の一見無害そうなコードだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;hello&quot;</span>s <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このコードは文法的に正しいが、意味的に間違っているコードだ。このコードをコンパイルすると膨大なエラーメッセージが出力される。しかも問題の行番号特定以外、大して役に立たない。</p> <h2 id="コンパイラーのバグ"><a href="004-debug-compile-error.html#コンパイラーのバグ" class="header-anchor">#</a> コンパイラーのバグ</h2> <p>C++コンパイラーもソフトウェアであり、バグがある。コンパイラーにバグがある場合、正しいC++のソースファイルがコンパイルできないことがある。</p> <p>読者がそのようなコンパイラーの秘孔を突くコードを書くことはまれだ。しかし、もしそのようなコードを偶然にも書いてしまった場合、GCCは、</p> <div class="language- extra-class"><pre class="language-text"><code>gcc: internal compiler error: エラー内容
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See &lt;ドキュメントへのファイルパス&gt; for instructions.
+</code></pre></div><p>のようなメッセージを出力する。</p> <p>これはGCCのバグなので、見つけた読者は適切な方法でバグ報告をしよう。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="003-guide-to-c++.html" class="prev">C++ヒッチハイクガイド</a></span> <span class="next"><a href="005-the-restaurant-at-the-end-of-the-branch.html">条件分岐の果てのレストラン</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/9.39e986e2.js" defer></script>
+  </body>
+</html>

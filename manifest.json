@@ -1,0 +1,19 @@
+{
+  "name": "江添亮のC++入門",
+  "short_name": "江添亮のC++入門",
+  "icons": [
+      {
+          "src": "/196.png",
+          "sizes": "196x196",
+          "type": "image/png"
+      },
+      {
+          "src": "/512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+      }
+  ],
+  "theme_color": "#3eaf7c",
+  "background_color": "#3eaf7c",
+  "display": "standalone"
+}

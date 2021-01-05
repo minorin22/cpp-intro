@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cプリプロセッサー | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/52.f5dc4f7e.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/31.93e5e7a5.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="sidebar-link">傲慢なエラー処理: 例外</a></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="active sidebar-link">Cプリプロセッサー</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="200-cpp.html#includeディレクティブ" class="sidebar-link">\#includeディレクティブ</a></li><li class="sidebar-sub-header"><a href="200-cpp.html#define" class="sidebar-link">\#define</a></li><li class="sidebar-sub-header"><a href="200-cpp.html#条件付きソースファイル選択" class="sidebar-link">条件付きソースファイル選択</a></li><li class="sidebar-sub-header"><a href="200-cpp.html#lineディレクティブ" class="sidebar-link">\#lineディレクティブ</a></li><li class="sidebar-sub-header"><a href="200-cpp.html#errorディレクティブ" class="sidebar-link">\#errorディレクティブ</a></li><li class="sidebar-sub-header"><a href="200-cpp.html#pragma" class="sidebar-link">\#pragma</a></li><li class="sidebar-sub-header"><a href="200-cpp.html#nullディレクティブ" class="sidebar-link">Nullディレクティブ</a></li><li class="sidebar-sub-header"><a href="200-cpp.html#定義済みマクロ名" class="sidebar-link">定義済みマクロ名</a></li><li class="sidebar-sub-header"><a href="200-cpp.html#stdcpp-default-new-alignment-整数リテラル-アライメント" class="sidebar-link">__STDCPP_DEFAULT_NEW_ALIGNMENT__  整数リテラル        アライメント</a></li></ul></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="cプリプロセッサー"><a href="200-cpp.html#cプリプロセッサー" class="header-anchor">#</a> Cプリプロセッサー</h1> <p>CプリプロセッサーはC++がC言語から受け継いだ機能だ。CプリプロセッサーはソースコードをC++としてパースする前に、テキストをトークン単位で変形する処理のことだ。この処理はソースファイルをC++としてパースする前処理として行われる。CプリプロセッサーはC++ではなく別言語として認識すべきで、そもそもプログラミング言語ではなくマクロ言語だ。</p> <p>C++ではCプリプロセッサーが広く使われており、今後もしばらくは使われるだろう。読者がC++で書かれた既存のコードを読むとき、Cプリプロセッサーは避けて通れない。Cプリプロセッサーはいずれ廃止したい機能ではあるが、C++はいまだに廃止できていない。</p> <p>Cプリプロセッサーはプリプロセッシングディレクティブ(preprocessing directive)を認識し、トークン列を処理する。ディレクティブはソースファイルの文頭に文字<code>#</code>から始まり、改行文字で終わる。<code>#</code>とディレクティブの間に空白文字を入れてもよい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> NOSPACE</span>
+<span class="token macro property">#    <span class="token directive keyword">define</span> SPACE</span>
+</code></pre></div><h2 id="includeディレクティブ"><a href="200-cpp.html#includeディレクティブ" class="header-anchor">#</a> #includeディレクティブ</h2> <p><code>#include</code>は指定したファイルの内容をその場に挿入する。本質的にはコピペだ。C++では<code>#include</code>はライブラリを利用するのに使われる。</p> <p><code>#include</code>は以下のいずれかの文法を持つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ヘッダーファイルパス&gt;</span> 改行文字</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;ヘッダーファイルパス&quot;</span> 改行文字</span>
+</code></pre></div><p><code>#include</code>は指定したファイルパスのファイルの内容をその場所に挿入する。このファイルをヘッダーファイルという。<code>&lt;&gt;</code>によるファイルパスは、標準ライブラリやシステムのヘッダーファイルを格納したディレクトリーからヘッダーファイルを探す。<code>&quot;&quot;</code>によるファイルパスは、システム以外のディレクトリーからもヘッダーファイルを探す。例えばカレントディレクトリーなどだ。</p> <p>例えば、以下のようなヘッダーファイル<code>foo.h</code>があり、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// foo.h</span>
+foo foo foo
+</code></pre></div><p>以下のようなソースファイル<code>bar.cpp</code>がある場合、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// bar.cpp</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;foo.h&quot;</span></span>
+
+<span class="token comment">// end bar.cpp</span>
+</code></pre></div><p><code>bar.cpp</code>をCプリプロセッサーにかけると、以下のようなソースファイルが出力される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// bar.cpp</span>
+
+<span class="token comment">// foo.h</span>
+foo foo foo
+
+<span class="token comment">// end bar.h</span>
+</code></pre></div><p>このソースファイルはC++のソースファイルとしてはエラーとなるが、Cプリプロセッサーは単純にトークン列で分割したテキストファイルとしてソースファイルを処理するため、Cプリプロセッサーとしてはエラーにはならない。</p> <p>冒頭で述べたように、<code>#include</code>の本質はコンパイラーによるコピペである。あるテキストファイルの内容をその場に挿入するコピペ機能を提供する。</p> <p><code>#include</code>は、ほかの言語でモジュール、importなどと呼ばれている機能を簡易的に提供する。C++の標準ライブラリを使うには、<code>&lt;iostream&gt;</code>や<code>&lt;string&gt;</code>や<code>&lt;vector&gt;</code>のようなヘッダーファイルを<code>#include</code>する必要がある。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// iostreamライブラリを使う</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token comment">// stringライブラリを使う</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// &lt;string&gt;のライブラリ</span>
+    std<span class="token operator">::</span>string <span class="token function">s</span><span class="token punctuation">(</span><span class="token string">&quot;hello&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// iostreamのライブラリ</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>すでに述べたように<code>#include</code>はファイルの内容をその場に挿入するだけであり、ほかの言語にあるモジュールのための高級な機能ではない。本書を執筆時点で規格策定中のC++20では、より高級なモジュール機能を追加する予定がある。</p> <p>同じヘッダーファイルを複数回<code>#include</code>すると、当然複数回挿入される。</p> <p>以下のような<code>val.h</code>を、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// val.h</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> val <span class="token punctuation">;</span>
+</code></pre></div><p>以下のように複数回<code>#include</code>すると、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;val.h&quot;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;val.h&quot;</span></span>
+</code></pre></div><p>以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// val.h</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> val <span class="token punctuation">;</span>
+<span class="token comment">// val.h</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> val <span class="token punctuation">;</span>
+</code></pre></div><p>これは<code>val</code>の定義が重複しているためエラーとなる。</p> <p>しかし、ヘッダーファイルを一度しか<code>#include</code>しないようにするのは困難だ。なぜならば、ヘッダーファイルはほかのヘッダーファイルから間接的に<code>#include</code>されることもあるからだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// lib_f.h</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;val.h&quot;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// lib_g.h</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;val.h&quot;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+</code></pre></div><div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// main.cpp</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;lib_f.h&quot;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;lib_g.h&quot;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>この<code>main.cpp</code>をCプリプロセッサーにかけると以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// main.cpp</span>
+
+<span class="token comment">// lib_f.h</span>
+
+<span class="token comment">// val.h</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> val <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// lib_g.h</span>
+
+<span class="token comment">// val.h</span>
+<span class="token keyword">inline</span> <span class="token keyword">int</span> val <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>これは<code>val</code>の定義が重複しているためエラーとなる。</p> <p>この問題に対処するためには、複数回<code>#include</code>されると困るヘッダーファイルでは、インクルードガード(include guard)と呼ばれている方法を使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// val.h</span>
+
+<span class="token macro property">#<span class="token directive keyword">ifndef</span> INCLUDE_GUARD_HEADER_VAL_H</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> INCLUDE_GUARD_HEADER_VAL_H</span>
+
+<span class="token keyword">inline</span> <span class="token keyword">int</span> val <span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>このように記述した<code>val.h</code>を複数回<code>#include</code>しても、最初の<code>ifndef</code>のみがコンパイル対象になるため、問題は起こらない。</p> <p>インクルードガードは以下の様式を持つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">ifndef</span> 十分にユニークなマクロ名</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> 十分にユニークなマクロ名 </span>
+
+<span class="token comment">// 重複してコンパイルされたくないコードをここに書く</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p><code>十分にユニークなマクロ名</code>は全ソースファイル中で衝突しないそのヘッダーに固有のマクロ名を使う。慣習的に推奨される方法としてはすべて大文字を使い、十分に長いマクロ名にすることだ。</p> <h2 id="define"><a href="200-cpp.html#define" class="header-anchor">#</a> #define</h2> <p><code>#define</code>はマクロ置換を行う。マクロにはオブジェクト風マクロ(object-like macro)と関数風マクロ(function-like macro)がある。風というのは、マクロはオブジェクトでも関数でもないからだ。ただ、文法上オブジェクトや関数の似ているだけで、実態はトークン列の愚直な置換だ。</p> <h3 id="オブジェクト風マクロ"><a href="200-cpp.html#オブジェクト風マクロ" class="header-anchor">#</a> オブジェクト風マクロ</h3> <p>オブジェクト風マクロの文法は以下のとおり。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> マクロ名 置換リスト　改行文字</span>
+</code></pre></div><p><code>#define</code>以降の行では、マクロ名が置換リストに置き換わる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> ONE             1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ONE_PLUS_ONE    ONE + ONE</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> GNU GNU's is NOT UNIX</span>
+
+ONE
+ONE_PLUS_ONE
+</code></pre></div><p>これをプリプロセスすると以下のソースコードになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token number">1</span>
+<span class="token number">1</span> <span class="token operator">+</span> <span class="token number">1</span>
+</code></pre></div><p>マクロ名<code>ONE</code>は<code>1</code>に置換される。</p> <p>マクロ名<code>ONE_PLUS_ONE</code>は<code>ONE + ONE</code>に置換される。置換された結果に別のマクロ名があれば、そのマクロ名も置換される。</p> <p>あるマクロ名を置換した結果、そのマクロ名が現れても再帰的に置換されることはない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> GNU GNU's NOT UNIX!</span>
+
+GNU
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>GNU<span class="token number">'</span>s NOT UNIX<span class="token operator">!</span>
+</code></pre></div><p>マクロ名<code>GNU</code>を展開するとトークン`GNU'が現れるが、これは置換されたマクロ名と同じなので、再帰的に置換されることはない。</p> <h3 id="関数風マクロ"><a href="200-cpp.html#関数風マクロ" class="header-anchor">#</a> 関数風マクロ</h3> <p>関数風マクロの文法は以下のとおり。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> マクロ名( 識別子リスト ) 置換リスト 改行文字</span>
+</code></pre></div><p>関数風マクロはあたかも関数のように記述できる。関数風マクロに実引数として渡したトークン列は、置換リスト内で仮引数としての識別子で参照できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> NO_ARGUMENT()           No argument</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ONE_ARGUMENT( ARG )     begin ARG end</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> MAKE_IT_DOUBLE( ARG )   ONE_ARGUMENT( ARG ARG )</span>
+
+<span class="token function">NO_ARGUMENT</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">ONE_ARGUMENT</span><span class="token punctuation">(</span> foo bar <span class="token punctuation">)</span>
+<span class="token function">MAKE_IT_DOUBLE</span><span class="token punctuation">(</span> foo bar <span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>No argument
+begin foo bar end
+begin foo bar foo bar end
+</code></pre></div><p>複数の引数を取るマクロへの実引数は、カンマで区切られたトークン列を渡す。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> TWO( A, B ) A B</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> THREE( A, B, C ) C B A</span>
+
+<span class="token function">TWO</span><span class="token punctuation">(</span> <span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token punctuation">)</span>
+<span class="token function">THREE</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span>
+<span class="token number">3</span> <span class="token number">2</span> <span class="token number">1</span>
+</code></pre></div><p>ただし、括弧で囲まれたトークン列の中にあるカンマは、マクロの実引数の区切りとはみなされない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> MACRO( A ) A</span>
+
+<span class="token function">MACRO</span><span class="token punctuation">(</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span>
+</code></pre></div><h3 id="va-args-可変長引数マクロ"><a href="200-cpp.html#va-args-可変長引数マクロ" class="header-anchor">#</a> <code>__VA_ARGS__</code>(可変長引数マクロ)</h3> <p><code>#define</code>の識別子リストを<code>...</code>だけにしたマクロは、可変長引数マクロになる。このときマクロの実引数のトークン列は、置換リストの中で<code>__VA_ARGS__</code>として参照できる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> MACRO(...) __VA_ARGS__</span>
+
+<span class="token function">MACRO</span><span class="token punctuation">(</span> You can write <span class="token punctuation">,</span> <span class="token operator">and</span> <span class="token punctuation">,</span><span class="token punctuation">,</span> <span class="token operator">or</span> even <span class="token punctuation">,</span><span class="token punctuation">,</span><span class="token punctuation">,</span><span class="token punctuation">,</span> <span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>You can write <span class="token punctuation">,</span> <span class="token operator">and</span> <span class="token punctuation">,</span><span class="token punctuation">,</span> <span class="token operator">or</span> even <span class="token punctuation">,</span><span class="token punctuation">,</span><span class="token punctuation">,</span><span class="token punctuation">,</span>
+</code></pre></div><p>カンマも含めてすべてのトークン列がそのまま<code>__VA_ARGS__</code>で参照できる。</p> <p>可変長引数マクロの識別子リストに仮引数と<code>...</code>を書いたマクロの置換リストでは、仮引数の数だけの実引数は仮引数で参照され、残りが<code>__VA_ARGS__</code>で参照される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> MACRO( X, Y, Z, ... ) X Y Z and __VA_ARGS__</span>
+
+<span class="token function">MACRO</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span> <span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token operator">and</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span>
+</code></pre></div><p><code>X</code>, <code>Y</code>, <code>Z</code>にそれぞれ<code>1</code>, <code>2</code>, <code>3</code>が入り、<code>__VA_ARGS__</code>には<code>4</code>, <code>5</code>, <code>6</code>が入る。</p> <h3 id="va-opt"><a href="200-cpp.html#va-opt" class="header-anchor">#</a> <code>__VA_OPT__</code></h3> <p><code>__VA_OPT__</code>は可変長引数マクロで<code>__VA_ARGS__</code>にトークン列が渡されたかどうかで置換結果を変えることができる。</p> <p><code>__VA_OPT__</code>は可変引数マクロの置換リストでのみ使える。<code>__VA_OPT__(content)</code>は<code>__VA_ARGS__</code>にトークンがない場合はトークンなしに置換され、トークンがある場合はトークン列<code>content</code>に置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> MACRO( X, ... ) f( X __VA_OPT__(,) __VA_ARGS__ )</span>
+
+<span class="token function">MACRO</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token function">MACRO</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token function">f</span><span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+<span class="token function">f</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">)</span>
+</code></pre></div><p><code>MACRO(1)</code>は<code>X</code>が<code>1</code>になり、<code>__VA_ARGS__</code>にはトークンがないので、<code>__VA_OPT__(,)</code>は空に置換される。結果として<code>f(1)</code>となる。</p> <p><code>MACRO(1,2)</code>は、<code>X</code>が<code>1</code>になり、<code>__VA_ARGS__</code>にはトークン<code>2</code>が入るので、<code>__VA_OPT__(,)</code>は<code>,</code>に置換される。結果として<code>f(1,2)</code>となる。</p> <p><code>__VA_OPT__</code>は<code>__VA_ARGS__</code>に実引数となるトークン列がなければ空に置換されるので、このようにトークン列の有無によってカンマなどの文法上必須のトークン列の有無を切り替えたい場合に使うことができる。</p> <h3 id="演算子"><a href="200-cpp.html#演算子" class="header-anchor">#</a> #演算子</h3> <p><code>#</code>はマクロ実引数を文字列リテラルにする。</p> <p><code>#</code>は関数風マクロの置換リストの中のみで使うことができる。<code>#</code>は関数風マクロの仮引数の識別子の直前に書くことができる。<code>#</code>が直前に書かれた識別子は、マクロ実引数のトークン列の文字列リテラルになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> STRING( X ) # X</span>
+
+<span class="token function">STRING</span><span class="token punctuation">(</span> hello <span class="token punctuation">)</span>
+<span class="token function">STRING</span><span class="token punctuation">(</span> hello world <span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token string">&quot;hello&quot;</span>
+<span class="token string">&quot;hello world&quot;</span>
+</code></pre></div><p>また、可変長マクロと組み合わせた場合、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> STRING( ... ) # __VA_ARGS__</span>
+
+<span class="token function">STRING</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">STRING</span><span class="token punctuation">(</span> hello<span class="token punctuation">,</span>world <span class="token punctuation">)</span>
+</code></pre></div><p>以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token string">&quot;&quot;</span>
+<span class="token string">&quot;hello,world&quot;</span>
+</code></pre></div><h3 id="演算子-2"><a href="200-cpp.html#演算子-2" class="header-anchor">#</a> ##演算子</h3> <p><code>##</code>はマクロ実引数の結合を行う。</p> <p><code>##</code>は関数風マクロの置換リストの中にしか書けない。<code>##</code>は両端にマクロの仮引数の識別子を書かなければならない。<code>##</code>は両端の識別子の参照するマクロ実引数のトークン列を結合した置換を行う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> CONCAT( A, B ) A ## B</span>
+
+<span class="token function">CONCAT</span><span class="token punctuation">(</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">)</span>
+<span class="token function">CONCAT</span><span class="token punctuation">(</span> aaa bbb<span class="token punctuation">,</span> ccc ddd<span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>foobar
+aaa bbbccc ddd
+</code></pre></div><p>結合した結果のトークンはさらにマクロ置換の対象となる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> CONCAT( A, B ) A ## B</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> FOOBAR hello</span>
+
+<span class="token function">CONCAT</span><span class="token punctuation">(</span> FOO<span class="token punctuation">,</span> BAR <span class="token punctuation">)</span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>hello
+</code></pre></div><p><code>CONCAT(FOO,BAR)</code>は<code>FOOBAR</code>に置換され、<code>FOOBAR</code>という名前のマクロ名があるためにさらに<code>hello</code>に置換される。</p> <h3 id="複数行の置換リスト"><a href="200-cpp.html#複数行の置換リスト" class="header-anchor">#</a> 複数行の置換リスト</h3> <p><code>#define</code>ディレクティブの置換リストは複数行に渡って書くことができない。これは文法上の制約によるものだ。<code>#define</code>ディレクティブは改行文字で終端される。</p> <p>しかし、関数やクラスを生成するような複雑なマクロは、複数行に分けて書きたい。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> LIST_NAME2( PREFIX, TYPE ) PREFIX ## TYPE</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> LIST_NAME( TYPE ) LIST_NAME2( list_, TYPE )</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> DEFINE_LIST( TYPE ) struct LIST_NAME(TYPE){TYPE value ;LIST_NAME(TYPE) * prev ;LIST_NAME(TYPE) * next ;} ; </span>
+
+<span class="token function">DEFINE_LIST</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>
+<span class="token function">DEFINE_LIST</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>
+</code></pre></div><p>この場合、行末にバックスラッシュに続けて改行を書くと、バックスラッシュと改行がプリプロセッサーによって削除される。</p> <p>上の例は以下のように、プリプロセッサーとしては比較的わかりやすく書くことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> LIST_NAME2( PREFIX, TYPE ) PREFIX ## TYPE</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> LIST_NAME( TYPE ) LIST_NAME2( list_, TYPE )</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> DEFINE_LIST( TYPE )\
+struct LIST_NAME(TYPE)\
+{\
+    TYPE value ;\
+    LIST_NAME(TYPE) * prev ;\
+    LIST_NAME(TYPE) * next ;\
+} ; </span>
+
+<span class="token function">DEFINE_LIST</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>
+<span class="token function">DEFINE_LIST</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>
+</code></pre></div><p>C++ではテンプレートがあるために、このようなマクロを書く必要はない。</p> <h3 id="undefディレクティブ"><a href="200-cpp.html#undefディレクティブ" class="header-anchor">#</a> #undefディレクティブ</h3> <p><code>#undef</code>はそれ以前に定義されたマクロを削除する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> FOO BAR</span>
+FOO
+<span class="token macro property">#<span class="token directive keyword">undef</span> FOO</span>
+FOO
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>BAR
+FOO
+</code></pre></div><h2 id="条件付きソースファイル選択"><a href="200-cpp.html#条件付きソースファイル選択" class="header-anchor">#</a> 条件付きソースファイル選択</h2> <p><code>#if</code>, <code>#elif</code>, <code>#else</code>, <code>#endif</code>, <code>#ifdef</code>, <code>#ifndef</code>は条件付きのソースファイルの選択(conditional inclusion)を行う。これは条件付きコンパイルに近い機能を提供する。</p> <h3 id="プリプロセッサーの定数式"><a href="200-cpp.html#プリプロセッサーの定数式" class="header-anchor">#</a> プリプロセッサーの定数式</h3> <p>プリプロセッサーで使える条件式は、C++の条件式と比べてだいぶ制限がある。基本的には整数定数式で、<code>true</code>, <code>false</code>が使えるほか、<code>123</code>, <code>1+1</code>, <code>1 == 1</code>, <code>1 &lt; 1</code>のような式も使える。ただし、識別子はすべてマクロ名として置換できるものは置換され、置換できない識別子は、<code>true</code>, <code>false</code>以外はキーワードも含めてすべて<code>0</code>に置換される。</p> <p>したがって、プリプロセッサーで以下のように書くと、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">if</span> UNDEFINED</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>以下のように書いたものと同じになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>プリプロセッサーであるので、C++としての<code>constexpr</code>変数や<code>constexpr</code>関数も使えない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">constexpr</span> <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> x</span>
+hello
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>これは以下のように置換される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">constexpr</span> <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">;</span>
+</code></pre></div><p>プリプロセッサーはC++の文法と意味を理解しない。単にトークン列として処理する。</p> <p>以下の例はエラーになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">constexpr</span> <span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">1</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> f()</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>なぜならば、<code>0()</code>は整数定数式として合法なコードではないからだ。何度も言うように、プリプロセッサーはC++の文法と意味を理解しない。</p> <p>プリプロセッサーの定数式では、特殊なマクロ風の式を使うことができる。<code>defined</code>と<code>__has_include</code>だ。</p> <p><code>defined</code>は以下の文法を持つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>defined 識別子
+defined <span class="token punctuation">(</span> 識別子 <span class="token punctuation">)</span>
+</code></pre></div><p><code>defined</code>は識別子がそれ以前の行で<code>#define</code>でマクロとして定義されていて<code>#undef</code>で取り消されていない場合<code>1</code>になり、それ以外の場合<code>0</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// #if 0</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> defined MACRO</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> MACRO</span>
+
+<span class="token comment">// #if 1</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> defined MACRO</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">undef</span> MACRO</span>
+
+<span class="token comment">// #if 0</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> defined MACRO</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p><code>__has_include</code>は以下の文法を持つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>__has_include <span class="token punctuation">(</span> <span class="token operator">&lt;</span> ヘッダーファイル名 <span class="token operator">&gt;</span> <span class="token punctuation">)</span>
+__has_include <span class="token punctuation">(</span> <span class="token string">&quot; ヘッダーファイル名 &quot;</span> <span class="token punctuation">)</span>
+__has_include <span class="token punctuation">(</span> 文字列リテラル <span class="token punctuation">)</span>
+__has_include <span class="token punctuation">(</span> <span class="token operator">&lt;</span> マクロ <span class="token operator">&gt;</span> <span class="token punctuation">)</span>
+</code></pre></div><p>1番目と2番目は、指定されたヘッダーファイル名がシステムに存在する場合<code>1</code>に、そうでない場合<code>0</code>になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// &lt;filesystem&gt;の存在を確認してから#includeする</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> __has_include(&lt;filesystem&gt;)</span>
+<span class="token macro property">#   <span class="token directive keyword">include</span> <span class="token string">&lt;filesystem&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token comment">// &quot;mylibrary.h&quot;の存在を確認してから#includeする</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> __has_include(&quot;mylibrary.h&quot;)</span>
+<span class="token macro property">#   <span class="token directive keyword">include</span> <span class="token string">&quot;mylibrary.h&quot;</span></span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>3番目と4番目は、1番目と2番目が適用できない場合に初めて考慮される。その場合、まず通常通りにプリプロセッサーのマクロ置換が行われる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> STDIO &quot;stdio.h&quot;</span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> __has_include( STDIO )</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> STDLIB stdlib.h</span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> __has_include( &lt;STDLIB&gt; )</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><h3 id="ifディレクティブ"><a href="200-cpp.html#ifディレクティブ" class="header-anchor">#</a> #ifディレクティブ</h3> <p><code>#if</code>ディレクティブは以下の文法を持つ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">if</span> 定数式 改行文字</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>もし定数式がゼロの場合、<code>#if</code>と<code>#endif</code>で囲まれたトークン列は処理されない。定数式が非ゼロの場合、処理される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
+This line will be skipped<span class="token punctuation">.</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> 1</span>
+This line will be processed<span class="token punctuation">.</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>これをプリプロセスすると以下のようになる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>This line will be processed<span class="token punctuation">.</span>
+</code></pre></div><p><code>#if 0</code>は処理されないので、<code>#endif</code>までのトークン列は消える。</p> <h3 id="elifディレクティブ"><a href="200-cpp.html#elifディレクティブ" class="header-anchor">#</a> #elifディレクティブ</h3> <p><code>#elif</code>ディレクティブは、C++でいう<code>else if</code>に相当する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">elif</span> 定数式 改行文字</span>
+</code></pre></div><p><code>#elif</code>ディレクティブは<code>#if</code>ディレクティブと<code>#endif</code>ディレクティブの間に複数書くことができる。<code>#elif</code>のある<code>#if</code>が処理される場合、<code>#if</code>から<code>#elif</code>の間のトークン列が処理される、<code>#if</code>が処理されない場合、<code>#elif</code>が<code>#if</code>と同じように定数式を評価して処理されるかどうかが判断される。<code>#elif</code>が処理される場合、処理されるトークン列は次の<code>#elif</code>もしくは<code>#endif</code>までの間のトークン列になる。</p> <p>以下の例は、すべて<code>YES</code>のトークンがある行のみ処理される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">if</span> 1</span>
+YES
+<span class="token macro property">#<span class="token directive keyword">elif</span> 1</span>
+NO
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
+NO
+<span class="token macro property">#<span class="token directive keyword">elif</span> 1</span>
+YES
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
+NO
+<span class="token macro property">#<span class="token directive keyword">elif</span> 1</span>
+YES
+<span class="token macro property">#<span class="token directive keyword">elif</span> 1</span>
+NO
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
+NO
+<span class="token macro property">#<span class="token directive keyword">elif</span> 0</span>
+NO
+<span class="token macro property">#<span class="token directive keyword">elif</span> 1</span>
+YES
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p>プリプロセスした結果は以下のとおり。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>YES
+YES
+YES
+YES
+</code></pre></div><h3 id="elseディレクティブ"><a href="200-cpp.html#elseディレクティブ" class="header-anchor">#</a> #elseディレクティブ</h3> <p><code>#else</code>ディレクティブはC++でいう<code>else</code>に相当する。</p> <p><code>#else</code>ディレクティブは<code>#if</code>ディレクティブと<code>#endif</code>ディレクティブの間に書くことができる。もし<code>#if</code>と<code>#elif</code>ディレクティブが処理されない場合で<code>#else</code>ディレクティブがある場合、<code>#else</code>から<code>#endif</code>までのトークン列が処理される。</p> <p>以下の例は、<code>YES</code>のトークンがある行のみ処理される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">if</span> 1</span>
+YES
+<span class="token macro property">#<span class="token directive keyword">else</span></span>
+NO
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
+NO
+<span class="token macro property">#<span class="token directive keyword">else</span></span>
+YES
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> 0</span>
+NO
+<span class="token macro property">#<span class="token directive keyword">elif</span> 1</span>
+YES
+<span class="token macro property">#<span class="token directive keyword">else</span></span>
+NO
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><h3 id="ifdef-ifndefディレクティブ"><a href="200-cpp.html#ifdef-ifndefディレクティブ" class="header-anchor">#</a> #ifdef, #ifndefディレクティブ</h3> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">ifdef</span> 識別子</span>
+<span class="token macro property">#<span class="token directive keyword">ifndef</span> 識別子</span>
+</code></pre></div><p>は、それぞれ以下と同じ意味になる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">if</span> defined 識別子</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> !defined 識別子</span>
+</code></pre></div><p>例、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">ifdef</span> MACRO</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token comment">// 上と同じ</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> defined MACRO</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+
+<span class="token macro property">#<span class="token directive keyword">ifndef</span> MACRO</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token comment">// 上と同じ</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> !defined MACRO</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><h2 id="lineディレクティブ"><a href="200-cpp.html#lineディレクティブ" class="header-anchor">#</a> #lineディレクティブ</h2> <p><code>#line</code>ディレクティブはディレクティブの次の行の行番号と、ソースファイル名を変更する。これは人間が使うのではなく、ツールによって生成されることを想定した機能だ。</p> <p>以下の文法の<code>#line</code>ディレクティブは、<code>#line</code>ディレクティブの次の行の行番号をあたかも数値で指定した行番号であるかのように振る舞わせる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">line</span> 数値 改行文字</span>
+</code></pre></div><p>数値として0もしくは2147483647より大きい数を指定した場合の挙動は未定義となる。</p> <p>以下の例はコンパイルエラーになるが、コンパイルエラーメッセージはあたかも102行目に問題があるかのように表示される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 1行目</span>
+<span class="token comment">// 2行目</span>
+<span class="token macro property">#<span class="token directive keyword">line</span> 100 </span><span class="token comment">// 3行目</span>
+<span class="token comment">// 100行目</span>
+<span class="token comment">// 101行目</span>
+ill<span class="token operator">-</span>formed line <span class="token comment">// 102行目</span>
+</code></pre></div><p>以下の例は<code>999</code>を出力するコードだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token macro property">#<span class="token directive keyword">line</span> 999</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token constant">__LINE__</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>以下の文法の<code>#line</code>ディレクティブは、次の行の行番号を数値にした上で、ソースファイル名をソースファイル名にする。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">line</span> 数値 &quot;ソースファイル名&quot; 改行文字</span>
+</code></pre></div><p>例、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">line</span> 42 &quot;answer.cpp&quot;</span>
+</code></pre></div><p>以下の文法の<code>#line</code>ディレクティブは、プリプロセッサートークン列をプリプロセスし、上の2つの文法のいずれかに合致させる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">line</span> プリプロセッサートークン列 改行文字</span>
+</code></pre></div><p>例、</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">define</span> LINE_NUMBER 123</span>
+<span class="token macro property">#<span class="token directive keyword">line</span> LINE_NUMBER</span>
+</code></pre></div><h2 id="errorディレクティブ"><a href="200-cpp.html#errorディレクティブ" class="header-anchor">#</a> #errorディレクティブ</h2> <p><code>#error</code>ディレクティブはコンパイルエラーを引き起こす。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">error</span> 改行文字</span>
+<span class="token macro property">#<span class="token directive keyword">error</span> トークン列 改行文字</span>
+</code></pre></div><p><code>#error</code>によるコンパイラーのエラーメッセージには<code>#error</code>のトークン列を含む。</p> <p><code>#error</code>の利用例としては、<code>#if</code>と組み合わせるものがある。以下の例は<code>CHAR_BIT</code>が8でなければコンパイルエラーになるソースファイルだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;climits&gt;</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> CHAR_BIT != 8</span>
+<span class="token macro property">#<span class="token directive keyword">error</span> CHAR_BIT != 8 implementation is not supported.</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre></div><p><code>#if</code>が処理されなければ、その中にある<code>#error</code>も処理されないので、コンパイルエラーにはならない。</p> <h2 id="pragma"><a href="200-cpp.html#pragma" class="header-anchor">#</a> #pragma</h2> <p><code>#pragma</code>ディレクティブは実装依存の処理を行う。<code>#pragma</code>はコンパイラー独自の拡張機能を追加する文法として使われている。</p> <p>文法は以下のとおり。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">pragma</span> プリプロセッサートークン列 改行文字</span>
+</code></pre></div><p>C++では属性が追加されたために、<code>#pragma</code>を使う必要はほとんどなくなっている。</p> <h2 id="nullディレクティブ"><a href="200-cpp.html#nullディレクティブ" class="header-anchor">#</a> Nullディレクティブ</h2> <p><code>Null</code>ディレクティブとは何もしないプリプロセッサーディレクティブだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code># 改行文字
+</code></pre></div><p>つまり、単に<code>#</code>とだけ書いた行はエラーにはならない。</p> <h2 id="定義済みマクロ名"><a href="200-cpp.html#定義済みマクロ名" class="header-anchor">#</a> 定義済みマクロ名</h2> <p>いくつかのマクロ名がプリプロセッサーによってあらかじめ定義されている。</p> <hr> <p>マクロ名                             値              意味</p> <hr> <p><code>__cplusplus</code> <code>201703L</code>         C++17時点での値<br>
+将来の規格で増やされる</p> <p><code>__DATE__</code> <code>&quot;Mmm dd yyyy&quot;</code>   ソースファイルがプリプロセスされた日付
+<code>Mmm</code>は月、<code>dd</code>は日、<code>yyyy</code>は年<br>
+月の文字列は<code>asctime</code>が生成するものと同じ<br>
+日が1桁の場合、<code>dd</code>の最初の文字は空白文字</p> <p><code>__FILE__</code>                          文字列リテラル      ソースファイルの名前の文字列リテラル</p> <p><code>__LINE__</code>                          整数リテラル        ソースファイルの現在の行番号</p> <p><code>__STDC_HOSTED__</code>                   整数リテラル        ホスト実装の場合1<br>
+フリースタンディング実装の場合0</p> <h2 id="stdcpp-default-new-alignment-整数リテラル-アライメント"><a href="200-cpp.html#stdcpp-default-new-alignment-整数リテラル-アライメント" class="header-anchor">#</a> <code>__STDCPP_DEFAULT_NEW_ALIGNMENT__</code>  整数リテラル        アライメント</h2></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="046-random-part4.html" class="prev">サンプリング分布(sampling distributions)</a></span> <span class="next"><a href="300-multiple-source-files.html">分割コンパイル</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/52.f5dc4f7e.js" defer></script>
+  </body>
+</html>

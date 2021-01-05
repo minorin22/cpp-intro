@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>傲慢なエラー処理: 例外 | 江添亮のC++入門</title>
+    <meta name="description" content="">
+    <link rel="icon" href="64.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="152.png">
+  <meta name="msapplication-TileImage" content="/144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="assets/css/0.styles.17f32d1e.css" as="style"><link rel="preload" href="assets/js/app.8620998f.js" as="script"><link rel="preload" href="assets/js/2.7009e9ba.js" as="script"><link rel="preload" href="assets/js/31.93e5e7a5.js" as="script"><link rel="prefetch" href="assets/js/10.0bc4fb9f.js"><link rel="prefetch" href="assets/js/11.c5d46ffe.js"><link rel="prefetch" href="assets/js/12.cec763ba.js"><link rel="prefetch" href="assets/js/13.85764695.js"><link rel="prefetch" href="assets/js/14.56c0c5a1.js"><link rel="prefetch" href="assets/js/15.ba58285d.js"><link rel="prefetch" href="assets/js/16.663fe3ce.js"><link rel="prefetch" href="assets/js/17.b9e53cc4.js"><link rel="prefetch" href="assets/js/18.468131c1.js"><link rel="prefetch" href="assets/js/19.966431ea.js"><link rel="prefetch" href="assets/js/20.39088cad.js"><link rel="prefetch" href="assets/js/21.f1d2fbe4.js"><link rel="prefetch" href="assets/js/22.53af9436.js"><link rel="prefetch" href="assets/js/23.45c08f75.js"><link rel="prefetch" href="assets/js/24.fec53f63.js"><link rel="prefetch" href="assets/js/25.1c55ab94.js"><link rel="prefetch" href="assets/js/26.97221aa1.js"><link rel="prefetch" href="assets/js/27.ad617385.js"><link rel="prefetch" href="assets/js/28.1d1956f2.js"><link rel="prefetch" href="assets/js/29.bb17ac3f.js"><link rel="prefetch" href="assets/js/3.a3b2b660.js"><link rel="prefetch" href="assets/js/30.3861fe0d.js"><link rel="prefetch" href="assets/js/32.7f1f5a03.js"><link rel="prefetch" href="assets/js/33.ba1ef509.js"><link rel="prefetch" href="assets/js/34.63b70d43.js"><link rel="prefetch" href="assets/js/35.2cf21250.js"><link rel="prefetch" href="assets/js/36.93604af5.js"><link rel="prefetch" href="assets/js/37.132be8e6.js"><link rel="prefetch" href="assets/js/38.32a3f051.js"><link rel="prefetch" href="assets/js/39.bab7cf23.js"><link rel="prefetch" href="assets/js/4.3ff2fe10.js"><link rel="prefetch" href="assets/js/40.2cd9628c.js"><link rel="prefetch" href="assets/js/41.24bfe547.js"><link rel="prefetch" href="assets/js/42.39ebe085.js"><link rel="prefetch" href="assets/js/43.4ff95f43.js"><link rel="prefetch" href="assets/js/44.f1a016d7.js"><link rel="prefetch" href="assets/js/45.590d3d64.js"><link rel="prefetch" href="assets/js/46.46b99b9b.js"><link rel="prefetch" href="assets/js/47.483b5213.js"><link rel="prefetch" href="assets/js/48.65facf6a.js"><link rel="prefetch" href="assets/js/49.2bda166c.js"><link rel="prefetch" href="assets/js/5.7f8f4812.js"><link rel="prefetch" href="assets/js/50.858dc861.js"><link rel="prefetch" href="assets/js/51.a40bec0a.js"><link rel="prefetch" href="assets/js/52.f5dc4f7e.js"><link rel="prefetch" href="assets/js/53.4cfac598.js"><link rel="prefetch" href="assets/js/54.9b6224cf.js"><link rel="prefetch" href="assets/js/55.4fb7a3ba.js"><link rel="prefetch" href="assets/js/56.8a7823a6.js"><link rel="prefetch" href="assets/js/6.af1283dd.js"><link rel="prefetch" href="assets/js/7.401cafeb.js"><link rel="prefetch" href="assets/js/8.44430c93.js"><link rel="prefetch" href="assets/js/9.39e986e2.js">
+    <link rel="stylesheet" href="assets/css/0.styles.17f32d1e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="index.html" class="home-link router-link-active"><!----> <span class="site-name">江添亮のC++入門</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="000-preface.html" class="sidebar-link">序</a></li><li><a href="001-intro.html" class="sidebar-link">C++の概要</a></li><li><a href="002-build.html" class="sidebar-link">C++の実行</a></li><li><a href="003-guide-to-c++.html" class="sidebar-link">C++ヒッチハイクガイド</a></li><li><a href="004-debug-compile-error.html" class="sidebar-link">デバッグ：コンパイルエラーメッセージの読み方</a></li><li><a href="005-the-restaurant-at-the-end-of-the-branch.html" class="sidebar-link">条件分岐の果てのレストラン</a></li><li><a href="006-debug-compile-warning.html" class="sidebar-link">デバッグ: コンパイル警告メッセージ</a></li><li><a href="007-standard-input.html" class="sidebar-link">最近体重が気になるあなたのための標準入力</a></li><li><a href="008-loop.html" class="sidebar-link">ループ</a></li><li><a href="009-vector.html" class="sidebar-link">メモリーを無限に確保する</a></li><li><a href="010-debug-printf.html" class="sidebar-link">デバッグ：printfデバッグ</a></li><li><a href="011-integer.html" class="sidebar-link">整数</a></li><li><a href="012-floating-point.html" class="sidebar-link">浮動小数点数</a></li><li><a href="013-names.html" class="sidebar-link">名前</a></li><li><a href="014-iterator.html" class="sidebar-link">イテレーターの基礎</a></li><li><a href="015-reference.html" class="sidebar-link">lvalueリファレンスとconst</a></li><li><a href="016-algorithm.html" class="sidebar-link">アルゴリズム</a></li><li><a href="017-lambda.html" class="sidebar-link">ラムダ式</a></li><li><a href="018-class.html" class="sidebar-link">クラスの基本</a></li><li><a href="019-operator-overloading.html" class="sidebar-link">より自然に振る舞うクラス</a></li><li><a href="020-array.html" class="sidebar-link">std::array</a></li><li><a href="021-three-virtues-of-a-programmer.html" class="sidebar-link">プログラマーの三大美徳</a></li><li><a href="022-implement-array.html" class="sidebar-link">配列</a></li><li><a href="023-template.html" class="sidebar-link">テンプレート</a></li><li><a href="024-more-array.html" class="sidebar-link">arrayをさらに実装</a></li><li><a href="025-array-iterator.html" class="sidebar-link">arrayのイテレーター</a></li><li><a href="026-exception.html" class="active sidebar-link">傲慢なエラー処理: 例外</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="026-exception.html#例外を投げる" class="sidebar-link">例外を投げる</a></li><li class="sidebar-sub-header"><a href="026-exception.html#例外を捕まえる" class="sidebar-link">例外を捕まえる</a></li><li class="sidebar-sub-header"><a href="026-exception.html#例外による巻き戻し" class="sidebar-link">例外による巻き戻し</a></li></ul></li><li><a href="027-pointer.html" class="sidebar-link">ポインター</a></li><li><a href="028-pointer-semantics.html" class="sidebar-link">意味上のポインター</a></li><li><a href="029-pointer-syntax.html" class="sidebar-link">文法上のポインター</a></li><li><a href="030-pointer-details.html" class="sidebar-link">ポインターの内部実装</a></li><li><a href="031-iterator-operations.html" class="sidebar-link">イテレーター詳細</a></li><li><a href="032-memory-allocation.html" class="sidebar-link">動的メモリー確保</a></li><li><a href="033-vector-implementation.html" class="sidebar-link">vectorの実装 : 基礎</a></li><li><a href="034-vector-memory-allocation.html" class="sidebar-link">vectorの実装 : メモリー確保</a></li><li><a href="035-copy.html" class="sidebar-link">コピー</a></li><li><a href="036-move.html" class="sidebar-link">ムーブ</a></li><li><a href="037-rvalue-reference.html" class="sidebar-link">rvalueリファレンス</a></li><li><a href="038-move-semantics.html" class="sidebar-link">ムーブの実装</a></li><li><a href="039-disable-copy.html" class="sidebar-link">コピーの禁止</a></li><li><a href="040-smart-pointer.html" class="sidebar-link">スマートポインター</a></li><li><a href="041-move-support.html" class="sidebar-link">自作の数値クラスで演算をムーブに対応する方法</a></li><li><a href="042-string-intro.html" class="sidebar-link">文字列</a></li><li><a href="043-random.html" class="sidebar-link">乱数</a></li><li><a href="044-random-part2.html" class="sidebar-link">ポアソン分布</a></li><li><a href="045-random-part3.html" class="sidebar-link">正規分布</a></li><li><a href="046-random-part4.html" class="sidebar-link">サンプリング分布(sampling distributions)</a></li><li><a href="200-cpp.html" class="sidebar-link">Cプリプロセッサー</a></li><li><a href="300-multiple-source-files.html" class="sidebar-link">分割コンパイル</a></li><li><a href="400-gdb.html" class="sidebar-link">デバッガー</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="傲慢なエラー処理-例外"><a href="026-exception.html#傲慢なエラー処理-例外" class="header-anchor">#</a> 傲慢なエラー処理: 例外</h1> <h2 id="例外を投げる"><a href="026-exception.html#例外を投げる" class="header-anchor">#</a> 例外を投げる</h2> <p><code>std::array</code>の実装方法はほとんど解説した。読者は<code>std::array</code>の実装方法を知り、確固たる自信の元に<code>std::array</code>を使えるようになった。ただし、1つだけ問題がある。</p> <p><code>&quot;std::array&quot;</code>のユーザーはあらかじめ設定した要素数を超える範囲の要素にアクセスすることができてしまう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 妥当な要素はa[0]のみ</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">&gt;</span> a <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// エラー、範囲外</span>
+    a<span class="token punctuation">[</span><span class="token number">1000</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>array</code>を自力で実装できる傲慢な読者としては、ユーザーごときが間違った使い方をできるのが許せない。間違いを起こした時点でエラーを発生させ、問題を知らしめ、対処できるようにしたい。</p> <p><code>operator []</code>に範囲外チェックを入れるのは簡単だ。問題は、エラーをユーザーに通知する方法がない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>reference array<span class="token operator">::</span><span class="token keyword">operator</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">(</span> std<span class="token operator">::</span>size_t i <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 範囲外チェック</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> i <span class="token operator">&gt;=</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// エラー検出</span>
+        <span class="token comment">// しかし何をreturnすればいいのだろう</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> storage<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>operator []</code>は伝統的にエラーチェックをしない要素アクセスをするものだ。</p> <p><code>vector</code>で一番最初に説明した要素アクセスの方法であるメンバー関数<code>at</code>を覚えているだろうか。実はメンバー関数<code>at</code>はエラーチェックをする。試してみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">&gt;</span> a <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> a<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>以下が実行結果だ。</p> <div class="language- extra-class"><pre class="language-text"><code>terminate called after throwing an instance of 'std::out_of_range'
+  what():  array::at: __n (which is 1000) &gt;= _Nm (which is 1)
+</code></pre></div><p>何やらよくわからないがエラーのようだ。以下のような意味であることがわかる。</p> <div class="language- extra-class"><pre class="language-text"><code>`std::out_of_range`がthrowされたあとにterminateが呼ばれた
+  what(): array_at: __n(値は1000) &gt;= _Nm (値は1)
+</code></pre></div><p>どうやらエラーメッセージのようだ。わかりづらいメッセージだが、なんとなく言わんとすることはわかる。<code>_Nm</code>が<code>array</code>の要素数で、<code>__n</code>がメンバー関数<code>at</code>に渡した実引数だ。要素数<code>_Nm</code>よりも<code>__n</code>が大きい。</p> <p>このエラー処理は、「例外」を使って行われる。</p> <p>例外は通常の処理をすっ飛ばして特別なエラー処理をする機能だ。何もエラー処理をしない場合、プログラムは終了する。例外を発生させることを、「例外を投げる」という。</p> <p>例外は文字どおり投げるという意味の<code>throw</code>キーワードを使い、何らかの値を投げる(throw)。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// int型の値123を投げる</span>
+<span class="token keyword">throw</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// double型の値3.14を投げる</span>
+<span class="token keyword">throw</span> <span class="token number">3.14</span> <span class="token punctuation">;</span>
+
+std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token operator">&gt;</span> value <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token comment">// std::array&lt;int,5&gt;型の変数valueの値を投げる</span>
+<span class="token keyword">throw</span> value <span class="token punctuation">;</span>
+</code></pre></div><p>この例では、<code>int</code>型、<code>double</code>型、<code>std::array&lt;int,5&gt;</code>型の値を投げている。</p> <p>一度例外が投げられると、通常の実行はすっ飛ばされる。</p> <p>以下は<code>0</code>を入力すると例外を投げるプログラムだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 0を入力するなよ、絶対するなよ</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Don't type 0. &gt;&quot;</span>s <span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> input <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cin <span class="token operator">&gt;&gt;</span> input <span class="token punctuation">;</span>
+
+    <span class="token comment">/// 入力が0なら例外を投げる</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> input <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 通常の処理</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Success!\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムを実行すると、非<code>0</code>を入力した場合、<code>&quot;Success!\n&quot;</code>が出力される。<code>0</code>を入力した場合、例外が投げられる。例外が投げられると、通常の実行はすっ飛ばされる。エラー処理はしていないので、プログラムは終了する。</p> <p><code>std::array</code>や<code>std::vector</code>のメンバー関数<code>at(n)</code>は<code>n</code>が要素数を超える場合、例外を投げている。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>array<span class="token operator">::</span>reference array<span class="token operator">::</span><span class="token function">at</span><span class="token punctuation">(</span> std<span class="token operator">::</span>size_t n <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> n <span class="token operator">&gt;=</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> 何らかの値
+
+    <span class="token keyword">return</span> storage<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>投げる例外は、<code>std::out_of_range</code>というクラスの値だ。このクラスを完全に説明するのは現時点では難しいが、以下のように振る舞うと考えておこう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> std <span class="token punctuation">{</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">out_of_range</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// エラー内容の文字列を受け取るコンストラクター</span>
+    <span class="token function">out_of_range</span><span class="token punctuation">(</span> std<span class="token operator">::</span>string <span class="token keyword">const</span> <span class="token operator">&amp;</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// エラー内容の文字列を返すメンバー関数</span>
+    <span class="token keyword">auto</span> <span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><p>とりあえず使ってみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>out_of_range <span class="token function">err</span><span class="token punctuation">(</span><span class="token string">&quot;I am error.&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// I am error.</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> err<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>コンストラクターでエラー内容を表現した文字列を受け取り、メンバー関数<code>what</code>でエラー内容の文字列を取得する。</p> <p>必要な情報はすべて学んだ。あとはメンバー関数<code>at</code>を実装するだけだ。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>array<span class="token operator">::</span>reference array<span class="token operator">::</span><span class="token function">at</span><span class="token punctuation">(</span> std<span class="token operator">::</span>size_t n <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> n <span class="token operator">&gt;=</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> std<span class="token operator">::</span><span class="token function">out_of_range</span><span class="token punctuation">(</span><span class="token string">&quot;Error: Out of Range&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> storage<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="例外を捕まえる"><a href="026-exception.html#例外を捕まえる" class="header-anchor">#</a> 例外を捕まえる</h2> <p>現状では、エラーを発見して例外を投げたら即座にプログラムが終了してしまう。投げた例外を途中で捕まえて、プログラムを通常の実行に戻す機能がほしい。その機能が「例外のキャッチ」だ。</p> <p>例外のキャッチには<code>try</code>キーワードと<code>catch</code>キーワードを使う。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 例外を投げるコード</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span> 型 名前 <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    エラー処理
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>try {}</code>ブロックの中で投げられた例外は、<code>catch</code>で型が一致する場合にキャッチされる。例外がキャッチされた場合、<code>catch</code>のブロックが実行される。そして実行が再開される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token number">123</span> <span class="token punctuation">;</span> <span class="token comment">// int型</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// キャッチする</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span> <span class="token keyword">int</span> e <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 実行される</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;resumed.\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>catch</code>の型と投げられた例外の型が一致しない場合は、キャッチしない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token number">3.14</span> <span class="token punctuation">;</span> <span class="token comment">// double型</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// キャッチしない</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span> <span class="token keyword">int</span> e <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// 実行されない</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;You won't read this.\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>catch</code>は複数書くことができる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token string">&quot;error&quot;</span>s <span class="token punctuation">;</span> <span class="token comment">// std::string型</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// キャッチしない</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span> <span class="token keyword">int</span> e <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    <span class="token comment">// キャッチしない</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span> <span class="token keyword">double</span> e <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    <span class="token comment">// キャッチする</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span> e <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>tryブロック</code>の中で投げられた例外は、たとえ複雑な関数呼び出しの奥底にある例外でもあますところなくキャッチされる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token number">123</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+<span class="token keyword">void</span> <span class="token function">h</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">h</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// キャッチされる</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span> <span class="token keyword">int</span> e <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>関数<code>h</code>は関数<code>g</code>を呼び出し、関数<code>g</code>は関数<code>f</code>を呼び出し、関数<code>f</code>は例外を投げる。このように複雑な関数呼び出しの結果として投げられる例外もキャッチできる。</p> <p>すでに学んだように、<code>std::array&lt;T&gt;::at</code>に範囲外のインデックスを渡したときは<code>std::out_of_range</code>クラスが例外として投げられる。これをキャッチしてみよう。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>array<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">&gt;</span> a <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">try</span> <span class="token punctuation">{</span> a<span class="token punctuation">[</span><span class="token number">1000</span><span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span> std<span class="token operator">::</span>out_of_range <span class="token operator">&amp;</span> e <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// エラー内容を示す文字列</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="例外による巻き戻し"><a href="026-exception.html#例外による巻き戻し" class="header-anchor">#</a> 例外による巻き戻し</h2> <p>例外が投げられた場合、その例外が投げられた場所を囲む<code>try</code>ブロックと対応する<code>catch</code>に到達するまで、関数呼び出しが巻き戻される。これを<code>スタックアンワインディング</code>(stack unwinding)という。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">throw</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+<span class="token keyword">void</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">h</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token function">h</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span> <span class="token keyword">int</span> e <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><p>この例では、関数<code>main</code>が関数<code>h</code>を呼び出し、その結果として最終的に関数<code>f</code>の中で例外が投げられる。投げられた例外は関数呼び出しを巻き戻して関数<code>main</code>の中の<code>try</code>ブロックまで到達し、対応する<code>catch</code>に捕まる。</p> <p>もし関数<code>main</code>を抜けてもなお対応する<code>catch</code>がない場合はどうなるのか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 対応するcatchがない</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>その場合、<code>std::terminate()</code>という関数が呼ばれる。この関数が呼ばれた場合、プログラムは終了する。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// プログラムは終了する</span>
+    std<span class="token operator">::</span><span class="token function">terminate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>tryブロック</code>はネストできる。その場合、対応する<code>catch</code>が見つかるまで巻き戻しが起こる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token keyword">throw</span> <span class="token number">0</span> <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span> <span class="token keyword">double</span> e <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token comment">// try 1</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token comment">// try 2</span>
+            <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span> e <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> e <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// ここで捕まる</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>上のコードは複雑な<code>tryブロック</code>のネストが行われている。プログラムがどのように実行されるのかを考えてみよう。</p> <p>まず関数<code>main</code>が関数<code>f</code>を呼び出す。関数<code>f</code>は例外を投げる。関数<code>f</code>の中の<code>try</code>ブロックは対応する<code>catch</code>がないので関数<code>main</code>に巻き戻る。関数<code>main</code>の内側の<code>try</code>ブロック、ソースコードでは<code>// try 2</code> とコメントをしている<code>try</code>ブロックの<code>catch</code>には対応しない。さらに上の<code>try</code>ブロックに巻き戻る。<code>// try 1</code>の<code>tryブロック</code>の<code>catch</code>は<code>int</code>型なので、この<code>catch</code>に捕まる。</p> <p>例外が投げられ、<code>スタックアンワインディング</code>による巻き戻しが発生した場合、通常のプログラムの実行は行われない。例えば以下のプログラムは何も出力しない。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 例外を投げたあとの実行</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;function f\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 関数fを呼んだあとの実行</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;function g\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token comment">// 関数gを呼んだあとの実行</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;function main\n&quot;</span>s <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>スタックアンワインディング</code>中に通常の実行は行われないが、変数の破棄は行われる。これはとても重要だ。変数が破棄されるとき、デストラクターが実行されるのを覚えているだろうか。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Object</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>string name <span class="token punctuation">;</span>
+    <span class="token comment">// コンストラクター</span>
+    <span class="token function">Object</span><span class="token punctuation">(</span> std<span class="token operator">::</span>string <span class="token keyword">const</span> <span class="token operator">&amp;</span> name <span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">name</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> name <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; is constructed.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// デストラクター</span>
+    <span class="token operator">~</span><span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> name <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; is destructed.\n&quot;</span>s <span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// 変数objが構築される</span>
+    Object <span class="token function">obj</span><span class="token punctuation">(</span><span class="token string">&quot;obj&quot;</span>s<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 変数objが破棄される</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>実行結果</p> <div class="language- extra-class"><pre class="language-text"><code>obj is constructed.
+obj is destructed.
+</code></pre></div><p>例外のスタックアンワインディングでは関数内の変数が破棄される。つまりデストラクターが実行される。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Object <span class="token function">obj</span><span class="token punctuation">(</span><span class="token string">&quot;f&quot;</span>s<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token keyword">throw</span> <span class="token number">0</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Object <span class="token function">obj</span><span class="token punctuation">(</span><span class="token string">&quot;g&quot;</span>s<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Object <span class="token function">obj</span><span class="token punctuation">(</span><span class="token string">&quot;main&quot;</span>s<span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span> <span class="token keyword">int</span> e <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;caught.\n&quot;</span>s <span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><p>このプログラムを実行した結果は以下のようになる。</p> <div class="language- extra-class"><pre class="language-text"><code>main is constructed.
+g is constructed.
+f is constructed.
+f is destructed.
+g is destructed.
+caught.
+main is destructed.
+</code></pre></div><p>なぜこの順番に出力されるか考えてみよう。</p> <ol><li>プログラムの実行は関数<code>main</code>から始まる。そのためまず<code>main</code>が構築される</li> <li>関数<code>main</code>は関数<code>g</code>を呼ぶ。<code>g</code>が構築される</li> <li>関数<code>g</code>は関数<code>f</code>を呼ぶ。<code>f</code>が構築される</li> <li>関数<code>f</code>は例外を投げるので、<code>f</code>は破棄される</li> <li>関数<code>g</code>に巻き戻ったが<code>catch</code>がないのでさらに巻き戻る。<code>g</code>が破棄される</li> <li>関数<code>main</code>に巻き戻ったところ対応する<code>catch</code>があるのでスタックアンワインディングは停止する</li> <li><code>caught.</code>が出力される</li> <li><code>main</code>が破棄される</li></ol> <p>例外が投げられると通常の実行は飛ばされるので、例外が投げられるかもしれない処理のあとに、例外の有無にかかわらず絶対に実行したい処理がある場合は、クラスのデストラクターに書くとよい。</p> <p>C++20以降では、標準ライブラリに<code>std::scope_exit</code>が追加される予定だ。<code>std::scope_exit</code>は渡した関数オブジェクトをデストラクターで実行してくれる。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">int</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> ptr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token punctuation">;</span>
+    std<span class="token operator">::</span>scope_exit <span class="token function">e</span><span class="token punctuation">(</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span><span class="token punctuation">]</span><span class="token punctuation">{</span> <span class="token keyword">delete</span> ptr <span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">;</span>
+
+    <span class="token comment">// 処理</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>このように書くと、後続の処理で<code>return</code>で関数から戻ろうが、<code>throw</code>しようが、<code>delete ptr</code>が実行される。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="025-array-iterator.html" class="prev">arrayのイテレーター</a></span> <span class="next"><a href="027-pointer.html">ポインター</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="assets/js/app.8620998f.js" defer></script><script src="assets/js/2.7009e9ba.js" defer></script><script src="assets/js/31.93e5e7a5.js" defer></script>
+  </body>
+</html>
